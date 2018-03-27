@@ -1,17 +1,104 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="purple">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-searchbar> </ion-searchbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  
+  <div>
+    <h2>Descubre e-wave</h2>
+      <ion-slides slidesPerView="2">
+
+        <ion-slide>
+            <ion-card>
+              <img src="http://wp.cartafinanciera.com/wp-content/uploads/2015/07/Pymes_cartafinanciera-770x420.png">
+              <div class="desc">Pymes</div>
+            </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+          <ion-card>
+              <img src="http://www.conectiva.com/wp-content/uploads/2016/06/los-profesionales-mas-inteligentes-660x330.jpg">
+              <div class="desc">Profesionales</div>
+            </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+          <ion-card>
+              <img src="http://bam-mentors.com/wp-content/uploads/2017/05/vendedores.jpg">
+              <div class="desc">Vendedores</div>
+            </ion-card>
+        </ion-slide>
+
+      </ion-slides>  
+
+      <ion-toolbar>
+        <ion-segment color="purple">
+          <ion-segment-button value="perfil" selected="true">
+              <ion-icon name="compass"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="card">
+            <ion-icon name="globe"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="address">
+            <ion-icon name="notifications"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="history">
+            <ion-icon name="grid"></ion-icon>
+          </ion-segment-button>
+
+        </ion-segment>
+      </ion-toolbar>        
+
+      <ion-item>
+        <p item-start>
+          Noticias y Negocios<br>
+          <ion-note>La descarga diaria</ion-note>
+        </p>
+        <button ion-button color="purple" clear item-end>Ver mas</button>
+      </ion-item>
+      <ion-slides slidesPerView="2">
+
+        <ion-slide>
+          <ion-card>
+            <img src="data:image/png;base64,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">
+            <div class="desc">Infobae</div>
+            <ion-buttons text-right>
+              <button color="purple" clear ion-button>Ver mas</button>
+            </ion-buttons>
+          </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+          <ion-card>
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0PDQ0NDQ0NDQ0NDQ0NDQ0NDQ8NDg0NFREWFhURExMYHSsgGBomGxUVITEhJikrLjAuFx8zODMtOCgtLisBCgoKDg0OGBAQFy0dHx8rKysrKy0rKy0tLS0tKysrKy0tLS0rLSstLS0tLS0tLS0rLS0tKy0tLS0rKy0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAcAAEBAAMBAQEBAAAAAAAAAAAAAQQGBwUCCAP/xABHEAACAgEBAQkLCAkDBQAAAAAAAQIDBBEFBgcSITFRVJPSExYXNDVBc3SRsrMzUlNhcXKStBQiJTKBhKOx00OD0RUjJEJE/8QAGwEBAQACAwEAAAAAAAAAAAAAAAEEBQIDBgf/xAA2EQEAAQICBAwGAwADAQAAAAAAAQIDBBEFUXGxEhMUMTIzNFJTkaHRBhUWIXKBQWHBIyRiIv/aAAwDAQACEQMRAD8A6KfKW7UAEAKAKKACKAABFAAUqBAKKACAAABSgQCooAgFAABjHB3gRQAFCAAooAIoAAEUABSoEAooAAEAAFKBAKikAAUAMY4O8ABFAAUIACigAigAARQAFKgAAoAAEAAFAACopAAAYxxd4AABFAAUIACigAigAARQAFKARQAAAEAAFAACopAAxTi71AAAARQARQAAooAIoAAEUABSgEAKACAAABQAAqAGMdbICooAAACKACKAAFFABFAAAKEAKUAgBQAQAAAKAAAyYxwd4AKigAAAIoAIoAAUUAEUAAAoQApUCClAAEAAAClADFOt3qAEAVFAAAKgjjO0t1m045GRCObbGML7oRXBr4oqbSX7vMfQrOjMJNumZtxMzENXVeriZyl97G3VbTnl4lc8y2ULMvGrnFxr0lCVsVKL/V86bRwxWjMJTYuVRbjOKZ3FF6uaozl2M8C2akAooAIoAAElyjdnul2hRtPLpoy7K6q5UqEIxr0jrRXJ8q523/E9tovR+Gu4S3XXbiZnPfLAvXKormIl4k92O1tH/wCdbyP/ANauyZ/yrB+HDq46vW7fjNuutvjbhBt870R8/vREXKojXO9so5n9TqVSgACAAAAAxTgyFCKAEAVFAAVFH592tZH9Kyv1o+NZHnX0kj6hh4/4qNkNLXH/ANS/psCyP6fgaSXj2H519PA4YyP+vd/GrdK0dKHf9HzP2HzLKW3zgafMxlOozCAUUAEVIuU6kzXR8z9gykzhxDfBnFbYzk2k+FRxN6f/ADVH0HQ0f9G1+98tbf6ctcstjwX+tHkfnRs3VD9G4nyVfo4e6j5ff62rbO9taeaH9jrUIBRQAAIAAMU4MgAoRQAAqKAAF4VWtMoYG6DxHN9TyvhSMrBVTym1n3o3uu5THAn7OCo+l5Q1Octq3s/KkPQX/wBkabT0RyOrLXDvw0zw3YDwTZKAKKJHL99zxnD9BZ757H4bj/hr2/4wMXnwoaGejyYmcu1733knD+7d8ew8DpqZ5dc/W6Gyw8RxcNiNVwqtbuyhSABSoAAKAABADEODIUABQigABUUDybN0+zYylGWbjxlFuMouxJxkno0/4mwjReLmM4tTk6uOo1sDbW6XZ08PLhDNx5Tni5EIRViblJ1ySSXPqzIwmjMVRft1VW5iIqhxru0TTMZuNo981TY9wGbTRtGFt9kKq1TdFzm+DFNpaLU1emLNy9hZpt05znDuw9UU15y6f31bM6fjdajxvyrGeFLYcdRrO+rZnT8brUPlWM8KTjqNa99WzOn43WofKsZ4UnHUazvq2Z0/G61F+VYzwpTjqNbn2+ZtLHyb8WWNdXdGFM4ydcuEoyc9dGeo0DhrtizXFymac5YWJriqqMmmm9Y7rO4ndBgU7MxarsuiuyCt4UJ2JSjrdNrVfY0/4ni9K6PxN3F110W5mJy3M+zcppoiJl7ffXsvp+L1qNd8qxnhS7eOo1vYjJNJrjTSafOmYExNMzEuznfRAApQCKAAAAjEODIAKAAqCKAGYqKjgO1vGsr1nI+JI+oYfqqNkNLX0pYh3OIAAAyAZQAygBkAAAEs/df2MD9E4vyVfo4e6j5ff62rbO9t6eaH9TqclCAFKAQAoADEODvAAFAAVBGt7Z3bYeJkTxra8mVlfAcnXCtw/WgpLRuafI+Y3OE0JfxNqLtFVMROuZ9mNXiaaKspzYS3ydn/AEWZ1VX+QyPpzE96n19nHldH9uYZ1ysuusjqo2XW2RT5dJTbWv18Z7O1RNNFNM/xENdVOdUy+cSiVttVMNFO62uqDk2oqU5KK1a82rFy5Fuia55oiZ8oIjOYhtng32l9Jg9dd/iNJ9R4Tu1eUe7J5JWwNtbjMzDolkXzxpVxlCLVVlkp6ylouJwS8/OZOE0xh8Vc4u3FWeU88R7uFeHrojOWum1dAAAAe7uf3K5WfXZZjzx4xrn3OSunZB8Lgp8XBg+LjNdjNJ2cHVTTciqc4z+0O23ZqrjOHqeDbaX0mD113+IwvqPCd2ryj3dnJa/6a1tbZ1mLkW41rg7KnBSdbcoPhQjNaNpPkkvMbfDYinEWqbtHNPvk6K6eDVkwpLVNfUd7i6tRvk7PjCEXVmaxhGL0qq01S0+kPG3Ph7E1VzVFVP3n+/ZnRiqYj+WXgb4OBfdTRCvLU7rIVQcq6lFSlJJatTfFxnRd0DiLVFVyqqnKIz55/j9OVOJpmYjJtpo2SoQApQCAFAwzgyFCAACgAOOb4XlbK+zH+BA+g6D7Db/e+WpxPWS1w2zHAM/YPj2D67ifGgY+M7Pd/GrdLnb6cbXeT5i3LV98ryVd6XH+Ijd/D/bI2SxsV1bj57trAABQOn70nimV60vhRPHfEvW29n+s7B9GW9nmmY4pu+8r5v3qPy9R9D0N2G1+98tXiOslr5s3SAenuX8o4HrmN8SJh4/st38Z3Odvpxtd6PmzbAFCAFKgQNQMQ4sgAoQA1fdjuqns+dEIUQu7tGyTcpuHB4LS8y4+U3mitFUY2iqqqqYyli4i/NuftDX/AAmXdCq66fZNrPwza8SfR0ctq1NS29tSWZlWZUoKt2KtOEZOSXBgo8r+w3mDwsYWzTaic8s/Wc2NcucOrN55lOsA/vg5DqupuSUnTdVcot6KThNSSb/gdd2jjLdVGuJjzjJaZymJbv4TruhVdfLsnnvpq14ksvlk6nm7od29mbjSxpY0KlKUJcONspNcGSemjX1GXgdC28Jd4yK5lwuYia6eDk1M3TGAAADZNy266ez6raoY8LlZZ3RuVjho+Co6cSfMarSGiqMbVFVVeWTvtX5txlD2/Cfd0Krr59k18fDVrxZ8odvK51NP25tJ5eVdlSgq5XODcItyUeDXGHK/um9wmHjD2abUTnl75saurhVZsAyHAAydm5boyKMhRUnRdXaot6KTjJPTXzch1X7UXbdVuf5iY81pngzEt38KF3Qquvn2Tz301a8SfRlcrnU9nclu2sz8v9GljV1LuVlnDjbKb1i48WjX1mDpLQ1GFszdiuZ+7stX5rqyyboeeZKgAKVADEODIAAFCObb7Py2F6K/3oHsfhnqrm2NzX43nhoZ6Zgv71Yd80pQounF66ShVOUXpxPRpHXVet0zlVVETthYpmeaH3/07J6NkdRb/wAHHlFnvx5wvBq1T5MZpptNNNPRp8TT5mdzigAAAAAAAAAAAAZS2dk9GyH/ALFv/B1cfa78ecLwZ1JPAyIpylj5EYpNuUqbIxilyttriRYvW5nKK484ODPPkxjsRt29b5U/lb/7wNL8QdjnbH+sjDdN188I2IEUABQMM4O9SgAA5vvs/LYXor/egex+GequbY3NdjeeGhnpmC7Dvdv9k4v3sn8xYeA0926vZTuhtcL1cTtbKjTsjJwTavjWV6zkfEkfUcP1VGyNzS19KWIdzgAAAAAAAAAAEnyP7GB+h8V/9qv0cPdR8uxHW17Z3txTH2hgbqn+zdoepZXwpGRo3tdrLvRvcbvQlwg+ktS27eu8qfyt/wDeBpfiDsc7Y/1kYbpuvnhGxAARQAGIcGQBFKAHN99n5bC9Ff70D2Pwz1VzbG5rsdzw0M9MwXYd7vyTjfeyfzFh4DT3bq9lO6G1wnVR+97ZUadky4JtbxrK9ZyPiSPqOH6mjZG5pK+lL52djq3Ix6ZNqN2RTTJx01SnYotrXz8Zb9fF2q69UTPlGbjTGcxDo3gzw+k5f9LsnkvqW94cerYcjp1r4M8PpOX/AEuyPqa94ceqcjp1ngzw+k5f9Lsj6mveHHqcjp1ngzw+k5ftq7JfqW94ceq8jp1ngyw+k5ftq7I+pb3hx6pyOnWvgyw+k5ftq7I+pb3hx6nI6dZ4MsPpWX7auyPqW94cepyOnWeDLD6Tl+2nsj6lveHHqcjp1tB3SbOhiZuRi1ynOFLrUZT04T4VUJvXRacsmemwGInEYei7MZTOe/JhXKOBVMPLnyP7GZbg/Q+L8lX6OHuo+X3+tr2zvbmnmh5+6nybtD1LK+DI79G9rtflG+HXd6E7HCT6S1Tbt67yp/K3/wB4Gl+IOxztj/WThusdePCNgoAAEAMU4MgABFKOb77Hy2F6K/3onsfhnq7m2GuxsfeGhnpmFk7Bvd+Scb72T+YsPAae7dXsp3Q2mF6qP22VGnZLgm1vGsr1nI+JI+o4fqqNkbmkr6Uv6bB8ewfXcT40DhjOzXfxq3SW+nG13hHzJupUiZwpTMCgQ1CLqDMLkOK7vvK+b96j8vWfQtDdhtfvfLVYjrJa/ZyP7GbN0v0NifJV+jh7qPl1/rats725p5oYG6rybtD1LK+FIyNHdrsx/wCo3uF3oS4SfSWp/Tbt67yn/K3/AN4Gk+IOxzthk4brHXjwrYgRQAADFODvAAAIwNp7ExMpwlk0xtdaag3Ka4KfLyNcyMzDY/EYaJi1Vlm667NFc51Rmwu87ZfQ4fjt7Rk/Osb4npHs6+S2u69XAwqceqNNEFXVDhcGCbaWsnJ8vHytswb9+5frmu5Ocz/jupoimMoZJ0q8O3cjsyUpTliQcpylKT4dvHJvVv8Ae5zZ06ZxtMZRc+2yPZ0ThrU/wxdo7mNn0UX5FONCu7HptvpsUrG4W1wcoS0b0ekknx8R34fSuLvXaLddedNUxExlH3iedxrw9ummaoj7w5935bV6bPqcfsHqvk2B8KPOfdgcoud478tq9Nn1OP2B8mwPhR5z7nKLve3Hfltbps+px+wX5NgfCjzn3OUXO863sC+duDh22S4dlmJjWWSaScpyqi5S0XFxtvkPB42im3iLlFMZREzENpbmZpjNno6KPvVEf3DlPM4nXu02s4rXNnyL/Rx+b7h9CjQ+By6qPOfdqpxFzW+u/La3TZ9Tj9gfJsD4UevunKLneO/Pa3TZ9Tj9gfJ8D4Uec+6cfc7zedzWxsTPw6s3NojkZV3D7tdJyg5uE3COqg0l+rGK4l5jzmkMbfweIqsWKuDRTllHr/O1mWrdNynhVRnL1O8vZPQq/wAdvaMP5zjfEn0dnJ7cfw96EUkkuJJJJcyRraqpqmZnnl3RD4yceFtc6rI8Ou2Eq7IvVKUJLRri+pnK3cqt1RXROUxOfk4zETGTxe8vZXQ4dZd2jYfOcb4k+Uezq5Pb1MrZu5zBxrO7Y+PGqzgyhwlKxvgvTVcba8yOm/pLE36OBcrzj9OVNmimc4h6phOxQARQAGIcGQoQAAAilAABQjA2/wCI5vqmT8KRlYHtNv8AKN7hd6EuDqa517T6c0mS8OPOvaDL+k4cede0i/p3bcu/2ds/1HE+DE+aaR7Vd/KW4tdCHqIxaOlG2HOeZ+c6prgx41+6vP8AUfVI5mknnn7PvhrnXtKmX9HDXOvagZOyb28k9k4+jT0nkLi4/wDVkeC09Exjav7iNzaYbq4bMaZkARQARQAAooAIoGIcGQAUIAAARSgAArQicvuj47jD5kPwo7OOud6fOU4FOo7jD5kPwocdc70+cnBp1HcYfMh+FDjrnenzk4FOp9pacS4kdczn95V9BHx3GHzIfhR2cdc70+cuPBjUdxh8yH4UWL1zvT5ycGNS9xh8yH4UXjrnenzk4NOp9RilxJJLmS0Rwqqmqc5nNYjJ9HEAARQARQAAooADEODvUABQgAABFKAAChAABQAFCKAEAVFAAAARQARQAAoAYxwd6AUABQgAABFKAAChAABQAFCKAAFRQAAAEUABQgAAxdTi71AgFAAUIAAARSgAAoQAAUABQigABUUAAABFAAUIgGMcWQBFAgFAAUIAAARSgAAoQAAUABUEUAMwKigAAAIoAChGIcWQoBBFAgFAAUIAAARSgAAoQAAUABUEUAMwKigAAAIoADFOLvAKAQRQIBQAFCAAAEUoAAKEAAFAAUIoAAVFAAAARQMU4u8AAVBFAgFQAABQgAABFKAFCAACgAKEVAGAKARUAABAD//Z">
+            <div class="desc">Niubie</div>
+            <ion-buttons text-right>
+              <button color="purple" clear ion-button>Ver mas</button>
+            </ion-buttons>
+          </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+          <ion-card>
+            <img src="http://s1.latercera.com/wp-content/uploads/2018/01/La-Terceraok.png">
+            <div class="desc">La tercera</div>
+            <ion-buttons text-right>
+              <button color="purple" clear ion-button>Ver mas</button>
+            </ion-buttons>
+          </ion-card>
+        </ion-slide>
+
+      </ion-slides>  
+  </div>
+
 </ion-content>

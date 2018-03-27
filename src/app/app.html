@@ -1,1 +1,21 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu id="mimenu" side="left" [content]="mycontent">
+	
+  <ion-content color="themeorange" class="bglight">
+    <div class="boximg" *ngIf="user">
+		<ion-navbar color="purple">
+			<p>{{ user.email }}</p>
+		</ion-navbar>
+    </div>
+    <ion-list>
+      <button menuClose ion-item >
+        <ion-icon color="themeorange" name="ios-home" item-left></ion-icon>
+        <span>Inicio</span>
+      </button>
+      <button menuClose ion-item (click)="logout()">
+        <ion-icon color="themeorange" name="ios-log-out" item-left></ion-icon>
+        <span>Logout</span>
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav  #mycontent [root]="rootPage"></ion-nav>

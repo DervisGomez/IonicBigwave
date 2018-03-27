@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="themeorange">
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <img src="assets/imgs/cart.png" class="logo">
+  <ion-card padding>
+    <form [formGroup]="form" novalidate>
+      <ion-item color="theme-blue">
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" name="email" formControlName="email" #email (ionBlur)="removeSpaces(email)"></ion-input>
+      </ion-item>
+      <div padding *ngIf="form.controls.email.errors && form.controls.email.dirty">
+        <ion-label color="danger">*Requerido</ion-label>
+      </div>
+
+      <ion-item color="theme-blue">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" name="password" formControlName="password" #password></ion-input>
+      </ion-item>
+      <div padding *ngIf="form.controls.password.errors && form.controls.password.dirty">
+        <ion-label color="danger">*Requerido</ion-label>
+      </div>
+      <div class="btn-login">
+        <button full ion-button (click)="login()" color="themeorange">Ingresar</button>
+      </div>
+    </form>
+    <div class="bottons_a">    
+      <button full ion-button outline color="theme-purple" clear class="bt1" color="themeorange">Olvidé la contraseña</button>
+      <button full ion-button outline color="theme-purple" clear class="bt2" (click)="goToSignIn()" color="themeorange">Aún no tengo cuenta</button>
+    </div>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-navbar color="themeorange">
+    <ion-title>Registro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<form form [formGroup]="form" novalidate>
+	
+		<ion-grid>
+		  <ion-row>
+		    <ion-col col-6>  
+					<ion-item>
+						<ion-label floating>Nombre</ion-label>s
+						<ion-input type="text" name="name" formControlName="name" #name></ion-input>
+					</ion-item>
+					<div padding *ngIf="form.controls.name.errors && form.controls.name.dirty">
+						<ion-label color="danger" *ngIf="form.controls.name.errors.required">*Requerido</ion-label>
+					</div>
+				</ion-col>
+		    <ion-col col-6>  
+		      <ion-item>
+			    	<ion-label floating>Email</ion-label>
+			   		<ion-input type="text" name="email" formControlName="email" #email></ion-input>
+					</ion-item>
+					<div padding *ngIf="form.controls.email.errors && form.controls.email.dirty">
+						<ion-label color="danger" *ngIf="form.controls.email.errors.required">*Requerido</ion-label>
+					</div>
+				</ion-col>		
+		  </ion-row>
+			
+			<ion-row>
+				<ion-col col-12>
+					<ion-item>
+						<ion-label floating>Nickname</ion-label>
+						<ion-input type="text" name="nickname" formControlName="nickname" #nickname></ion-input>
+					</ion-item>
+					<div padding *ngIf="form.controls.nickname.errors && form.controls.nickname.dirty">
+						<ion-label color="danger" *ngIf="form.controls.nickname.errors.required">*Requerido</ion-label>
+					</div>
+				</ion-col>
+
+			</ion-row>
+					  
+			
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label floating>Contraseña</ion-label>
+						<ion-input type="text" name="password" formControlName="password" #password></ion-input>
+					</ion-item>
+					<div padding *ngIf="form.controls.password.errors && form.controls.password.dirty">
+						<ion-label color="danger" *ngIf="form.controls.password.errors.required">*Requerido</ion-label>
+					</div>					
+				</ion-col>				
+				<ion-col>
+					<ion-item>
+						<ion-label floating>Confirmar</ion-label>
+						<ion-input type="text" name="password_confirm" formControlName="password_confirm" #password_confirm></ion-input>
+					</ion-item>
+					<div padding *ngIf="form.controls.password.errors && form.controls.password.dirty">
+						<ion-label color="danger" *ngIf="form.controls.password.errors.required">*Requerido</ion-label>
+					</div>					
+				</ion-col>
+			</ion-row>
+			
+			
+			<ion-row>
+				<ion-col>
+					<button full ion-button (click)="register()" [disabled]="form.invalid">Registrarse</button>
+				</ion-col>
+			</ion-row>			
+		</ion-grid>
+	</form>
+</ion-content>
