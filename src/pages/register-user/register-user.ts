@@ -28,8 +28,16 @@ export class RegisterUserPage {
 	    email: ['', Validators.required],
 	    name: ['', Validators.required],
 	    nickname: ['', Validators.required],
-      	password: ['', Validators.required],
-      	password_confirm: ['', Validators.required]
+      	password:  ['', Validators.compose([
+	        Validators.required,
+	        Validators.maxLength(8),
+	        Validators.minLength(15),
+	    ])],
+      	password_confirm:  ['', Validators.compose([
+	        Validators.required,
+	        Validators.maxLength(8),
+	        Validators.minLength(15),
+	    ])],
 	    // image: ['', Validators.required],
     });  
 
