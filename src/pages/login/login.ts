@@ -14,6 +14,7 @@ import { HttpResponse, HttpHeaders } from '@angular/common/http';
 export class LoginPage {
 
   form: FormGroup;
+  currentTab: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -33,9 +34,10 @@ export class LoginPage {
       password: ['', Validators.required]
     });    
 
+    this.currentTab = this.navParams.get("data");
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad LoginPage a:', this.currentTab);
   }
 
   goToSignIn(){
@@ -65,17 +67,18 @@ export class LoginPage {
       let user = data.body.data;
       let headers = {
         'access-token': data['headers'].get('access-token'),
-        'uid': data['headers'].get('access-token'),
+        'uid': data['headers'].get('uid'),
         'client': data['headers'].get('client')
       }
 
       this.storage.set("user", JSON.stringify(user)).then((user) => {
         let userJson = JSON.parse(user);
         console.log(userJson)
-        this.events.publish("userLogin", userJson);
+
         this.storage.set("headers", headers);
+        this.events.publish("userLogin", userJson);
         this.menuCtrl.enable(true);
-        this.navCtrl.setRoot(TabsPage);    
+        this.navCtrl.setRoot(this.currentTab);
       });      
 
     },

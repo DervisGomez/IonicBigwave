@@ -2,6 +2,7 @@
 	
   <ion-content color="themeorange" class="bglight">
     <div class="boximg" *ngIf="user">
+    	{{user | json}}
 		<ion-navbar color="purple">
 			<p>{{ user.email }}</p>
 		</ion-navbar>

@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = "WelcomePage";
+  rootPage:any = TabsPage;
   user: any;
   @ViewChild(Nav) nav: Nav;
 
@@ -39,14 +39,10 @@ export class MyApp {
   checkLogin() {
     this.storage.get('user').then((user) => {
       console.log(user)
-      if (!user) {
-        this.nav.setRoot("WelcomePage");
-      } else {
+      if (user) {
         this.user = JSON.parse(user).data;
         this.menuCtrl.enable(true);
         let loading = this.loading.create({content: "cargando"});
-        this.nav.setRoot(TabsPage);
-
       }
 
     });//storage user
@@ -56,9 +52,7 @@ export class MyApp {
     this.storage.remove('user');
     let loading = this.loading.create({content: 'Cargando...'});
     loading.present().then(() => {
-      loading.dismiss().then(() => {
-        this.nav.setRoot("WelcomePage");
-      });
+      loading.dismiss();
     });//Loading
   }
 

@@ -33,7 +33,7 @@ export class UserProvider {
   }
 
   perfil(currentHeaders: {'access-token': string, 'uid': string, 'client': string}): Observable<any>{
-    // let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
     let headers = new HttpHeaders({
     	'Content-Type': 'application/json;charset=utf-8',
     	'access-token': currentHeaders['access-token'],
@@ -41,7 +41,7 @@ export class UserProvider {
     	'client': currentHeaders.client
     });
       	
-      console.log(currentHeaders)
+    console.log(currentHeaders)
   	return this.http.get(routes.perfil(), { headers: headers, observe: 'response' });
   }
 }
