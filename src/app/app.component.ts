@@ -25,9 +25,12 @@ export class MyApp {
     ){
     
     this.checkLogin();
+    
     this.events.subscribe("userLogin", (user) => {
-      this.user = user.data;
+      this.user = user;
+      console.log("events in component app", this.user)
     });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -52,6 +55,7 @@ export class MyApp {
     this.storage.remove('user');
     let loading = this.loading.create({content: 'Cargando...'});
     loading.present().then(() => {
+      this.events.publish("userLogin", null);
       loading.dismiss();
     });//Loading
   }

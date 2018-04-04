@@ -15,6 +15,7 @@ export class LoginPage {
 
   form: FormGroup;
   currentTab: any;
+  user: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -35,6 +36,12 @@ export class LoginPage {
     });    
 
     this.currentTab = this.navParams.get("data");
+
+    this.events.subscribe("userLogin", (user) => {
+      this.user = user;
+      console.log("events in login", this.user);
+      this.navCtrl.setRoot(this.currentTab);
+    });      
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage a:', this.currentTab);
@@ -62,7 +69,7 @@ export class LoginPage {
       
       loading.dismiss();
 
-      console.log(data['headers'].get('client'), data['headers'].get('uid'))
+      console.log("login", data['headers'].get('access-token'), data['headers'].get('client'), data['headers'].get('uid'))
 
       let user = data.body.data;
       let headers = {
@@ -71,12 +78,12 @@ export class LoginPage {
         'client': data['headers'].get('client')
       }
 
-      this.storage.set("user", JSON.stringify(user)).then((user) => {
-        let userJson = JSON.parse(user);
-        console.log(userJson)
+      this.storage.set("user", JSON.stringify(user)).then((dataUserSave) => {
+        // let userJson = JSON.parse(user);
+        console.log("headers", headers)
 
         this.storage.set("headers", headers);
-        this.events.publish("userLogin", userJson);
+        this.events.publish("userLogin", user);
         this.menuCtrl.enable(true);
         this.navCtrl.setRoot(this.currentTab);
       });      

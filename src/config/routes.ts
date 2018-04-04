@@ -8,5 +8,14 @@ export const routes = {
     },
     perfil: () =>{
     	return `${ROOT}/current`;
+    },
+    pymes: () => {
+    	return `${ROOT}/pymes`;
+    },
+    sellers: () => {
+    	return `${ROOT}/sellers`;
+    },
+    independents: () => {
+    	return `${ROOT}/independents`;
     }
 }

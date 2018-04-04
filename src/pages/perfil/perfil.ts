@@ -22,6 +22,7 @@ user: any;
   	this.checkLogin();
     this.events.subscribe("userLogin", (user) => {
       this.user = user;
+      console.log("events in perfil", this.user);
     });  	
   }
 
@@ -33,11 +34,11 @@ user: any;
     this.storage.get('user').then((user) => {
       console.log(user)
       if (user) {
-        this.user = JSON.parse(user).data;
+        this.user = JSON.parse(user);
         let loading = this.loading.create({content: "cargando"});
   		this.getPerfil();
       }else{
-      	this.navCtrl.push("LoginPage",{data: "PerfilPage"});
+      	this.navCtrl.setRoot("LoginPage",{data: "PerfilPage"});
       }
 
     });//storage user
@@ -46,18 +47,26 @@ user: any;
   getPerfil(){
   	this.storage.get('headers').then((data)=>{
 	  	this.userProvider.perfil(data).subscribe((res => {
+	  	  
 	      let user = res;
 	      let headers = {
-	        'access-token': res['headers'].get('access-token'),
+	        'access-token': res['headers'].get('access-token') == '' ? data['access-token'] : res['headers'].get('access-token'),
 	        'uid': res['headers'].get('uid'),
 	        'client': res['headers'].get('client')
 	      }	  		
-	
+
+	  	  console.log("perfil: ", res)
+
 	      this.storage.set("headers", headers);
-	      this.user = user;
-	  	  console.log(user, headers);
+	      this.user = res.body.data.attributes;
 
 	  	}))
+  	});
+  }
+
+  editPerfil(user){
+  	this.navCtrl.push("EditPerfilPage",{
+  		user: user
   	});
   }
 

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="user">
 
   <ion-navbar color="purple">
     <ion-title text-center>Perfil</ion-title>
@@ -7,9 +7,25 @@
 </ion-header>
 
 
-<ion-content padding>
-	<p>Data actual de perfil:</p>
-	<pre *ngIf="user">
-		{{ user.body | json }}
-	</pre>
+<ion-content padding *ngIf="user">
+	<ion-list>
+    <ion-item>
+      <span item-left>Nombre</span>
+      <span item-right>{{ user.name }}</span>
+    </ion-item>
+    <ion-item>
+      <span item-left>Email</span>
+      <span item-right>{{ user.email }}</span>
+    </ion-item>
+    <ion-item>
+      <span item-left>Nickname</span>
+      <span item-right>{{ user.nickname }}</span>
+    </ion-item>
+	</ion-list>
+
+  <ion-footer>
+    <button full ion-button (click)="editPerfil(user)">
+      <ion-icon name="ios-contact-outline" item-left color="theme-white"></ion-icon>&nbsp; Editar perfil
+    </button>
+  </ion-footer>	
 </ion-content>

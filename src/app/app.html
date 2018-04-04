@@ -1,8 +1,7 @@
-<ion-menu id="mimenu" side="left" [content]="mycontent">
+<ion-menu id="mimenu" side="left" [content]="mycontent" *ngIf="user">
 	
   <ion-content color="themeorange" class="bglight">
-    <div class="boximg" *ngIf="user">
-    	{{user | json}}
+    <div class="boximg">
 		<ion-navbar color="purple">
 			<p>{{ user.email }}</p>
 		</ion-navbar>

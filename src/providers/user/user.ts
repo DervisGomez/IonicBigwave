@@ -32,6 +32,20 @@ export class UserProvider {
     return this.http.post(routes.registerUser(), user, { headers: headers, params: Params });
   }
 
+  edit(usuario: { email?: string, name?: string, nickname?: string, password?: string, password_confirm?: string }): Observable<any> {
+    let user = JSON.stringify(usuario);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8');
+	let Params = new HttpParams();
+
+	Params = Params.append('email', usuario.email);
+	Params = Params.append('name', usuario.name);
+	Params = Params.append('nickname', usuario.nickname);
+	Params = Params.append('password', usuario.password);
+	Params = Params.append('password_confirm', usuario.password_confirm);
+	  
+    return this.http.patch(routes.registerUser(), user, { headers: headers, params: Params });
+  }
+
   perfil(currentHeaders: {'access-token': string, 'uid': string, 'client': string}): Observable<any>{
 
     let headers = new HttpHeaders({

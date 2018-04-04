@@ -17,6 +17,10 @@ export class MessagesPage {
     public loading: LoadingController,
     public events: Events
   ){
+    this.events.subscribe("userLogin", (user) => {
+      this.user = user;
+      console.log("events in component app", this.user)
+    });  	
   	this.checkLogin();
   }
 
@@ -28,11 +32,11 @@ export class MessagesPage {
     this.storage.get('user').then((user) => {
       console.log(user)
       if (user) {
-        this.user = JSON.parse(user).data;
+        this.user = JSON.parse(user);
         let loading = this.loading.create({content: "cargando"});
   		this.getMessage();
       }else{
-      	this.navCtrl.push("LoginPage",{data: "MessagesPage"});
+      	this.navCtrl.setRoot("LoginPage",{data: "MessagesPage"});
       }
 
     });//storage user

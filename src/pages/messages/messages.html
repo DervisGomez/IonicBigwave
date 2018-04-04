@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="user">
 
   <ion-navbar color="purple">
     <ion-title text-center>Mensajes</ion-title>
@@ -7,6 +7,6 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding *ngIf="user">
 
 </ion-content>
