@@ -68,7 +68,6 @@ export class LoginPage {
     }).subscribe((data) => {
       
       loading.dismiss();
-
       console.log("login", data['headers'].get('access-token'), data['headers'].get('client'), data['headers'].get('uid'))
 
       let user = data.body.data;

@@ -22,8 +22,7 @@ export class MyApp {
     public loading: LoadingController,
     public menuCtrl: MenuController,
     public events: Events    
-    ){
-    
+    ){    
     this.checkLogin();
     
     this.events.subscribe("userLogin", (user) => {
@@ -47,7 +46,6 @@ export class MyApp {
         this.menuCtrl.enable(true);
         let loading = this.loading.create({content: "cargando"});
       }
-
     });//storage user
   }
 

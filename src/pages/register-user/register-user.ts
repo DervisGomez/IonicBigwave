@@ -30,13 +30,13 @@ export class RegisterUserPage {
 	    nickname: ['', Validators.required],
       	password:  ['', Validators.compose([
 	        Validators.required,
-	        Validators.maxLength(8),
-	        Validators.minLength(15),
+	        Validators.maxLength(15),
+	        Validators.minLength(8),
 	    ])],
       	password_confirm:  ['', Validators.compose([
 	        Validators.required,
-	        Validators.maxLength(8),
-	        Validators.minLength(15),
+	        Validators.maxLength(15),
+	        Validators.minLength(8),
 	    ])],
 	    // image: ['', Validators.required],
     });  
