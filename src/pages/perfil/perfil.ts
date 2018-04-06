@@ -40,15 +40,16 @@ user: any;
       }else{
       	this.navCtrl.setRoot("LoginPage",{data: "PerfilPage"});
       }
-
     });//storage user
   }
 
   getPerfil(){
   	this.storage.get('headers').then((data)=>{
+      console.log(data);
 	  	this.userProvider.perfil(data).subscribe((res => {
 	  	  
 	      let user = res;
+        console.log(res.headers.headers);
 	      let headers = {
 	        'access-token': res['headers'].get('access-token') == '' ? data['access-token'] : res['headers'].get('access-token'),
 	        'uid': res['headers'].get('uid'),

@@ -12,7 +12,7 @@ import { HomePage } from '../home/home';
 export class TabsPage {
   user: any;
   tab1Root = HomePage;
-  tab2Root = 'ExplorePage';
+  tab2Root = 'WishesPage';
   tab3Root = 'NearbyPage';
   tab4Root = 'MessagesPage';
   tab5Root = 'PerfilPage';

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/user/user';
+import { Storage } from '@ionic/storage';
 
 
 @IonicPage()
@@ -21,12 +22,14 @@ export class EditPerfilPage {
     private toastCtrl: ToastController,
     public fb: FormBuilder,
     public userProvider: UserProvider,
+    public storage: Storage,
   ){
   	this.user = this.navParams.get("user");
+  	console.log(this.user);
     this.form = this.fb.group({
-	    email: ['', Validators.required],
-	    name: ['', Validators.required],
-	    nickname: ['', Validators.required],
+	    email: [this.user.email, Validators.required],
+	    name: [this.user.name, Validators.required],
+	    nickname: [this.user.nickname, Validators.required],
       	password:  ['', Validators.compose([
 	        Validators.required,
 	        Validators.maxLength(15),
@@ -45,6 +48,20 @@ export class EditPerfilPage {
     console.log('ionViewDidLoad EditPerfilPage');
   }
 
+  checkLogin() {
+    this.storage.get('user').then((user) => {
+      console.log(user)
+      if (user) {
+        this.user = JSON.parse(user);
+        console.log(this.user);
+        let loading = this.loading.create({content: "cargando"});
+      }else{
+      	this.navCtrl.setRoot("LoginPage",{data: "PerfilPage"});
+      }
+
+    });//storage user
+  }
+
 
   edit(){
  	 let loading = this.loading.create({ content: 'Cargando...' });
@@ -61,9 +78,9 @@ export class EditPerfilPage {
 	},
 	err => {
 		let toast = this.toastCtrl.create({
-		message: err.errors[0],
-		duration: 3000,
-		position: 'top'
+			message: err.error.errors[0],
+			duration: 3000,
+			position: 'top'
 		});
 		toast.present()
 

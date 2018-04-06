@@ -1,8 +1,8 @@
 page-home {
 	ion-slide{
-
 		ion-card{
 			height: 150px;
+			width: 150px;
 			img{
 				width: 100% !important;
 				height: 80px !important;
@@ -14,4 +14,83 @@ page-home {
 			}
 		}
 	}
+	.card-background-page {
+	  ion-card {
+	    position: relative;
+	    text-align: center;
+	    img{
+				width: 100% !important;
+				height: 150px !important;
+			}
+	  }
+	  .card-title {
+	    position: absolute;
+	    top: 36%;
+	    font-size: 32px;
+	    width: 100%;
+	    font-weight: bold;
+	    color: #fff;
+	    text-shadow: 0 0 6px black;
+	  }
+	  .card-subtitle {
+	    font-size: 1.0em;
+	    position: absolute;
+	    top: 52%;
+	    width: 100%;
+	    color: #888;
+	  }
+	}
+
+	.inner2{
+		width: 750px;
+		height: 100%;
+		ion-card{
+			width: 150px;
+			height: 150px;
+			display: table-cell;
+			img{
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				margin: 16px auto;
+				border-color: #000;
+				border-width: 2px;
+				box-shadow: 0 0 2px black;
+			}
+			.card-title {
+			    position: absolute;
+			    bottom: 0;
+			    padding: 4px;
+			    width: 150px;
+			    color: #444;
+			    text-align: center;
+			}
+		}
+		
+	}
+
+	.inner{
+		width: 750px;
+		height: 100%;
+		ion-card{
+			width: 150px;
+			height: 150px;
+			display: table-cell;
+			img{
+				width: 150px;
+				height: 150px;
+			}
+			.card-title {
+			    position: absolute;
+			    bottom: -1px;
+			    padding: 4px;
+			    width: 150px;
+			    color: #fff;
+			    text-align: center;
+			    background-color: rgba(139,35,180,0.9);
+			}
+		}
+		
+	}
+
 }

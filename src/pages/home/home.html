@@ -5,68 +5,139 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-searchbar> </ion-searchbar>
+    <ion-searchbar > </ion-searchbar>
+    <ion-buttons right>
+      <button ion-button >
+        <ion-icon style="font-size: 32px" name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
   
   <div>
-    <h2>Descubre e-wave</h2>
-      <ion-slides slidesPerView="2">
+    <h2 style="margin-left: 8px;margin-right: 8px">Descubre e-wave</h2>
+      <ion-slides pager>
 
-        <ion-slide>
+        <ion-slide class="card-background-page">
             <ion-card>
-              <img src="http://wp.cartafinanciera.com/wp-content/uploads/2015/07/Pymes_cartafinanciera-770x420.png">
-              <div class="desc">Pymes</div>
+              <img src="http://wp.cartafinanciera.com/wp-content/uploads/2015/07/Pymes_cartafinanciera-770x420.png"/>
+              <div class="card-title">Pymes</div>
             </ion-card>
         </ion-slide>
 
-        <ion-slide>
+        <ion-slide class="card-background-page">
           <ion-card>
               <img src="http://www.conectiva.com/wp-content/uploads/2016/06/los-profesionales-mas-inteligentes-660x330.jpg">
-              <div class="desc">Profesionales</div>
+              <div class="card-title">Profesionales</div>
             </ion-card>
         </ion-slide>
 
-        <ion-slide>
+        <ion-slide class="card-background-page">
           <ion-card>
               <img src="http://bam-mentors.com/wp-content/uploads/2017/05/vendedores.jpg">
-              <div class="desc">Vendedores</div>
+              <div class="card-title">Vendedores</div>
             </ion-card>
         </ion-slide>
 
       </ion-slides>  
-
-      <ion-toolbar>
+      <div style="margin-left: 8px;margin-right: 8px">
+      <ion-toolbar >
         <ion-segment color="purple">
           <ion-segment-button value="perfil" selected="true">
-              <ion-icon name="compass"></ion-icon>
+              <ion-icon name="list-box"></ion-icon>
           </ion-segment-button>
 
           <ion-segment-button value="card">
-            <ion-icon name="globe"></ion-icon>
+            <ion-icon name="pricetags"></ion-icon>
           </ion-segment-button>
+
 
           <ion-segment-button value="address">
             <ion-icon name="notifications"></ion-icon>
+
           </ion-segment-button>
 
           <ion-segment-button value="history">
-            <ion-icon name="grid"></ion-icon>
+            <ion-icon name="ribbon"></ion-icon>
           </ion-segment-button>
 
         </ion-segment>
-      </ion-toolbar>        
+      </ion-toolbar>   
+      </div>     
 
-      <ion-item>
+      <ion-item *ngIf="false">
         <p item-start>
           Noticias y Negocios<br>
           <ion-note>La descarga diaria</ion-note>
         </p>
         <button ion-button color="purple" clear item-end>Ver mas</button>
       </ion-item>
-      <ion-slides slidesPerView="2">
+      <ion-item >
+        <h3 >
+          Algunos Productos
+        </h3>
+        <button ion-button color="purple" clear item-end>Ver mas</button>
+      </ion-item>
+      <ion-scroll scrollX="true" style="width:100%; height:150px; display: flex;margin-left: 8px;margin-right: 8px">
+        <div class="inner">
+          <ion-card >
+            <img src="https://www.mstudio.es/wp-content/uploads/p-bodegon-aceite-de-oliva1.jpg"/>
+            <h3 class="card-title">Producto</h3>
+          </ion-card>
+          <ion-card>
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71PHN7RNZOL.jpg"/>
+            <h3 class="card-title">Producto</h3>
+          </ion-card>
+          <ion-card >
+            <img src="https://www.downloadmessenger.org/wp-content/uploads/2015/09/AliExpress-Shopping-App.jpg"/>
+            <h3 class="card-title">Producto</h3>
+          </ion-card>
+          <ion-card>
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71PHN7RNZOL.jpg"/>
+            <h3 class="card-title">Nombre del Producto</h3>
+          </ion-card>
+          <ion-card >
+            <img src="https://www.mstudio.es/wp-content/uploads/p-bodegon-aceite-de-oliva1.jpg"/>
+            <h3 class="card-title">Producto</h3>
+          </ion-card>
+        </div>
+        
+      </ion-scroll>
+      <ion-item >
+        <h3 >
+          Algunos Perfiles
+        </h3>
+        <button ion-button color="purple" clear item-end>Ver mas</button>
+      </ion-item>
+      <ion-scroll scrollX="true" style="width:100%; height:150px; display: flex;margin-left: 8px;margin-right: 8px">
+        <div class="inner2">
+          <ion-card >
+            <img  src="https://www.downloadmessenger.org/wp-content/uploads/2015/09/AliExpress-Shopping-App.jpg"/>
+            <h3 class="card-title">Nombre Perfil</h3>
+          </ion-card>
+          <ion-card>
+            <img src="https://andreo.li/wp-content/uploads/andreoli-gestiona-eficientemente-el-perfil-de-tu-tienda-online-en-Instagram.jpg"/>
+            <h3 class="card-title">Nombre Perfil</h3>
+          </ion-card>
+          <ion-card >
+            <img  src="https://www.downloadmessenger.org/wp-content/uploads/2015/09/AliExpress-Shopping-App.jpg"/>
+            <h3 class="card-title">Nombre Perfil</h3>
+          </ion-card>
+          <ion-card>
+            <img src="https://images-na.ssl-images-amazon.com/images/I/71PHN7RNZOL.jpg"/>
+            <h3 class="card-title">Nombre Perfil</h3>
+          </ion-card>
+          <ion-card>
+            <img src="https://andreo.li/wp-content/uploads/andreoli-gestiona-eficientemente-el-perfil-de-tu-tienda-online-en-Instagram.jpg"/>
+            <h3 class="card-title">Nombre Perfil</h3>
+          </ion-card>
+        </div>        
+      </ion-scroll>
+
+
+      <ion-slides slidesPerView="2" *ngIf="false">>
 
         <ion-slide>
           <ion-card>

@@ -1,7 +1,7 @@
 <ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Explorar" tabIcon="search" ></ion-tab>
-  <ion-tab [root]="tab2Root" [rootParams]="tab2Root" tabTitle="Deseos" tabIcon="heart">a</ion-tab>
   <ion-tab [root]="tab3Root" [rootParams]="tab3Root" tabTitle="Cerca" tabIcon="compass"></ion-tab>
   <ion-tab [root]="tab4Root" [rootParams]="tab4Root" tabTitle="Mensajes" tabIcon="text" *ngIf="user != null || user != undefined"></ion-tab>
   <ion-tab [root]="tab5Root" [rootParams]="tab5Root" tabTitle="Perfil" tabIcon="person"></ion-tab>
+  <ion-tab [root]="tab2Root" [rootParams]="tab2Root" tabTitle="Deseos" tabIcon="heart"></ion-tab>
 </ion-tabs>

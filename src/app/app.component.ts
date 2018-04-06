@@ -42,7 +42,7 @@ export class MyApp {
     this.storage.get('user').then((user) => {
       console.log(user)
       if (user) {
-        this.user = JSON.parse(user).data;
+        this.user = JSON.parse(user);
         this.menuCtrl.enable(true);
         let loading = this.loading.create({content: "cargando"});
       }

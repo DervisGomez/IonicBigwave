@@ -43,7 +43,7 @@ export class UserProvider {
 	Params = Params.append('password', usuario.password);
 	Params = Params.append('password_confirm', usuario.password_confirm);
 	  
-    return this.http.patch(routes.registerUser(), user, { headers: headers, params: Params });
+    return this.http.put(routes.registerUser(), user, { headers: headers, params: Params });
   }
 
   perfil(currentHeaders: {'access-token': string, 'uid': string, 'client': string}): Observable<any>{
