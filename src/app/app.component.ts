@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, LoadingController, MenuController, Events } from 'ionic-angular';
+import { Platform,Content, Nav, LoadingController, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,6 +13,7 @@ export class MyApp {
   rootPage:any = TabsPage;
   user: any;
   @ViewChild(Nav) nav: Nav;
+  @ViewChild(Content) content: Content;
 
   constructor(
     platform: Platform, 
@@ -54,7 +55,10 @@ export class MyApp {
     let loading = this.loading.create({content: 'Cargando...'});
     loading.present().then(() => {
       this.events.publish("userLogin", null);
+      this.user=null;
       loading.dismiss();
+      this.rootPage= TabsPage;
+      //this.rootPage.resize();
     });//Loading
   }
 

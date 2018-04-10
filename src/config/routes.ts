@@ -1,13 +1,14 @@
-const ROOT = 'https://bigwave.herokuapp.com/v1';
+export const ROOT = 'https://bigwave.herokuapp.com/v1';
 export const routes = {
     login: (email, pass) => {
-        return `${ROOT}/auth/sign_in?email=${email}&password=${pass}`
+        return `/auth/sign_in?email=${email}&password=${pass}`
     },
     registerUser: () => {
-        return `${ROOT}/auth`
+        return `auth`
     },
     perfil: () =>{
-    	return `${ROOT}/current`;
+    	//return `${ROOT}/users/current`;
+        return `/users/current`;
     },
     pymes: () => {
     	return `${ROOT}/pymes`;

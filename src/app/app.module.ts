@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule,HttpClient } from '@angular/common/http'; 
 import { IonicStorageModule } from '@ionic/storage';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -14,6 +14,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserProvider } from '../providers/user/user';
 import { BigwaveProvider } from '../providers/bigwave/bigwave';
+
+import {HttpModule} from '@angular/http';
+import { Angular2TokenService,A2tUiModule } from 'angular2-token';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,9 @@ import { BigwaveProvider } from '../providers/bigwave/bigwave';
       driverOrder: ['sqlite', 'indexeddb', 'websql']
     }),    
     ReactiveFormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    HttpModule,
+    A2tUiModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +51,8 @@ import { BigwaveProvider } from '../providers/bigwave/bigwave';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    BigwaveProvider
+    BigwaveProvider,
+    Angular2TokenService
   ]
 })
 export class AppModule {}
