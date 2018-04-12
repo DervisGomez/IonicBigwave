@@ -38,7 +38,6 @@ export class WishesPage {
       console.log(user)
       if (user) {
         this.user = JSON.parse(user);
-        let loading = this.loading.create({content: "cargando"});
       }else{
       	this.navCtrl.setRoot("LoginPage",{data: "WishesPage"});
       }

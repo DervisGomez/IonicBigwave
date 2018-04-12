@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, MenuController, Events } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TabsPage } from '../tabs/tabs';
-import { HttpClient, HttpHeaders, HttpParams,HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest,HttpClientModule } from '@angular/common/http';
-import { RequestOptions, Headers } from '@angular/http';
-import { Http,HttpModule } from '@angular/http';
+import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
@@ -49,7 +41,6 @@ user: any;
       console.log(user)
       if (user) {
         this.user = JSON.parse(user);
-        let loading = this.loading.create({content: "cargando"});
   		  this.getPerfil();
       }else{
       	this.navCtrl.setRoot("LoginPage",{data: "PerfilPage"});

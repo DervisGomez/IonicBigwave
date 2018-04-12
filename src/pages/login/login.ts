@@ -3,10 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
-import { TabsPage } from '../tabs/tabs';
-import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Angular2TokenService} from 'angular2-token';
-import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
 
 @IonicPage()
@@ -61,16 +58,22 @@ export class LoginPage {
     let strParse = new String(email.value);
     let campo = strParse.trim();
     email.value = campo;
-    console.log(campo);
   }  
 
   login(){
     let loading = this.loading.create({ content: 'Cargando...' });
     loading.present();
 
-    //this.errors=[];
-    //this.loading=true;
-    //this.userService.user = this.user;
+    if (this.form.value.email==undefined||this.form.value.email=="") {
+      loading.dismiss();
+      this.message("Email Invalid.");
+      return
+    }
+    if (this.form.value.password=="") {
+      loading.dismiss();
+      this.message("password Invalid.");
+      return
+    }
     this._tokenService.signIn({
       email:    this.form.value.email,
       password: this.form.value.password
@@ -90,75 +93,33 @@ export class LoginPage {
           client:client,
           uid:uid
         }
-        //data = JSON.parse(data['_body'])
         console.log(header);
         this.storage.set('headers', header);
         this.storage.set('user', JSON.stringify(this.user));
-        //this.storage.set('access-token', token);
-        //this.storage.set('client', client);
-        //this.storage.set('uid', uid);
-        //this.refresh();
         loading.dismiss();
         this.events.publish("userLogin", this.user);
         this.menuCtrl.enable(true);
         this.navCtrl.setRoot(this.currentTab);
       },
       error =>    {
+        console.log(error);
+        loading.dismiss();
         //this.loading=false;
         //this.errorHttp = true; this.loading=false; console.log(error._body);
-        if (error && '_body' in error){
-          loading.dismiss();
-          error = JSON.parse(error._body);
-          error.errors.forEach(element => {
-            //this.errors.push(element);
-          });
-          let toast = this.toastCtrl.create({
-            message: "He ocurrido un error, por favor intente luego",
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present()
+        if (error && '_body' in error){          
+          this.message("Invalid login credentials. Please try again.");
         }
       }
     );
+  }
 
-    /*this.userProvider.login({
-      email: this.form.value.email,
-      clave: this.form.value.password
-    }).subscribe((data) => {
-      
-      loading.dismiss();
-      console.log("login", data)
-      console.log("login", data['headers'].get('access-token'), data['headers'].get('client'), data['headers'].get('uid'))
-
-      let user = data.body.data;
-      let headers = {
-        'access-token': data['headers'].get('access-token'),
-        'uid': data['headers'].get('uid'),
-        'client': data['headers'].get('client')
-      }
-
-      this.storage.set("user", JSON.stringify(user)).then((dataUserSave) => {
-        // let userJson = JSON.parse(user);
-        console.log("headers", headers)
-
-        this.storage.set("headers", headers);
-        this.events.publish("userLogin", user);
-        this.menuCtrl.enable(true);
-        this.navCtrl.setRoot(this.currentTab);
-      });      
-
-    },
-    err => {
-      let toast = this.toastCtrl.create({
-        message: "He ocurrido un error, por favor intente luego",
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present()
-
-      loading.dismiss();
-    });*/
+  message(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present()
   }
 
 }

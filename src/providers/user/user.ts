@@ -1,12 +1,7 @@
-import { HttpClient, HttpHeaders, HttpParams,HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { routes } from '../../config/routes';
-import { RequestOptions, Headers } from '@angular/http';
-import { Http } from '@angular/http';
 
 @Injectable()
 export class UserProvider {
@@ -33,9 +28,9 @@ export class UserProvider {
   	Params = Params.append('nickname', usuario.nickname);
   	Params = Params.append('password', usuario.password);
   	Params = Params.append('password_confirm', usuario.password_confirm);
-	  console.log("http://someUrl?" + Params);
+	  console.log("http://someUrll?" + Params);
 	  
-    return this.http.post(routes.registerUser(), user, { headers: headers, params: Params });
+    return this.http.post(routes.registerUser2(), user, { headers: headers, params: Params });
   }
 
   edit(usuario: { email?: string, name?: string, nickname?: string, password?: string, password_confirm?: string },currentHeaders: {'access-token': string, 'uid': string, 'client': string}): Observable<any> {

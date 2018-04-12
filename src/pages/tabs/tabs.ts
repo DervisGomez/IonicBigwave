@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 
 @Component({
@@ -33,6 +31,8 @@ export class TabsPage {
       console.log(user)
       if (user) {
         this.user = JSON.parse(user);
+      }else{
+        
       }
 
     });//storage user

@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform,Content, Nav, LoadingController, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { App } from 'ionic-angular';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { Storage } from '@ionic/storage';
@@ -22,7 +23,8 @@ export class MyApp {
     public storage: Storage,
     public loading: LoadingController,
     public menuCtrl: MenuController,
-    public events: Events    
+    public events: Events,
+    public appCtrl: App   
     ){    
     this.checkLogin();
     
@@ -45,7 +47,6 @@ export class MyApp {
       if (user) {
         this.user = JSON.parse(user);
         this.menuCtrl.enable(true);
-        let loading = this.loading.create({content: "cargando"});
       }
     });//storage user
   }
@@ -57,7 +58,9 @@ export class MyApp {
       this.events.publish("userLogin", null);
       this.user=null;
       loading.dismiss();
-      this.rootPage= TabsPage;
+      this.appCtrl.getRootNav().setRoot(TabsPage);     
+      window.location.reload()
+
       //this.rootPage.resize();
     });//Loading
   }

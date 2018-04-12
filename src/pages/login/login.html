@@ -12,7 +12,7 @@
     <form [formGroup]="form" novalidate>
       <ion-item color="theme-blue">
         <ion-label floating>Email</ion-label>
-        <ion-input type="text" name="email" formControlName="email" #email (ionBlur)="removeSpaces(email)"></ion-input>
+        <ion-input type="email" name="email" formControlName="email" #email (ionBlur)="removeSpaces(email)"></ion-input>
       </ion-item>
       <div padding *ngIf="form.controls.email.errors && form.controls.email.dirty">
         <ion-label color="danger">*Requerido</ion-label>

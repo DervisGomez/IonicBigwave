@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
-import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
@@ -74,7 +73,6 @@ export class EditPerfilPage {
       if (user) {
         this.user = JSON.parse(user);
         console.log(this.user);
-        let loading = this.loading.create({content: "cargando"});
       }else{
       	this.navCtrl.setRoot("LoginPage",{data: "PerfilPage"});
       }
@@ -85,8 +83,7 @@ export class EditPerfilPage {
 
   edit(){
  	 let loading = this.loading.create({ content: 'Cargando...' });
-    loading.present();      	
-    var object = this;
+    loading.present();  
     if (!this.password_show) {
       this.form.value.password=this.form.value.current_password;
       this.form.value.password_confirm=this.form.value.current_password;

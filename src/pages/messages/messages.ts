@@ -33,7 +33,6 @@ export class MessagesPage {
       console.log(user)
       if (user) {
         this.user = JSON.parse(user);
-        let loading = this.loading.create({content: "cargando"});
   		this.getMessage();
       }else{
       	this.navCtrl.setRoot("LoginPage",{data: "MessagesPage"});
