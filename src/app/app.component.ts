@@ -59,7 +59,7 @@ export class MyApp {
       this.user=null;
       this.menuCtrl.enable(false);
       loading.dismiss();
-      //this.appCtrl.getRootNav().setRoot(TabsPage,{sesion:1});
+      this.appCtrl.getRootNav().setRoot(TabsPage,{sesion:1});
     });//Loading
   }
 
