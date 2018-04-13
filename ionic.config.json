@@ -1,6 +1,6 @@
 {
   "name": "bigwave",
-  "app_id": "",
+  "app_id": "88dd3226",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
