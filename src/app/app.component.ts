@@ -57,11 +57,9 @@ export class MyApp {
     loading.present().then(() => {
       this.events.publish("userLogin", null);
       this.user=null;
+      this.menuCtrl.enable(false);
       loading.dismiss();
-      this.appCtrl.getRootNav().setRoot(TabsPage);     
-      window.location.reload()
-
-      //this.rootPage.resize();
+      //this.appCtrl.getRootNav().setRoot(TabsPage,{sesion:1});
     });//Loading
   }
 

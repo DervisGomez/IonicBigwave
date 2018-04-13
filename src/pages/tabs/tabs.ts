@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Events } from 'ionic-angular';
+import { Events, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../home/home';
@@ -17,6 +17,7 @@ export class TabsPage {
 
   constructor(
   	public storage: Storage,
+    public navParams: NavParams,
     public events: Events
   ){
     this.events.subscribe("userLogin", (user) => {
@@ -31,10 +32,13 @@ export class TabsPage {
       console.log(user)
       if (user) {
         this.user = JSON.parse(user);
+        if(this.navParams.get("sesion")){
+          this.user=null;
+        }
       }else{
         
       }
 
     });//storage user
-  }  
+  }
 }

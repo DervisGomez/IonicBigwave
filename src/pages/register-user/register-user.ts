@@ -72,7 +72,13 @@ export class RegisterUserPage {
   		},
   		err => {
         loading.dismiss();
-        this.message(err.error.errors.full_messages[0]);
+        console.log(err)
+        try{
+          this.message(err.error.errors.full_messages[0]);
+        }catch(err){
+          this.message("An error has occurred");
+        }
+        
   		});
     }else{
       this.message("Invalid information. Please try again.");

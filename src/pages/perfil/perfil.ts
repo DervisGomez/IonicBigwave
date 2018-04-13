@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
-import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, Events } from 'ionic-angular';
 import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
@@ -20,6 +20,7 @@ user: any;
   	public userProvider: UserProvider,
     public storage: Storage,
     public loading: LoadingController,
+    public toastCtrl: ToastController,
     public events: Events,
     private _tokenService: Angular2TokenService
   ){
@@ -91,39 +92,23 @@ user: any;
       },
       error =>   {
         //this.errorHttp = true; this.loading=false;
-        if("_body" in error){
-          error = error._body;
-          console.log("error: ",error);
-          error.errors.full_messages.forEach(element => {
-            //object.errors.push(element);
-          });
+        try{
+          this.message(error.error.errors.full_messages[0]);
+        }catch(err){
+          this.message("An error has occurred");
         }
         //this.router.navigate(['/']);
-      }
-    );
-	  	/*this.userProvider.perfil(data).subscribe((res => {	  	  
-	      let user = res;
-        console.log(res);
-        this.user = res.body.data.attributes;
-        console.log("perfil", res['headers'].get('access-token'), res['headers'].get('client'), res['headers'].get('uid'))
-        let headers = {
-          'access-token': res['headers'].get('access-token'),
-          'uid': res['headers'].get('uid'),
-          'client': res['headers'].get('client')
-        }
-	      let headers2 = {
-	        'access-token': res['headers'].get('access-token') == '' ? res['access-token'] : res['headers'].get('access-token'),
-	        'uid': res['headers'].get('uid'),
-	        'client': res['headers'].get('client')
-	      }	  		
-
-	  	  console.log("perfil: ", headers2)
-
-	      this.storage.set("headers", headers);
-	      this.user = res.body.data.attributes;
-
-	  	}))*/
+      });
   	});
+  }
+
+  message(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present()
   }
 
   editPerfil(user){
