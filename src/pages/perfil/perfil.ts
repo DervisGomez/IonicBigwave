@@ -51,11 +51,6 @@ user: any;
 
   getPerfil(){
   	this.storage.get('headers').then((data)=>{
-      //this.user = JSON.parse(window.localStorage.getItem('user'));
-    /*this.user.token=data['access-token'];
-    this.user.client=data.client;;
-    this.user.uid=data.uid;*/
-    //this.user = JSON.parse(this.storage.get('user'));
     this.user.token=data.token;
     this.user.client=data.client;
     this.user.uid=data.uid;

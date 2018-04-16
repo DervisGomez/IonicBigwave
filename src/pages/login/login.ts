@@ -43,7 +43,7 @@ export class LoginPage {
     this.events.subscribe("userLogin", (user) => {
       this.user = user;
       console.log("events in login", this.user);
-      this.navCtrl.setRoot(this.currentTab);
+      //this.navCtrl.setRoot(this.currentTab);
     });      
   }
   ionViewDidLoad() {
