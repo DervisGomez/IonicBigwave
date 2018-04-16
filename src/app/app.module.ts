@@ -17,6 +17,8 @@ import { BigwaveProvider } from '../providers/bigwave/bigwave';
 
 import {HttpModule} from '@angular/http';
 import { Angular2TokenService,A2tUiModule } from 'angular2-token';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { Angular2TokenService,A2tUiModule } from 'angular2-token';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     BigwaveProvider,
+    GoogleMaps,
+    Geolocation,
     Angular2TokenService
   ]
 })

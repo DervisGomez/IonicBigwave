@@ -43,5 +43,4 @@ export class WishesPage {
       }
     });//storage user
   }
-
 }

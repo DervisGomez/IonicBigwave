@@ -105,9 +105,9 @@ export class EditPerfilPage {
         }
         this.form.value.password=this.form.value.current_password;
         this.form.value.password_confirm=this.form.value.current_password;
-      }
-      loading.present(); 
+      } 
       if (this.form.value.password==this.form.value.password_confirm) {
+        loading.present();
         console.log(this.form.value)
         let url = routes.registerUser();
         this._tokenService.put(url, this.form.value).subscribe(
