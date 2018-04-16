@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform,Content, Nav, LoadingController, MenuController, Events } from 'ionic-angular';
+import { Platform,Content,ToastController, Nav, LoadingController, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { App } from 'ionic-angular';
@@ -23,6 +23,7 @@ export class MyApp {
     public storage: Storage,
     public loading: LoadingController,
     public menuCtrl: MenuController,
+    private toastCtrl: ToastController,
     public events: Events,
     public appCtrl: App   
     ){    
@@ -53,14 +54,24 @@ export class MyApp {
 
   logout() {
     this.storage.remove('user');
-    let loading = this.loading.create({content: 'Cargando...'});
+    let loading = this.loading.create({content: 'Cerrando sesión...'});
     loading.present().then(() => {
+      this.message("successful session closure")
       this.events.publish("userLogin", null);
       this.user=null;
       this.menuCtrl.enable(false);
       loading.dismiss();
       this.appCtrl.getRootNav().setRoot(TabsPage,{sesion:1});
     });//Loading
+  }
+
+  message(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present()
   }
 
 }

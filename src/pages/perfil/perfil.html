@@ -1,14 +1,14 @@
-<ion-header *ngIf="user">
+<ion-header >
 
-  <ion-navbar color="purple">
+  <ion-navbar color="purple" *ngIf="user">
     <ion-title text-center>Perfil</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding *ngIf="user">
-	<ion-list>
+<ion-content padding >
+	<ion-list *ngIf="user">
     <ion-item>
       <span item-left>Nombre</span>
       <span item-right>{{ user.name }}</span>
@@ -24,10 +24,10 @@
 	</ion-list>
 
   <ion-footer>
-    <button full ion-button (click)="editPerfil(user)">
+    <button full ion-button (click)="editPerfil(user)" *ngIf="user">
       <ion-icon name="ios-contact-outline" item-left color="theme-white"></ion-icon>&nbsp; Editar perfil
     </button>
-    <button full ion-button (click)="passwordPerfil(user)">
+    <button full ion-button (click)="passwordPerfil(user)" *ngIf="user">
       <ion-icon name="ios-contact-outline" item-left color="theme-white"></ion-icon>&nbsp; Cambiar Contraseña
     </button>
   </ion-footer>	

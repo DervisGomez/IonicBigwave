@@ -18,6 +18,7 @@ export class EditPerfilPage {
   form: FormGroup;
   action: any;
   password_show=false;
+  title="Editar Perfil";
 
   constructor(
   	public navCtrl: NavController, 
@@ -37,7 +38,8 @@ export class EditPerfilPage {
     this.action=this.navParams.get("action");
     console.log(this.action)
     if (this.action=="password") {
-      this.password_show=true;
+      this.password_show=true;      
+      this.title="Cambiar Contraseña";
     }
 
     this.form = this.fb.group({
@@ -82,14 +84,29 @@ export class EditPerfilPage {
 
 
   edit(){
-    if (this.form.valid) {
-   	 let loading = this.loading.create({ content: 'Cargando...' });
-      loading.present();  
+   	let loading = this.loading.create({ content: 'Cargando...' });     
       if (!this.password_show) {
+        this.title="Editar Perfil";
+        if (this.form.value.current_password==""&&this.form.value.current_password==undefined) {
+          this.message("Invalid password. Please try again.");
+          return
+        }
+        if (this.form.value.email==""&&this.form.value.email==undefined) {
+          this.message("Invalid email. Please try again.");
+          return
+        }
+        if (this.form.value.name==""&&this.form.value.name==undefined) {
+          this.message("Invalid name. Please try again.");
+          return
+        }
+        if (this.form.value.nickname==""&&this.form.value.nickname==undefined) {
+          this.message("Invalid nickname. Please try again.");
+          return
+        }
         this.form.value.password=this.form.value.current_password;
         this.form.value.password_confirm=this.form.value.current_password;
       }
-
+      loading.present(); 
       if (this.form.value.password==this.form.value.password_confirm) {
         console.log(this.form.value)
         let url = routes.registerUser();
@@ -99,13 +116,17 @@ export class EditPerfilPage {
             console.log("data:: ", data);
             this.user = Object.assign({}, this.user, data['data']);
             loading.dismiss();
-            let toast = this.toastCtrl.create({ message: "Perfil actualizado", duration: 3000, position: 'top' });
-            toast.present();     
+            if (!this.password_show) {
+              this.message("Updated profile")
+            }else{
+              this.message("Updated password")
+            } 
             this.navCtrl.setRoot("PerfilPage")  
             //this.toastr.success('Perfil Actualizado!', 'Toastr fun!');
             //this.loading=false;
           },
           error => {
+            console.log(error)
             try{
               this.message(error.error.errors.full_messages[0]);
             }catch(err){
@@ -117,9 +138,6 @@ export class EditPerfilPage {
       }else{
         this.message("password does not match");
       }
-    }else{
-      this.message("Invalid information. Please try again.");
-    }
   }
 
   message(message){
