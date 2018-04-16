@@ -39,7 +39,7 @@ export class WishesPage {
       if (user) {
         this.user = JSON.parse(user);
       }else{
-      	this.navCtrl.setRoot("LoginPage",{data: "WishesPage"});
+      	//this.navCtrl.setRoot("LoginPage",{data: "WishesPage"});
       }
     });//storage user
   }
