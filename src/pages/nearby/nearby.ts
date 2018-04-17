@@ -39,7 +39,10 @@ export class NearbyPage {
   	public geo: Geolocation) {
 
   	platform.ready().then(() => {  		
-  		this.loadMap(); 
+  		//this.loadMap();
+  		this.initMap();
+  		this.message("mal: "+ geo)
+	          
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
 	      this.lng = pos.coords.longitude;
@@ -47,7 +50,6 @@ export class NearbyPage {
 	      //this.initMap(pos);
 	          
 	    }).catch( err => this.message("mal: "+ err));
-	    this.message("ok: ");
 	});
   }
 
@@ -65,11 +67,11 @@ export class NearbyPage {
 	  });
 	}*/
 
-  initMap(location) {
-  	console.log(location);
+  initMap() {
+  	this.message("ok: ");
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 12,
-      center: {lat: this.lat, lng: this.lng}
+      center: {lat: 43.0741904, lng: -89.3809802}
     });
     this.directionsDisplay.setMap(this.map);
     //var myplace = {lat: this.lat, lng: this.lng};
