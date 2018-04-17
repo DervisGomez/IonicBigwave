@@ -66,12 +66,12 @@ export class LoginPage {
 
     if (this.form.value.email==undefined||this.form.value.email=="") {
       loading.dismiss();
-      this.message("Email Invalid.");
+      this.messages("Correo invalido");
       return
     }
     if (this.form.value.password=="") {
       loading.dismiss();
-      this.message("password Invalid.");
+      this.messages("Contraseña invalida");
       return
     }
     this._tokenService.signIn({
@@ -107,13 +107,13 @@ export class LoginPage {
         //this.loading=false;
         //this.errorHttp = true; this.loading=false; console.log(error._body);
         if (error && '_body' in error){          
-          this.message("Invalid login credentials. Please try again.");
+          this.messages("ICredenciales invalidas. Por favor intente de nuevo.");
         }
       }
     );
   }
 
-  message(message){
+  messages(message){
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,

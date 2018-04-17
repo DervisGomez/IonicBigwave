@@ -88,16 +88,16 @@ user: any;
       error =>   {
         //this.errorHttp = true; this.loading=false;
         try{
-          this.message(error.error.errors.full_messages[0]);
+          this.messages(error.error.errors.full_messages[0]);
         }catch(err){
-          this.message("An error has occurred");
+          this.messages("Ha ocurrido un error al cargar su información");
         }
         //this.router.navigate(['/']);
       });
   	});
   }
 
-  message(message){
+  messages(message){
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,

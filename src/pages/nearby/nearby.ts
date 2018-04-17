@@ -38,11 +38,7 @@ export class NearbyPage {
   	public platform: Platform,
   	public geo: Geolocation) {
 
-  	platform.ready().then(() => {  		
-  		//this.loadMap();
-  		this.initMap();
-  		this.message("mal: "+ geo)
-	          
+  	platform.ready().then(() => { 
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
 	      this.lng = pos.coords.longitude;
@@ -70,30 +66,24 @@ export class NearbyPage {
 	}*/
 
   initMap() {
-  	this.message("ok: ");
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 12,
       center: {lat: this.lat, lng: this.lng}
     });
     this.directionsDisplay.setMap(this.map);
-    var marker = new google.maps.Marker({
-	  map: this.map,
-	  position: {lat: this.lat, lng: this.lng}
-	});
-    //var myplace = {lat: this.lat, lng: this.lng};
-    //this.createMarker(location)
+    var myplace = {lat: this.lat, lng: this.lng};
+    this.createMarker(myplace);
   }
 
   createMarker(place) {
-	  var placeLoc = place.geometry.location;
 	  var marker = new google.maps.Marker({
-	    map: map,
-	    position: placeLoc
+	    map: this.map,
+	    position: place
 	  });
 
 	  google.maps.event.addListener(marker, 'click', function() {
 	    infowindow.setContent(place.name);
-	    infowindow.open(map, this);
+	    infowindow.open(this.map, this);
 	  });
 	}
 

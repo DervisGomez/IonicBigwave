@@ -88,19 +88,19 @@ export class EditPerfilPage {
       if (!this.password_show) {
         this.title="Editar Perfil";
         if (this.form.value.current_password==""&&this.form.value.current_password==undefined) {
-          this.message("Invalid password. Please try again.");
+          this.messages("Contraseña invalida.");
           return
         }
         if (this.form.value.email==""&&this.form.value.email==undefined) {
-          this.message("Invalid email. Please try again.");
+          this.messages("Email invalido");
           return
         }
         if (this.form.value.name==""&&this.form.value.name==undefined) {
-          this.message("Invalid name. Please try again.");
+          this.messages("Nombre invalido.");
           return
         }
         if (this.form.value.nickname==""&&this.form.value.nickname==undefined) {
-          this.message("Invalid nickname. Please try again.");
+          this.messages("Nickname invalido.");
           return
         }
         this.form.value.password=this.form.value.current_password;
@@ -117,9 +117,9 @@ export class EditPerfilPage {
             this.user = Object.assign({}, this.user, data['data']);
             loading.dismiss();
             if (!this.password_show) {
-              this.message("Updated profile")
+              this.messages("Perfil actualizado")
             }else{
-              this.message("Updated password")
+              this.messages("Contraseña actualizada")
             } 
             this.navCtrl.setRoot("PerfilPage")  
             //this.toastr.success('Perfil Actualizado!', 'Toastr fun!');
@@ -128,19 +128,20 @@ export class EditPerfilPage {
           error => {
             console.log(error)
             try{
-              this.message(error.error.errors.full_messages[0]);
+              //this.messages(error.error.errors.full_messages[0]);
+              this.messages("Ha ocurrido un error");
             }catch(err){
-              this.message("An error has occurred");
+              this.messages("Ha ocurrido un error");
             }
             loading.dismiss();
             //this.toastr.error('Perfil No Actualizado!', 'Major Error');
           });
       }else{
-        this.message("password does not match");
+        this.messages("Las contraseñas no son iguales");
       }
   }
 
-  message(message){
+  messages(message){
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,
