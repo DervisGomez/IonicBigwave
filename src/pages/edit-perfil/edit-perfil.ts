@@ -96,8 +96,8 @@ export class EditPerfilPage {
         {
           text: 'Use Camera',
           handler: () => {
-            //this.takePicture(this.camera.PictureSourceType.CAMERA);
-            this.getPicture()
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            //this.getPicture()
           }
         },
         {
@@ -136,6 +136,7 @@ export class EditPerfilPage {
    
     // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
+      this.presentToast(imagePath);
       // Special handling for Android library
       if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
         this.filePath.resolveNativePath(imagePath)
