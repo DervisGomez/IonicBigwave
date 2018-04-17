@@ -20,8 +20,8 @@ import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/goo
 })
 export class NearbyPage {
 
-  lat: any;
-  lng: any;
+  lat: any=0;
+  lng: any=0;
 
 
   @ViewChild('map') mapElement: ElementRef;
@@ -46,10 +46,12 @@ export class NearbyPage {
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
 	      this.lng = pos.coords.longitude;
-	      this.message("mal: "+ this.lat)
-	      //this.initMap(pos);
-	          
-	    }).catch( err => this.message("mal: "+ err));
+	      this.initMap();
+	      //this.initMap(pos);	          
+	    }).catch( err => {
+	    	this.initMap();
+	    	this.message("mal: "+ err)
+	    });
 	});
   }
 
@@ -71,9 +73,13 @@ export class NearbyPage {
   	this.message("ok: ");
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 12,
-      center: {lat: 43.0741904, lng: -89.3809802}
+      center: {lat: this.lat, lng: this.lng}
     });
     this.directionsDisplay.setMap(this.map);
+    var marker = new google.maps.Marker({
+	  map: this.map,
+	  position: {lat: this.lat, lng: this.lng}
+	});
     //var myplace = {lat: this.lat, lng: this.lng};
     //this.createMarker(location)
   }
