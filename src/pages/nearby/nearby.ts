@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 /**
  * Generated class for the NearbyPage page.
@@ -33,20 +33,23 @@ export class NearbyPage {
   constructor(
   	public navCtrl: NavController,
   	public navParams: NavParams,
+  	public platform: Platform,
   	public geo: Geolocation) {
 
+  	platform.ready().then(() => {
+    	this.geo.getCurrentPosition().then( pos => {
+	      this.lat = pos.coords.latitude;
+	      this.lng = pos.coords.longitude;
+	      console.log(this.lat,this.lng)
+	      this.initMap(pos);	      
+	    }).catch( err => console.log(err));
+	});
   }
 
   ionViewDidLoad() {  	//this.loadMap();
   	
     console.log('ionViewDidLoad NearbyPage');
-    this.geo.getCurrentPosition().then( pos => {
-      this.lat = pos.coords.latitude;
-      this.lng = pos.coords.longitude;
-      console.log(this.lat,this.lng)
-      this.initMap(pos);
-      
-    }).catch( err => console.log(err));
+    
   }
 
   initMap(location) {
@@ -54,22 +57,9 @@ export class NearbyPage {
       zoom: 12,
       center: {lat: this.lat, lng: this.lng}
     });
-    infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-      location: {lat: location.coords.latitude, lng: location.coords.longitude},
-      radius: 1000,
-      type: ['store']
-    }, (results,status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          this.createMarker(results[i]);
-        }
-      }
-    });
     this.directionsDisplay.setMap(this.map);
-    var myplace = {lat: this.lat, lng: this.lng};
-    this.createMarker(myplace)
+    //var myplace = {lat: this.lat, lng: this.lng};
+    //this.createMarker(location)
   }
 
   createMarker(place) {
