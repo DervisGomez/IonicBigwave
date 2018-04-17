@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/google-maps';
 /**
@@ -34,6 +34,7 @@ export class NearbyPage {
   constructor(
   	public navCtrl: NavController,
   	public navParams: NavParams,
+  	public toastCtrl: ToastController,
   	public platform: Platform,
   	public geo: Geolocation) {
 
@@ -44,7 +45,7 @@ export class NearbyPage {
 	      console.log(this.lat,this.lng)
 	      //this.initMap(pos);
 	      this.loadMap();     
-	    }).catch( err => console.log(err));
+	    }).catch( err => this.message("mal: "+ err));
 	});
   }
 
@@ -100,6 +101,15 @@ export class NearbyPage {
     });
   }
 
+  message(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present()
+  }
+
   loadMap(){
   let mapOptions: GoogleMapOptions = {
     camera: {
@@ -118,8 +128,10 @@ export class NearbyPage {
   .then(() => {
     // Now you can use all methods safely.
     this.getPosition();
+    this.message("bien");
   })
   .catch(error =>{
+  	this.message(error);
     console.log(error);
   });
 }
