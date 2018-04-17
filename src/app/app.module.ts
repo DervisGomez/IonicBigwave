@@ -20,6 +20,11 @@ import { Angular2TokenService,A2tUiModule } from 'angular2-token';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -56,6 +61,10 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     BigwaveProvider,
     GoogleMaps,
     Geolocation,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     Angular2TokenService
   ]
 })

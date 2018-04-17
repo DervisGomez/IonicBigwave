@@ -11,7 +11,6 @@ import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/goo
 
  declare var google;
  let infowindow: any;
- let map: any;
 
 @IonicPage()
 @Component({
@@ -72,17 +71,18 @@ export class NearbyPage {
     });
     this.directionsDisplay.setMap(this.map);
     var myplace = {lat: this.lat, lng: this.lng};
-    this.createMarker(myplace);
+    infowindow = new google.maps.InfoWindow();
+    this.createMarker(myplace,"Mi ubicación");
   }
 
-  createMarker(place) {
+  createMarker(place,title) {
 	  var marker = new google.maps.Marker({
 	    map: this.map,
 	    position: place
 	  });
 
 	  google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.setContent(place.name);
+	    infowindow.setContent(title);
 	    infowindow.open(this.map, this);
 	  });
 	}

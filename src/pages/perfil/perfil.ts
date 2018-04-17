@@ -13,6 +13,7 @@ import { ROOT } from '../../config/routes';
 })
 export class PerfilPage {
 user: any;
+foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
 
   constructor(
   	public navCtrl: NavController, 
@@ -55,7 +56,13 @@ user: any;
     this.user.client=data.client;
     this.user.uid=data.uid;
 
+    if (this.user.image==null){    
+      this.foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
+    }else{
+      this.foto=this.user.image;
+    }
     console.log(this.user);
+    console.log(this.foto);
 
     let url = routes.perfil();
       this._tokenService.get(url, this.user).subscribe(

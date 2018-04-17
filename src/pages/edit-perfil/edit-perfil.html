@@ -12,10 +12,17 @@
 		<ion-grid>
 		  <ion-row *ngIf="!password_show">
 		  	<ion-col col-12>  
+			  	<ion-item>
+			      <div class="foto-perfil" (click)="presentActionSheet()">
+			        <img src="{{pathForImage(lastImage)}}" >
+			      </div>      
+			    </ion-item>
+			</ion-col>	
+		  	<ion-col col-12>  
 		      <ion-item>
 			    	<ion-label floating>Email</ion-label>
 			   		<ion-input type="text" name="email" formControlName="email" #email></ion-input>
-					</ion-item>
+				</ion-item>
 					<div padding *ngIf="form.controls.email.errors && form.controls.email.dirty">
 						<ion-label color="danger" *ngIf="form.controls.email.errors.required">*Requerido</ion-label>
 					</div>

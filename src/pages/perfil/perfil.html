@@ -10,6 +10,11 @@
 <ion-content padding >
 	<ion-list *ngIf="user">
     <ion-item>
+      <div class="foto-perfil">
+        <img src="{{ foto }}" >
+      </div>      
+    </ion-item>
+    <ion-item>
       <span item-left>Nombre</span>
       <span item-right>{{ user.name }}</span>
     </ion-item>
