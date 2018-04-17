@@ -54,6 +54,8 @@ export class EditPerfilPage {
       this.title="Cambiar Contraseña";
     }
 
+    this.lastImage='https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg'
+
     this.form = this.fb.group({
 	    email: [this.user.email, Validators.required],
 	    name: [this.user.name, Validators.required],
@@ -146,6 +148,7 @@ export class EditPerfilPage {
 // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      this.presentToast("imgen: "+newFileName);
       this.lastImage = newFileName;
     }, error => {
       this.presentToast('Error while storing file.');

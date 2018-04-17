@@ -73,6 +73,9 @@ export class NearbyPage {
     var myplace = {lat: this.lat, lng: this.lng};
     infowindow = new google.maps.InfoWindow();
     this.createMarker(myplace,"Mi ubicación");
+    this.map.addListener('click', function(e) {
+      console.log(e);
+    });
   }
 
   createMarker(place,title) {
