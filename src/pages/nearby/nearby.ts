@@ -38,8 +38,7 @@ export class NearbyPage {
   	public platform: Platform,
   	public geo: Geolocation) {
 
-  	platform.ready().then(() => {
-  		
+  	platform.ready().then(() => {  		
   		this.loadMap(); 
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
@@ -48,6 +47,7 @@ export class NearbyPage {
 	      //this.initMap(pos);
 	          
 	    }).catch( err => this.message("mal: "+ err));
+	    this.message("ok: ");
 	});
   }
 
@@ -113,7 +113,7 @@ export class NearbyPage {
   }
 
   loadMap(){
-  	this.message("ok: ");
+  	
   let mapOptions: GoogleMapOptions = {
     camera: {
       target: {
@@ -126,6 +126,7 @@ export class NearbyPage {
   };
   this.message("ok2: ");
   this.map = GoogleMaps.create('map', mapOptions);
+  this.message("ok3: ");
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY)
   .then(() => {
@@ -137,6 +138,8 @@ export class NearbyPage {
   	this.message(error);
     console.log(error);
   });
+  this.message("ok4: ");
+
 }
 
  getPosition(): void{
