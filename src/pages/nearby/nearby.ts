@@ -74,8 +74,17 @@ export class NearbyPage {
     infowindow = new google.maps.InfoWindow();
     this.createMarker(myplace,"Mi ubicación");
     this.map.addListener('click', function(e) {
-      console.log(e);
+      console.log(e.latLng);
+      this.placeMarkerAndPanTo(e.latLng, this.map)
     });
+  }
+
+  placeMarkerAndPanTo(latLng, map) {
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    map.panTo(latLng);
   }
 
   createMarker(place,title) {

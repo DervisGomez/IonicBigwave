@@ -10,7 +10,7 @@ import { ROOT } from '../../config/routes';
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 declare var cordova: any;
 
@@ -96,7 +96,8 @@ export class EditPerfilPage {
         {
           text: 'Use Camera',
           handler: () => {
-            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            //this.takePicture(this.camera.PictureSourceType.CAMERA);
+            this.getPicture()
           }
         },
         {
@@ -106,6 +107,22 @@ export class EditPerfilPage {
       ]
     });
     actionSheet.present();
+  }
+
+  getPicture(){
+    let options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    }
+    this.camera.getPicture( options )
+    .then(imageData => {
+      this.lastImage = `data:image/jpeg;base64,${imageData}`;
+    })
+    .catch(error =>{
+      console.error( error );
+    });
   }
 
   public takePicture(sourceType) {
