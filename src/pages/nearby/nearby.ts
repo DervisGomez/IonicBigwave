@@ -39,7 +39,7 @@ export class NearbyPage {
   	public geo: Geolocation) {
 
   	platform.ready().then(() => {
-  		this.message("ok: ");
+  		
   		this.loadMap(); 
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
@@ -113,6 +113,7 @@ export class NearbyPage {
   }
 
   loadMap(){
+  	this.message("ok: ");
   let mapOptions: GoogleMapOptions = {
     camera: {
       target: {
@@ -123,7 +124,7 @@ export class NearbyPage {
       tilt: 30
     }
   };
-
+  this.message("ok2: ");
   this.map = GoogleMaps.create('map', mapOptions);
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY)
