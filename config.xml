@@ -86,8 +86,8 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-googlemaps" spec="^2.2.9">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCEipvdv1gMuwPuZfL4MEvmPiXLqz3qK-M" />
-        <variable name="API_KEY_FOR_IOS" value="AIzaSyCEipvdv1gMuwPuZfL4MEvmPiXLqz3qK-M" />
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyC6bA0tzMkWviWEpFnjQxEF0U5I_Kd2il0" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyC6bA0tzMkWviWEpFnjQxEF0U5I_Kd2il0" />
         <variable name="PLAY_SERVICES_VERSION" value="12.0.0" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.0" />
     </plugin>

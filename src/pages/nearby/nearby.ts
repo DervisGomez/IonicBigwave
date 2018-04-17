@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerOptions, Marker } from '@ionic-native/google-maps';
 /**
  * Generated class for the NearbyPage page.
  *
@@ -34,6 +35,7 @@ export class NearbyPage {
   	public navCtrl: NavController,
   	public navParams: NavParams,
   	public platform: Platform,
+  	private googleMaps: GoogleMaps,
   	public geo: Geolocation) {
 
   	platform.ready().then(() => {
@@ -41,7 +43,8 @@ export class NearbyPage {
 	      this.lat = pos.coords.latitude;
 	      this.lng = pos.coords.longitude;
 	      console.log(this.lat,this.lng)
-	      this.initMap(pos);	      
+	      //this.initMap(pos);
+	      this.loadMap();     
 	    }).catch( err => console.log(err));
 	});
   }
@@ -52,7 +55,16 @@ export class NearbyPage {
     
   }
 
+  loadMap() {
+	  this.map = new GoogleMap('map');
+
+	  this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+	    console.log('Map is ready!');
+	  });
+	}
+
   initMap(location) {
+  	console.log(location);
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 12,
       center: {lat: this.lat, lng: this.lng}
