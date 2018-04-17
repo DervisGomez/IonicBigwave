@@ -39,12 +39,14 @@ export class NearbyPage {
   	public geo: Geolocation) {
 
   	platform.ready().then(() => {
+  		this.message("ok: ");
+  		this.loadMap(); 
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
 	      this.lng = pos.coords.longitude;
-	      console.log(this.lat,this.lng)
+	      this.message("mal: "+ this.lat)
 	      //this.initMap(pos);
-	      this.loadMap();     
+	          
 	    }).catch( err => this.message("mal: "+ err));
 	});
   }
