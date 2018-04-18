@@ -95,7 +95,8 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
       error =>   {
         //this.errorHttp = true; this.loading=false;
         try{
-          this.messages(error.error.errors.full_messages[0]);
+          //this.messages(error.error.errors.full_messages[0]);
+          this.messages("Ha ocurrido un error al cargar su información");
         }catch(err){
           this.messages("Ha ocurrido un error al cargar su información");
         }

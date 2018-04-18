@@ -37,15 +37,16 @@ export class NearbyPage {
   	public platform: Platform,
   	public geo: Geolocation) {
 
-  	platform.ready().then(() => { 
+  	platform.ready().then(() => {
+      this.initMap(2);
     	this.geo.getCurrentPosition().then( pos => {
 	      this.lat = pos.coords.latitude;
 	      this.lng = pos.coords.longitude;
-	      this.initMap();
+	      this.initMap(16);
 	      //this.initMap(pos);	          
 	    }).catch( err => {
-	    	this.initMap();
-	    	this.message("mal: "+ err)
+	    	this.initMap(2);
+	    	this.message("GPS no activado")
 	    });
 	});
   }
@@ -64,28 +65,24 @@ export class NearbyPage {
 	  });
 	}*/
 
-  initMap() {
+  initMap(ps) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 12,
+      zoom: ps,
       center: {lat: this.lat, lng: this.lng}
     });
     this.directionsDisplay.setMap(this.map);
     var myplace = {lat: this.lat, lng: this.lng};
     infowindow = new google.maps.InfoWindow();
-    this.createMarker(myplace,"Mi ubicación");
+    if(this.lat==0&&this.lng==0){
+      //this.message("GPS No Activado");
+    }else{
+      this.createMarker(myplace,"Mi ubicación");
+    }    
     this.map.addListener('click', function(e) {
-      console.log(e.latLng);
-      this.placeMarkerAndPanTo(e.latLng, this.map)
+      this.message("coordenadas: "+e.latLng);
     });
   }
-
-  placeMarkerAndPanTo(latLng, map) {
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-    map.panTo(latLng);
-  }
+    
 
   createMarker(place,title) {
 	  var marker = new google.maps.Marker({
