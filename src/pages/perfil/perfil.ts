@@ -52,20 +52,16 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
 
   getPerfil(){
   	this.storage.get('headers').then((data)=>{
-    this.user.token=data.token;
-    this.user.client=data.client;
-    this.user.uid=data.uid;
 
-    if (this.user.image==null){    
-      this.foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
-    }else{
-      this.foto=this.user.image;
-    }
-    console.log(this.user);
-    console.log(this.foto);
+      if (this.user.image==null){    
+        this.foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
+      }else{
+        this.foto=this.user.image;
+      }
+      console.log(this.user);
 
-    let url = routes.perfil();
-      this._tokenService.get(url, this.user).subscribe(
+      let url = routes.perfil();
+      this._tokenService.get(url, data).subscribe(
       data =>      {
         console.log(data)
         var data2 = JSON.parse(data['_body']);
@@ -73,7 +69,7 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
           //this.router.navigate(['/']);
         }
         let id = data2['data'].id;
-        this.user = Object.assign({}, this.user, data2['data'].attributes);
+        //this.user = Object.assign({}, this.user, data2['data'].attributes);
         this.user.id = id;
         //window.localStorage.setItem('user', JSON.stringify(this.user));
         var token, uid, client;        
@@ -81,7 +77,7 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
         uid = data['headers'].get('uid');
         token = data['headers'].get('access-token');
         data = JSON.parse(data['_body']);
-        this.user = data['data'].attributes;
+        //this.user = data['data'].attributes;
         console.log(this.user)
         let header={
           token:token,
@@ -89,7 +85,7 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
           uid:uid
         }
         this.storage.set('headers', header);
-        this.storage.set('user', JSON.stringify(this.user));
+        //this.storage.set('user', JSON.stringify(this.user));
         //this.loading=false;
       },
       error =>   {

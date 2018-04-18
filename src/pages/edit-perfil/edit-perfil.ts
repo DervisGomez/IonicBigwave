@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ActionSheetController, Platform, NavParams, ModalController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ActionSheetController, Platform, NavParams, Events, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
@@ -8,11 +8,7 @@ import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
 
 import { File } from '@ionic-native/file';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
-import { FilePath } from '@ionic-native/file-path';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-
-declare var cordova: any;
+import { Camera } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -37,10 +33,9 @@ export class EditPerfilPage {
     public userProvider: UserProvider,
     public storage: Storage,
     private _tokenService: Angular2TokenService,
-    private camera: Camera, private transfer: Transfer,
-    private file: File,
-    private filePath: FilePath, 
-    public actionSheetCtrl: ActionSheetController, 
+    private camera: Camera,
+    public actionSheetCtrl: ActionSheetController,
+    public events: Events,
     public platform: Platform
   ){
     this._tokenService.init({apiBase: ROOT});
@@ -54,7 +49,11 @@ export class EditPerfilPage {
       this.title="Cambiar Contraseña";
     }
 
-    this.lastImage='https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg'
+    if (this.user.image==null) {
+      this.lastImage='https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg'
+    }else{
+      this.lastImage=this.user.image;
+    }    
 
     this.form = this.fb.group({
 	    email: [this.user.email, Validators.required],
@@ -109,22 +108,6 @@ export class EditPerfilPage {
     actionSheet.present();
   }
 
-  getPicture(){
-    let options: CameraOptions = {
-      destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 1000,
-      targetHeight: 1000,
-      quality: 100
-    }
-    this.camera.getPicture( options )
-    .then(imageData => {
-      this.lastImage = `data:image/jpeg;base64,${imageData}`;
-    })
-    .catch(error =>{
-      console.error( error );
-    });
-  }
-
   public takePicture(sourceType) {
   // Create options for the Camera Dialog
     var options = {
@@ -139,92 +122,9 @@ export class EditPerfilPage {
     this.camera.getPicture(options).then((imagePath) => {
       //this.presentToast(imagePath);
       this.lastImage = `data:image/jpeg;base64,${imagePath}`;
-      // Special handling for Android library
-      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        this.filePath.resolveNativePath(imagePath)
-          .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-          });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
+      
     }, (err) => {
-      this.presentToast('Error while selecting image.'+err);
-    });
-  }
-
-  // Create a new name for the image
-  private createFileName() {
-    var d = new Date(),
-    n = d.getTime(),
-    newFileName =  n + ".jpg";
-    return newFileName;
-  }
- 
-// Copy the image to a local folder
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.presentToast("imgen: "+newFileName);
-      this.lastImage = newFileName;
-    }, error => {
-      this.presentToast('Error while storing file.');
-    });
-  }
-   
-  private presentToast(text) {
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 3000,
-      position: 'top'
-    });
-    toast.present();
-  }
-   
-  // Always get the accurate path to your apps folder
-  public pathForImage(img) {
-    if (img === null) {
-      return 'https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
-  }
-
-  public uploadImage() {
-  // Destination URL
-    var url = "http://yoururl/upload.php";
-   
-    // File for Upload
-    var targetPath = this.pathForImage(this.lastImage);
-   
-    // File name only
-    var filename = this.lastImage;
-   
-    var options = {
-      fileKey: "file",
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "multipart/form-data",
-      params : {'fileName': filename}
-    };
-   
-    const fileTransfer: TransferObject = this.transfer.create();
-   
-    let loading = this.loading.create({
-      content: 'Uploading...',
-    });
-    loading.present();
-   
-    // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options).then(data => {
-      loading.dismissAll()
-      this.presentToast('Image succesful uploaded.');
-    }, err => {
-      loading.dismissAll()
-      this.presentToast('Error while uploading file.');
+      this.messages('Error while selecting image.'+err);
     });
   }
 
@@ -269,20 +169,29 @@ export class EditPerfilPage {
         loading.present();
         console.log(this.form.value)
         let url = routes.registerUser();
+
+        if(this.lastImage=="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg"){
+          this.form.value.image=this.lastImage;
+          console.log(this.form.value)
+        }else{
+          this.form.value.image=this.lastImage;
+        }
+
         this._tokenService.put(url, this.form.value).subscribe(
           data =>      {
             data = JSON.parse(data['_body']);
             console.log("data:: ", data);
             this.user = Object.assign({}, this.user, data['data']);
+            this.events.publish("userLogin", this.user);            
+            this.storage.set('user', JSON.stringify(this.user));
             loading.dismiss();
+
             if (!this.password_show) {
               this.messages("Perfil actualizado")
             }else{
               this.messages("Contraseña actualizada")
             } 
-            this.navCtrl.setRoot("PerfilPage")  
-            //this.toastr.success('Perfil Actualizado!', 'Toastr fun!');
-            //this.loading=false;
+            this.navCtrl.setRoot("PerfilPage") 
           },
           error => {
             console.log(error)
