@@ -56,7 +56,7 @@ export class MyApp {
     this.storage.remove('user');
     let loading = this.loading.create({content: 'Cerrando sesión...'});
     loading.present().then(() => {
-      this.message("successful session closure")
+      this.message("cierre de sesión exitoso")
       this.events.publish("userLogin", null);
       this.user=null;
       this.menuCtrl.enable(false);

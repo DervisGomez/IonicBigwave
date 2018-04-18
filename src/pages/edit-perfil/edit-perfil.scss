@@ -7,6 +7,7 @@ page-edit-perfil {
 		text-align: center;
 		margin: 0 auto;
 		overflow: hidden;
+		border: 2px solid #888;
 		img{
 			height: auto;
 			width: auto;
@@ -20,6 +21,12 @@ page-edit-perfil {
 			transform: translate(-50%,-50%);
 			background: white;
 			border-radius: 6px;
+		}
+		button{
+			position: absolute;
+			bottom: -4px;
+			background: rgba(255,255,255,.7);
+			color: #888
 		}
 	}
 }

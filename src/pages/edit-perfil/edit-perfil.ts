@@ -6,8 +6,6 @@ import { Storage } from '@ionic/storage';
 import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
-
-import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 
 @IonicPage()
@@ -40,10 +38,8 @@ export class EditPerfilPage {
   ){
     this._tokenService.init({apiBase: ROOT});
   	this.user = this.navParams.get("user");
-  	console.log(this.user);
-
     this.action=this.navParams.get("action");
-    console.log(this.action)
+
     if (this.action=="password") {
       this.password_show=true;      
       this.title="Cambiar Contraseña";
@@ -131,6 +127,7 @@ export class EditPerfilPage {
   checkLogin() {
     this.storage.get('user').then((user) => {
       console.log(user)
+
       if (user) {
         this.user = JSON.parse(user);
         console.log(this.user);
@@ -143,7 +140,8 @@ export class EditPerfilPage {
 
 
   edit(){
-   	let loading = this.loading.create({ content: 'Cargando...' });     
+   	let loading = this.loading.create({ content: 'Cargando...' });
+
       if (!this.password_show) {
         this.title="Editar Perfil";
         if (this.form.value.current_password==""&&this.form.value.current_password==undefined) {
@@ -165,6 +163,7 @@ export class EditPerfilPage {
         this.form.value.password=this.form.value.current_password;
         this.form.value.password_confirm=this.form.value.current_password;
       } 
+      
       if (this.form.value.password==this.form.value.password_confirm) {
         loading.present();
         console.log(this.form.value)
