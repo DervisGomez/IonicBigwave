@@ -131,7 +131,8 @@ export class EditPerfilPage {
       quality: 100,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
-      correctOrientation: true
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
     };
    
     // Get the data of an image
