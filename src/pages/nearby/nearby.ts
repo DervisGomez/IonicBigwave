@@ -38,17 +38,9 @@ export class NearbyPage {
   	public geo: Geolocation) {
 
   	platform.ready().then(() => {
-      this.initMap(2);
-    	this.geo.getCurrentPosition().then( pos => {
-	      this.lat = pos.coords.latitude;
-	      this.lng = pos.coords.longitude;
-	      this.initMap(16);
-	      //this.initMap(pos);	          
-	    }).catch( err => {
-	    	this.initMap(2);
-	    	this.message("GPS no activado")
-	    });
-	});
+      this.initMap(2,"nada");
+    	this.miPosition();
+	  });
   }
 
   ionViewDidLoad() {  	//this.loadMap();
@@ -57,43 +49,61 @@ export class NearbyPage {
     
   }
 
-  /*loadMap() {
-	  this.map = new GoogleMap('map');
-	  this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-	  	alert('Map is ready!')
-	    console.log('Map is ready!');
-	  });
-	}*/
+  miPosition(){
+    this.geo.getCurrentPosition().then( pos => {
+        this.lat = pos.coords.latitude;
+        this.lng = pos.coords.longitude;
+        this.initMap(14,"Mi Ubicación");
+        //this.initMap(pos);            
+      }).catch( err => {
+        this.initMap(2,"nada");
+        this.message("GPS no activado")
+      });
+  }
 
-  initMap(ps) {
+  initMap(ps,position) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: ps,
       center: {lat: this.lat, lng: this.lng}
     });
     this.directionsDisplay.setMap(this.map);
-    var myplace = {lat: this.lat, lng: this.lng};
+    this.createMarker(position)
     infowindow = new google.maps.InfoWindow();
-    if(this.lat==0&&this.lng==0){
-      //this.message("GPS No Activado");
-    }else{
-      this.createMarker(myplace,"Mi ubicación");
-    }    
+    var prueba=this;
     this.map.addListener('click', function(e) {
-      this.message("coordenadas: "+e.latLng);
+      var coor=e.latLng+"";
+      coor=coor.substring(1, coor.length-1)
+      var lat=coor.split(", ",2)
+      console.log("coordenadas: "+e.latLng);
+      console.log("coordenadas: "+coor);
+      console.log(+lat[0]);
+      console.log(+lat[1]);
+      prueba.lat=+lat[0];
+      prueba.lng=+lat[1];
+      prueba.initMap(14,"Ubicación seleccionada");
     });
-  }
-    
+  } 
 
-  createMarker(place,title) {
-	  var marker = new google.maps.Marker({
-	    map: this.map,
-	    position: place
-	  });
+  public newMap(){
+    console.log("hola")
+  } 
 
-	  google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.setContent(title);
-	    infowindow.open(this.map, this);
-	  });
+  createMarker(title) {
+    if(this.lat==0&&this.lng==0){
+      //this.message("No se pudo establecer la ubicacion");
+    }else{
+      var place = {lat: this.lat, lng: this.lng};
+      var marker = new google.maps.Marker({
+        map: this.map,
+        position: place
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(title);
+        infowindow.open(this.map, this);
+      });
+    }
+	  
 	}
 
   calculateAndDisplayRoute() {
