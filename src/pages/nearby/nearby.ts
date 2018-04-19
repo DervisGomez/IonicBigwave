@@ -21,7 +21,10 @@ export class NearbyPage {
 
   lat: any=0;
   lng: any=0;
-
+  filter={
+    show:false,
+    icon:"funnel"
+  }
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -47,6 +50,15 @@ export class NearbyPage {
   	
     console.log('ionViewDidLoad NearbyPage');
     
+  }
+
+  showFilter(){
+    this.filter.show=!this.filter.show;
+    if (this.filter.show) {
+      this.filter.icon="close"
+    }else{
+      this.filter.icon="funnel"
+    }
   }
 
   miPosition(){
