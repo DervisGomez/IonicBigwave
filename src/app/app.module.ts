@@ -15,7 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserProvider } from '../providers/user/user';
 import { BigwaveProvider } from '../providers/bigwave/bigwave';
 
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { Angular2TokenService,A2tUiModule } from 'angular2-token';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
