@@ -75,15 +75,15 @@ export class NearbyPage {
       });
   }
 
-  initMap(ps) {
+initMap(ps) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: ps,
       center: {lat: this.lat, lng: this.lng}
     });
 
     this.directionsDisplay.setMap(this.map);
-    this.createMarker();
-    this.createmarkers();
+    this.createMarkerUser();
+   /*  this.createmarkers(); */
     infowindow = new google.maps.InfoWindow();
     var prueba=this;
     this.map.addListener('click', e => {
@@ -96,14 +96,13 @@ export class NearbyPage {
       console.log(+lat[1]);
       prueba.lat=+lat[0];
       prueba.lng=+lat[1];
-      this.initMap(18);
+      this.createMarker();
     });
   } 
 
   public newMap(){
     console.log("hola")
   } 
-
   createMarker() {
     if(this.lat==0&&this.lng==0){
       //this.message("No se pudo establecer la ubicacion");
@@ -112,7 +111,29 @@ export class NearbyPage {
       var place = {lat: this.lat, lng: this.lng};
       var marker = new google.maps.Marker({
         map: this.map,
-        position: place
+        position: place,
+        icon: icons.emerald.icon,  
+       
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent("hola mundo");
+        infowindow.open(this.map, this);
+      });
+    
+    }
+	  
+	}
+  createMarkerUser() {
+    if(this.lat==0&&this.lng==0){
+      //this.message("No se pudo establecer la ubicacion");
+    }else{
+
+      var place = {lat: this.lat, lng: this.lng};
+      var marker = new google.maps.Marker({
+        map: this.map,
+        position: place,
+        icon: icons.kenny.icon, 
       });
 
       google.maps.event.addListener(marker, 'click', function() {
