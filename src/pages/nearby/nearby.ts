@@ -48,7 +48,7 @@ export class NearbyPage {
   }
 
   ionViewDidLoad() {  	//this.loadMap();
-  	this.miPosition()
+  	this.miPosition();
     console.log('ionViewDidLoad NearbyPage');
     
   }
@@ -83,7 +83,7 @@ export class NearbyPage {
 
     this.directionsDisplay.setMap(this.map);
     this.createMarker();
-   /*  this.createmarkers(); */
+    this.createmarkers();
     infowindow = new google.maps.InfoWindow();
     var prueba=this;
     this.map.addListener('click', e => {
@@ -96,7 +96,7 @@ export class NearbyPage {
       console.log(+lat[1]);
       prueba.lat=+lat[0];
       prueba.lng=+lat[1];
-     
+      this.initMap(18);
     });
   } 
 
