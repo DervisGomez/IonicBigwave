@@ -14,7 +14,7 @@
 		  	<ion-col col-12>  
 			  	<ion-item>
 			      <div class="foto-perfil" (click)="presentActionSheet()">
-			        <img src="{{lastImage}}" >
+			        <img [src]="lastImage" >
 			        <button full ion-button>
 				      <ion-icon name="ios-camera" item-left color="theme-white"></ion-icon>Cambiar
 				    </button>

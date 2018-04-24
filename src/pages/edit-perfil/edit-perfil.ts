@@ -50,7 +50,7 @@ export class EditPerfilPage {
     }
 
     if (this.user.image==null) {
-      this.lastImage='https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg'
+      this.lastImage='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAQAAAAk/gHOAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADfsAAA37AQt3NZsAAAAHdElNRQfiAwEUFCvxeSglAAAChUlEQVRo3u3Zz0vTcRjA8fecsonT1g5aJpYdItAORawZmUvsVkYHoUAP/QXh/oTs2KW/YkFeO0gNxghMwUt4aYeyYIIHKRmExuLpIKMfur6fH8/21eh5jvvs87y+z3d79v1+F8E1BhklQ4YLVChT5h15qs67WcctVpF9+Z6rrSl/njcHlN/LGvPc5BwdzQRMU20I+JnbPKa7OYB5g/L1XOG4PuChBUAQCtqAu3y3JAj3NAFDfLUGCG81Cc8dAILQrwW47ggQHmgRVp0Jz3QAI84AYYu2oO0DFwC3PfgpLmoQprx6eMqf0EvaixA4I4MJl4061TiS/oSTXgCVLpw4+oSkP+EfOBEpf0KvJyHw/YeAEAl4PcaOJwHi7Pp0wbcHBnv8JxwRQp8CIWCPIILfD7XCHjGj27egrBJz78IECYUuJJhwJ/hdsinsE6GicBoEoRI4hRvEuBJAEMbderCsSFh26cOMIkAQZmwBA2woEzYYsCOUlAGCULIBJFRG0p9ZtZsy03xUBqwzbftpaGeGFZXiNV5zn3ZbQD1OM0eJXcfiazxlip6/lzD7tsa4xBUy3DC8ftjkBQUKbLoeeePIGx59Xr90PUxnxYbNplHDdYPcIcc1w9XdnKWHz2ybLA76LAySJUuWIaeufaBIkSKfXAj9THqUPpjyyvwEjbFArQnTscYCY0HFO5j1eMZolqvMNv6/oovFJpev5yJdBwFSLLUIIAhL+5879LPWQoAgrP3+iDxGucUAQSj/en+RCwEgCLk6IMlWSIQtknsD+hGTKgPIPjqJ8jJCH+vEQyLADmfaSIcIgDjpNoZDBACMhE8YPgSECF84FiphO0ono8bXTvrxjSc/AP9WsDIxJs+7AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE4LTAzLTAxVDIwOjIwOjQzKzAxOjAwehhgmQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOC0wMy0wMVQyMDoyMDo0MyswMTowMAtF2CUAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC'
     }else{
       this.lastImage=this.user.image;
     }    
@@ -217,10 +217,10 @@ export class EditPerfilPage {
         let url = routes.registerUser();
 
         if(this.lastImage=="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg"){
-          this.form.value.image=this.lastImage;
+          this.form.value.avatar=this.lastImage;
           console.log(this.form.value)
         }else{
-          this.form.value.image=this.lastImage;
+          this.form.value.avatar=this.lastImage;
         }
 
         this._tokenService.put(url, this.form.value).subscribe(

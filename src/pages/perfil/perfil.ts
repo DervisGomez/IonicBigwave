@@ -53,10 +53,11 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
   getPerfil(){
   	this.storage.get('headers').then((data)=>{
 
-      if (this.user.image==null){    
+      if (this.user.avatar.url==null){    
         this.foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
       }else{
-        this.foto=this.user.image;
+        this.foto=ROOT+this.user.avatar.url;
+       console.log(ROOT+this.user.avatar.url)
       }
       console.log(this.user);
 

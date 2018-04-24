@@ -52,7 +52,11 @@ export class LoginPage {
 
   goToSignIn(){
     this.navCtrl.push("RegisterUserPage");
-  }  
+  }
+
+  goToRecoverPassword(){
+    this.navCtrl.push("RecoverPasswordPage");
+  } 
 
   removeSpaces(email){
     let strParse = new String(email.value);
@@ -107,7 +111,7 @@ export class LoginPage {
         //this.loading=false;
         //this.errorHttp = true; this.loading=false; console.log(error._body);
         if (error && '_body' in error){          
-          this.messages("ICredenciales invalidas. Por favor intente de nuevo.");
+          this.messages("Credenciales invalidas. Por favor intente de nuevo.");
         }
       }
     );
