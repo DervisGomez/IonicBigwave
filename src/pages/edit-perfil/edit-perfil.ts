@@ -14,6 +14,10 @@ import { Camera } from '@ionic-native/camera';
   templateUrl: 'edit-perfil.html',
 })
 export class EditPerfilPage {
+  smallSize: string;
+  smallImg: any;
+  bigSize: string;
+  bigImg: string;
   user: any;
   form: FormGroup;
   action: any;
@@ -118,12 +122,55 @@ export class EditPerfilPage {
     this.camera.getPicture(options).then((imagePath) => {
       //this.presentToast(imagePath);
       this.lastImage = `data:image/jpeg;base64,${imagePath}`;
-      
+      this.bigImg = this.lastImage;
+      this.bigSize = this.getImageSize(this.bigImg);
+      this.createThumbnail()
     }, (err) => {
       this.messages('Error while selecting image.'+err);
     });
   }
-
+  getImageSize(data_url) {
+    var head = 'data:image/jpeg;base64,';
+    return ((data_url.length - head.length) * 3 / 4 / (1024*1024)).toFixed(4);
+  }
+  createThumbnail() {
+    this.generateFromImage(this.bigImg, 200, 200, 0.5, data => {
+      this.smallImg = data;
+      this.lastImage = this.smallImg;
+    });
+  }
+  generateFromImage(img, MAX_WIDTH: number = 700, MAX_HEIGHT: number = 700, quality: number = 1, callback) {
+    var canvas: any = document.createElement("canvas");
+    var image = new Image();
+ 
+    image.onload = () => {
+      var width = image.width;
+      var height = image.height;
+ 
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+ 
+      ctx.drawImage(image, 0, 0, width, height);
+ 
+      // IMPORTANT: 'jpeg' NOT 'jpg'
+      var dataUrl = canvas.toDataURL('image/jpeg', quality);
+ 
+      callback(dataUrl)
+    }
+    image.src = img;
+  }
   checkLogin() {
     this.storage.get('user').then((user) => {
       console.log(user)

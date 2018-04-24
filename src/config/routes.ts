@@ -21,5 +21,8 @@ export const routes = {
     },
     independents: () => {
     	return `${ROOT}/independents`;
+    },
+    categories: () => {
+        return `profiles/categories`;
     }
-}
+ }

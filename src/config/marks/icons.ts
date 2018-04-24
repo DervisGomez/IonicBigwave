@@ -3,7 +3,10 @@ const iconBase = 'http://icons.iconarchive.com/icons/papirus-team/papirus-apps/3
 export const icons = {
   emerald: {
     icon: `${iconBase}emerald-theme-manager-icon-icon.png`
-}
+},
+  kenny:{
+    icon: 'http://icons.iconarchive.com/icons/xtudiando/south-park/32/Kenny-icon.png'
+  }
 }
 export const sucursales = [
     {

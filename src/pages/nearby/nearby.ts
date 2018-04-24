@@ -1,8 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Storage } from '@ionic/storage';
 import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/google-maps';
 import { icons, sucursales } from '../../config/marks/icons'
+import { routes, ROOT } from '../../config/routes';
+import { Angular2TokenService } from 'angular2-token';
+
 /**
  * Generated class for the NearbyPage page.
  *
@@ -23,11 +27,11 @@ export class NearbyPage {
   lat: any=0;
   lng: any=0;
   checked: boolean = true;
+  categories : any;
   filter={
     show:false,
     icon:"funnel"
   }
-
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   start = 'chicago, il';
@@ -39,18 +43,40 @@ export class NearbyPage {
   	public navCtrl: NavController,
   	public navParams: NavParams,
   	public toastCtrl: ToastController,
-  	public platform: Platform,
-  	public geo: Geolocation) {
-
-  	platform.ready().then(() => {
+    public platform: Platform,
+    public storage: Storage,
+    public geo: Geolocation,
+    private _tokenService: Angular2TokenService,
+    ) {
+      this._tokenService.init({apiBase: ROOT});
+  	  platform.ready().then(() => {
     
 	  });
   }
 
   ionViewDidLoad() {  	//this.loadMap();
-  	this.miPosition();
+    this.miPosition();
+    /* this.getCategories(); */
     console.log('ionViewDidLoad NearbyPage');
     
+  }
+  getCategories() {
+    this.storage.get('user').then((user) => {
+      if (user) {
+        this.storage.get('headers').then((data) => {
+          let url = routes.categories();
+          this._tokenService.get(url, data).subscribe(
+            response => {
+              console.log(response)
+
+            },
+            error => {
+              console.log(error);
+            })
+
+        })
+      }
+    })
   }
 
   showFilter(){
