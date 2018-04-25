@@ -6,30 +6,21 @@
   <div style="width: 29px;height: 29px;position: absolute;right: 9px;bottom: 90px; background: white;border-radius: 1px;box-shadow: 0 0 1px rgba(0,0,0,.3);padding: 8px" (click)="miPosition()"><ion-icon name="locate" style="color:#666;font-size: 15px"></ion-icon>
   </div>
 
-  <div style="width: 29px;height: 29px;position: absolute;right: 9px;bottom: 120px; background: white;border-radius: 1px;box-shadow: 0 0 1px rgba(0,0,0,.3);padding: 8px" (click)="showFilter()"><ion-icon name="{{filter.icon}}" style="color:#666;font-size: 15px;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);"></ion-icon>
+  <div *ngIf="user" style="width: 29px;height: 29px;position: absolute;right: 9px;bottom: 120px; background: white;border-radius: 1px;box-shadow: 0 0 1px rgba(0,0,0,.3);padding: 8px" (click)="showFilter()"><ion-icon name="{{filter.icon}}" style="color:#666;font-size: 15px;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);"></ion-icon>
+	</div>
+	
+  <div *ngIf="filter.show"  class="list" style="width: 232px;position: absolute;right: 48px;bottom: 23px; background: white;border-radius: 4px;box-shadow: 0 0 1px rgba(0,0,0,.3);padding: 8px">
+    <ion-item >
+      <ion-label>Solo ver</ion-label>
+		</ion-item>
+		<div ><!-- *ngFor="let category of categories ; let i = index;trackBy:trackByIndex;" -->
+		<ion-item >
+      <ion-label><!-- {{category.name}} --></ion-label>
+      <ion-checkbox color="dark" checked="true" ></ion-checkbox> <!-- [(ngModel)]="{{category[i].state}}" (change)="getCategories()"-->
+		</ion-item>
+		</div>
   </div>
 
-  <div *ngIf="filter.show" class="list" style="width: 232px;position: absolute;right: 48px;bottom: 23px; background: white;border-radius: 4px;box-shadow: 0 0 1px rgba(0,0,0,.3);padding: 8px" >
-  	<ion-item>
-	  <ion-label>Solo ver</ion-label>	  
-	</ion-item>
-	<ion-item>
-	  <ion-label>Empresas</ion-label>
-	  <ion-checkbox color="dark" checked="true"></ion-checkbox>
-	</ion-item>
-	<ion-item>
-	  <ion-label>Independientes</ion-label>
-	  <ion-checkbox color="dark" checked="true"></ion-checkbox>
-	</ion-item>
-	<ion-item>
-	  <ion-label>Sellers</ion-label>
-	  <ion-checkbox color="dark" checked="true"></ion-checkbox>
-	</ion-item>
-	<ion-item>
-	  <ion-label>Ofertas</ion-label>
-	  <ion-checkbox color="dark" checked="true"></ion-checkbox>
-	</ion-item>
-  </div>
 
   <div style="position: absolute;top: 10px; left: 124px;right: 10px"><input type="text" placeholder="Buscar" name="" style="width: 100%;border:none;box-shadow: 0 0 1px rgba(0,0,0,.6); padding: 9px; border-radius: 1px;padding-right: 32px"><ion-icon name="search" style="color:#666;font-size: 18px;position: absolute;right: 8px; top: 9px;cursor: pointer;z-index: 10;"></ion-icon>
   </div>

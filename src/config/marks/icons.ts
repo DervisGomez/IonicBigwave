@@ -11,7 +11,7 @@ export const icons = {
 export const sucursales = [
     {
       position: new google.maps.LatLng(8.299231, -62.736985),
-      type: 'emerald',
+      type: 'emerald',//Tipo de sucursal.
       description: 'tienda de ropa'
     }, {
       position: new google.maps.LatLng(8.2993383,-62.7201345),
