@@ -8,6 +8,7 @@
 
 
 <ion-content padding >
+  
 	<ion-list *ngIf="user">
     <ion-item>
       <div class="foto-perfil">
@@ -27,7 +28,7 @@
       <span item-right>{{ user.nickname }}</span>
     </ion-item>
 	</ion-list>
-
+<button mat-button>Click me!</button>
   <ion-footer>
     <button full ion-button (click)="editPerfil(user)" *ngIf="user">
       <ion-icon name="ios-contact-outline" item-left color="theme-white"></ion-icon>&nbsp; Editar perfil
