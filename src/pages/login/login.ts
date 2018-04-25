@@ -36,7 +36,10 @@ export class LoginPage {
     this.menuCtrl.enable(false); 
     
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.compose([
+          Validators.required,
+          Validators.email,
+      ])],
       password: ['', Validators.required]
     });    
 
@@ -64,6 +67,7 @@ export class LoginPage {
     let strParse = new String(email.value);
     let campo = strParse.trim();
     email.value = campo;
+    console.log(campo)
   }  
 
   login(){
