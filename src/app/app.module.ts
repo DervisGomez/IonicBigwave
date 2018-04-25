@@ -8,7 +8,14 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { WishesPage } from '../pages/wishes/wishes';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage} from '../pages/login/login';
+import { NearbyPage } from '../pages/nearby/nearby';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { MessagesPage } from '../pages/messages/messages';
+import { RegisterUserPage } from '../pages/register-user/register-user';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,6 +31,9 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +41,13 @@ import { Camera } from '@ionic-native/camera';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    WishesPage,
+    LoginPage,
+    NearbyPage,
+    PerfilPage,
+    MessagesPage,
+    RegisterUserPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +59,9 @@ import { Camera } from '@ionic-native/camera';
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
-    A2tUiModule
+    A2tUiModule,
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +69,13 @@ import { Camera } from '@ionic-native/camera';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    WishesPage,
+    LoginPage,
+    NearbyPage,
+    PerfilPage,
+    MessagesPage,
+    RegisterUserPage
   ],
   providers: [
     StatusBar,

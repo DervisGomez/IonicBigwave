@@ -3,6 +3,10 @@ import { Events, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../home/home';
+import { WishesPage } from '../wishes/wishes';
+import { NearbyPage } from '../nearby/nearby';
+import { PerfilPage } from '../perfil/perfil';
+import { MessagesPage } from '../messages/messages';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -10,10 +14,10 @@ import { HomePage } from '../home/home';
 export class TabsPage {
   user: any;
   tab1Root = HomePage;
-  tab2Root = 'WishesPage';
-  tab3Root = 'NearbyPage';
-  tab4Root = 'MessagesPage';
-  tab5Root = 'PerfilPage';
+  tab2Root = WishesPage;
+  tab3Root = NearbyPage;
+  tab4Root = MessagesPage;
+  tab5Root = PerfilPage;
 
   constructor(
   	public storage: Storage,

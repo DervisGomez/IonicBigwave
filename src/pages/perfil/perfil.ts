@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams, ToastController, LoadingController
 import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -45,7 +46,7 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
         this.user = JSON.parse(user);
   		  this.getPerfil();
       }else{
-      	this.navCtrl.setRoot("LoginPage",{data: "PerfilPage"});
+      	this.navCtrl.setRoot(LoginPage,{data: PerfilPage});
       }
     });//storage user
   }

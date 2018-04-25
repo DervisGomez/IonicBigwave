@@ -5,6 +5,8 @@ import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
 import { Angular2TokenService} from 'angular2-token';
 import { ROOT } from '../../config/routes';
+import { RegisterUserPage} from '../register-user/register-user';
+
 
 @IonicPage()
 @Component({
@@ -51,7 +53,7 @@ export class LoginPage {
   }
 
   goToSignIn(){
-    this.navCtrl.push("RegisterUserPage");
+    this.navCtrl.push(RegisterUserPage);
   }
 
   goToRecoverPassword(){
