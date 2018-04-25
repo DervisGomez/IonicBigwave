@@ -22,7 +22,10 @@ export const routes = {
     independents: () => {
     	return `${ROOT}/independents`;
     },
-    categories: () => {
+    allcategories: () => {
         return `profiles/categories`;
+    },
+    categories: () =>{
+        return   `profiles/categories`;
     }
  }

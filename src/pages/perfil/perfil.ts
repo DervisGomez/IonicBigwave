@@ -40,7 +40,6 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
 
   checkLogin() {
     this.storage.get('user').then((user) => {
-      console.log(user)
       if (user) {
         this.user = JSON.parse(user);
   		  this.getPerfil();
@@ -52,8 +51,7 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
 
   getPerfil(){
   	this.storage.get('headers').then((data)=>{
-
-      if (this.user.avatar.url==null){    
+      if (this.user.avatar.url==null){ 
         this.foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
       }else{
         this.foto="https://bigwave.herokuapp.com"+this.user.avatar.url;

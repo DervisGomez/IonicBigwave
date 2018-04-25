@@ -23,11 +23,11 @@ import { Angular2TokenService } from 'angular2-token';
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
-
+  user: any;
   lat: any=0;
   lng: any=0;
   checked: boolean = true;
-  categories : any;
+  categories : any[];
   filter={
     show:false,
     icon:"funnel"
@@ -56,19 +56,33 @@ export class NearbyPage {
 
   ionViewDidLoad() {  	//this.loadMap();
     this.miPosition();
-    /* this.getCategories(); */
+    this.getAllcategories();
     console.log('ionViewDidLoad NearbyPage');
     
   }
-  getCategories() {
+  getAllcategories() {
     this.storage.get('user').then((user) => {
-      if (user) {
+     this.user = user;
+      if (this.user) {
         this.storage.get('headers').then((data) => {
-          let url = routes.categories();
+          let url = routes.allcategories();
           this._tokenService.get(url, data).subscribe(
             response => {
               console.log(response)
-
+              let id = response['data'].id;
+              this.user.id = id;
+              var token, uid, client;
+              client = response['headers'].get('client');
+              uid = response['headers'].get('uid');
+              token = response['headers'].get('access-token');
+              this.categories = JSON.parse(response['_body']);
+              console.log(this.user)
+              let header = {
+                token: token,
+                client: client,
+                uid: uid
+              }
+              this.storage.set('headers', header);
             },
             error => {
               console.log(error);
@@ -78,9 +92,34 @@ export class NearbyPage {
       }
     })
   }
+getCategories(){
+  this.storage.get('headers').then((data) => {
+    let url = routes.categories();
+    this._tokenService.get(url, data).subscribe(
+      response => {
+        console.log(response)
+        let id = response['data'].id;
+        this.user.id = id;
+        var token, uid, client;
+        client = response['headers'].get('client');
+        uid = response['headers'].get('uid');
+        token = response['headers'].get('access-token');
+        this.categories = JSON.parse(response['_body']);
+        console.log(this.user)
+        let header = {
+          token: token,
+          client: client,
+          uid: uid
+        }
+        this.storage.set('headers', header);
+      },
+      error => {
+        console.log(error);
+      })
+  })
+}
 
   showFilter(){
-    console.log("checked", this.checked)
     this.filter.show=!this.filter.show;
     if (this.filter.show) {
       this.filter.icon="close"
