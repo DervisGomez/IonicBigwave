@@ -1,19 +1,18 @@
 <ion-header>
-  <ion-navbar color="themeorange">
+  <ion-navbar color="primary">
     <ion-title>
-      Login
+      Bigwave
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button mat-button (click)="goToSignIn()">Click me!</button>
-  <img src="assets/imgs/cart.png" class="logo">
+  <!--<img src="assets/imgs/cart.png" class="logo">
   <ion-card padding>
     <form [formGroup]="form" novalidate>
       <ion-item color="theme-blue">
         <ion-label floating>Email</ion-label>
-        <ion-input type="email" name="email" formControlName="email" #email (ionBlur)="removeSpaces(email)"></ion-input>
+        <ion-input type="email" name="email" ></ion-input>
       </ion-item>
       <div padding *ngIf="form.controls.email.errors && form.controls.email.dirty">
         <ion-label color="danger">*Requerido</ion-label>
@@ -35,6 +34,36 @@
       <button full ion-button outline color="theme-purple" clear class="bt1" (click)="goToRecoverPassword()" color="themeorange" >Olvidé la contraseña</button>
       <button full ion-button outline color="theme-purple" clear class="bt2" (click)="goToSignIn()" color="themeorange" >Aún no tengo cuenta</button>
     </div>
-  </ion-card>
+  </ion-card>-->
+  <div padding class="centrar">
+    <div class="fondo" >
+      <form class="example-form" padding [formGroup]="form">
+        <div padding>
+          <h4>Entrar</h4>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" type="email" formControlName="email" #email (ionBlur)="removeSpaces(email)">
+            <mat-error *ngIf="form.controls.email.errors">
+              <strong *ngIf="form.controls.email.errors.email && !form.controls.email.errors.required"> Por favor escribir un email valido </strong>
+              <strong *ngIf="form.controls.email.errors.required"> Email es requerido</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" type="password" name="password" formControlName="password" #password>
+            <mat-error *ngIf="form.controls.password.errors">
+              <strong *ngIf="form.controls.password.errors.required"> Password es requerido</strong>
+            </mat-error>
+          </mat-form-field>
+          <br><br>
+          <button class="example-full-width" mat-raised-button color="accent" (click)="login()">Loguear</button>
+          <br><br>
+          <button class="example-full-width" mat-button color="primary" (click)="goToRecoverPassword()">Olvide mi contraseña</button>
+          <br><br><hr style="background: #ccc;height: 1px"><br>
+          <button class="example-full-width" mat-raised-button color="primary" (click)="goToSignIn()" >Registrate</button> 
+        </div>               
+      </form>
+    </div>
+  </div>
+
+  
 
 </ion-content>

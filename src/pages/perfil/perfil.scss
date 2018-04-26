@@ -2,12 +2,12 @@ page-perfil {
 	.foto-perfil{
 		width: 150px;
 		height: 150px;
-		border-radius: 6px;
+		border-radius: 50%;
 		position: relative;
 		text-align: center;
 		margin: 0 auto;
 		overflow: hidden;
-		border: 2px solid #888;
+		border: 2px solid #888; 
 		img{
 			height: auto;
 			width: auto;
@@ -20,7 +20,26 @@ page-perfil {
 			left: 50%;
 			transform: translate(-50%,-50%);
 			background: white;
-			border-radius: 6px;
+			border-radius: 50%;
 		}
 	}
+	.centrar{
+		height: 100%;
+		display: table;
+		margin: 0 auto;
+		width:100%;
+		max-width: 520px;
+		.fondo{
+			width:100%;
+			display: table-cell;
+			vertical-align: middle;
+			form{
+				padding: 16px;
+				box-shadow: 0 0 8px rgba(0,0,0,0.25);
+			}
+		}		
+	}
+	.example-full-width{
+			width: 100%;
+		}
 }

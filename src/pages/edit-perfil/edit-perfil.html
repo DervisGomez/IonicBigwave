@@ -1,13 +1,77 @@
 <ion-header>
 
-  <ion-navbar color="purple">
+  <ion-navbar color="primary">
     <ion-title>{{title}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+	<div padding class="centrar">
+	    <div class="fondo" >
+	      <form class="example-form" padding [formGroup]="form">
+	      	<div padding>
+	      		<div *ngIf="!password_show">
+		            <div class="foto-perfil" (click)="presentActionSheet()">
+		              <img src="{{ lastImage }}" >
+		              <button full ion-button>
+				      	<ion-icon name="ios-camera" item-left color="theme-white"></ion-icon>Cambiar
+				    </button>
+		            </div> 
+		        </div>
+		        <br>
+		        <mat-form-field class="example-full-width" *ngIf="!password_show">
+		          <input matInput placeholder="Email" type="email" formControlName="email" #email (ionBlur)="removeSpaces(email)">
+		          <mat-error *ngIf="form.controls.email.errors">
+		            <strong *ngIf="form.controls.email.errors.email && !form.controls.email.errors.required"> Por favor escribir un email valido </strong>
+		            <strong *ngIf="form.controls.email.errors.required"> Email es requerido</strong>
+		          </mat-error>
+		        </mat-form-field>
+	      		<mat-form-field class="example-full-width" *ngIf="!password_show">
+		          <input matInput placeholder="Nombre*" type="text" formControlName="name" #name>
+		          <mat-error *ngIf="form.controls.name.errors">
+		            <strong *ngIf="form.controls.name.errors.required"> Nombre es requerido</strong>
+		          </mat-error>
+		        </mat-form-field >
+		        <mat-form-field class="example-full-width" *ngIf="!password_show">
+		          <input matInput placeholder="Nickname" type="text" formControlName="nickname" #nickname>
+		          <mat-error *ngIf="form.controls.nickname.errors">
+		            <strong *ngIf="form.controls.nickname.errors.required"> Nickname es requerido</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Contraseña" type="password" name="current_password" formControlName="current_password" #current_password>
+		          <mat-error *ngIf="form.controls.current_password.errors">
+		            <strong *ngIf="form.controls.current_password.errors.required"> Password es requerido</strong>
+		            <strong *ngIf="form.controls.current_password.errors.minlength">Mínimo 8 caracteres</strong>
+		            <strong *ngIf="form.controls.current_password.errors.maxlength">Máximo 15 caracteres</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width" *ngIf="password_show">
+		          <input matInput placeholder="Nueva contraseña" type="password" name="password" formControlName="password" #password>
+		          <mat-error *ngIf="form.controls.password.errors">
+		            <strong *ngIf="form.controls.password.errors.required"> Password es requerido</strong>
+		            <strong *ngIf="form.controls.password.errors.minlength">Mínimo 8 caracteres</strong>
+		            <strong *ngIf="form.controls.password.errors.maxlength">Máximo 15 caracteres</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width" *ngIf="password_show">
+		          <input matInput placeholder="Confirmar contraseña" type="password" name="password_confirm" formControlName="password_confirm" #password_confirm>
+		          <mat-error *ngIf="form.controls.password_confirm.errors">
+		            <strong *ngIf="form.controls.password_confirm.errors.required"> Password es requerido</strong>
+		            <strong *ngIf="form.controls.password_confirm.errors.minlength">Mínimo 8 caracteres</strong>
+		            <strong *ngIf="form.controls.password_confirm.errors.maxlength">Máximo 15 caracteres</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <ion-label color="danger" *ngIf="form.controls.password.value != form.controls.password_confirm.value">Las contraseñas no son iguales</ion-label>
+		        <br><br>
+		        <button class="example-full-width" mat-raised-button color="accent" (click)="edit()">Actualizar</button>
+	      	</div>	               
+	      </form>
+	    </div>
+	</div>
+
+<!--
 	<form form [formGroup]="form" novalidate>
 		<ion-grid>
 		  <ion-row *ngIf="!password_show">
@@ -106,5 +170,5 @@
 				</ion-col>
 			</ion-row>			
 		</ion-grid>
-	</form>
+	</form>-->
 </ion-content>

@@ -6,6 +6,7 @@ import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
 import { LoginPage } from '../login/login';
+import { EditPerfilPage } from '../edit-perfil/edit-perfil';
 
 @IonicPage()
 @Component({
@@ -111,13 +112,13 @@ foto="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
   }
 
   editPerfil(user){
-  	this.navCtrl.push("EditPerfilPage",{
+  	this.navCtrl.push(EditPerfilPage,{
   		user: user,
       action:"edit"
   	});
   }
   passwordPerfil(user){
-    this.navCtrl.push("EditPerfilPage",{
+    this.navCtrl.push(EditPerfilPage,{
       user: user,
       action:"password"
     });

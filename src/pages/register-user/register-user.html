@@ -1,15 +1,61 @@
 <ion-header>
 
-  <ion-navbar color="themeorange">
-    <ion-title>Registro</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Bigwave</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-	<button mat-button>Click me!</button>
-	<form form [formGroup]="form" novalidate>
+	<div padding class="centrar">
+	    <div class="fondo" >
+	      <form class="example-form" padding [formGroup]="form">
+	      	<div padding>
+	      		<h4>Registro</h4>
+	      		<mat-form-field class="example-full-width">
+		          <input matInput placeholder="Nombre*" type="text" formControlName="name" #name>
+		          <mat-error *ngIf="form.controls.name.errors">
+		            <strong *ngIf="form.controls.name.errors.required"> Nombre es requerido</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Email" type="email*" formControlName="email" #email (ionBlur)="removeSpaces(email)">
+		          <mat-error *ngIf="form.controls.email.errors">
+		            <strong *ngIf="form.controls.email.errors.email && !form.controls.email.errors.required"> Por favor escribir un email valido </strong>
+		            <strong *ngIf="form.controls.email.errors.required"> Email es requerido</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Nickname*" type="text" formControlName="nickname" #nickname>
+		          <mat-error *ngIf="form.controls.nickname.errors">
+		            <strong *ngIf="form.controls.nickname.errors.required"> Nickname es requerido</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Password*" type="password" name="password" formControlName="password" #password>
+		          <mat-error *ngIf="form.controls.password.errors">
+		            <strong *ngIf="form.controls.password.errors.required"> Password es requerido</strong>
+		            <strong *ngIf="form.controls.password.errors.minlength">Mínimo 8 caracteres</strong>
+		            <strong *ngIf="form.controls.password.errors.maxlength">Máximo 15 caracteres</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Confirmar*" type="password" name="password_confirm" formControlName="password_confirm" #password_confirm>
+		          <mat-error *ngIf="form.controls.password_confirm.errors">
+		            <strong *ngIf="form.controls.password_confirm.errors.required"> Password es requerido</strong>
+		            <strong *ngIf="form.controls.password_confirm.errors.minlength">Mínimo 8 caracteres</strong>
+		            <strong *ngIf="form.controls.password_confirm.errors.maxlength">Máximo 15 caracteres</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <ion-label color="danger" *ngIf="form.controls.password.value != form.controls.password_confirm.value">Las contraseñas no son iguales</ion-label>
+		        <br><br>
+		        <button class="example-full-width" mat-raised-button color="primary" (click)="register()">Registrar</button>
+	      	</div>	               
+	      </form>
+	    </div>
+	</div>
+	<!--<form form [formGroup]="form" novalidate>
 		<ion-grid>
 		  <ion-row>
 		    <ion-col col-6>  
@@ -83,5 +129,5 @@
 				</ion-col>
 			</ion-row>			
 		</ion-grid>
-	</form>
+	</form>-->
 </ion-content>

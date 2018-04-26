@@ -15,6 +15,10 @@ import { NearbyPage } from '../pages/nearby/nearby';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { MessagesPage } from '../pages/messages/messages';
 import { RegisterUserPage } from '../pages/register-user/register-user';
+import { EditPerfilPage } from '../pages/edit-perfil/edit-perfil';
+import { RecoverPasswordPage } from '../pages/recover-password/recover-password';
+
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,6 +37,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -47,7 +52,9 @@ import { MatButtonModule } from '@angular/material/button';
     NearbyPage,
     PerfilPage,
     MessagesPage,
-    RegisterUserPage
+    RegisterUserPage,
+    EditPerfilPage,
+    RecoverPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,8 @@ import { MatButtonModule } from '@angular/material/button';
     HttpModule,
     A2tUiModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,7 +83,9 @@ import { MatButtonModule } from '@angular/material/button';
     NearbyPage,
     PerfilPage,
     MessagesPage,
-    RegisterUserPage
+    RegisterUserPage,
+    EditPerfilPage,
+    RecoverPasswordPage
   ],
   providers: [
     StatusBar,

@@ -13,11 +13,13 @@
     <ion-item >
       <ion-label>Solo ver</ion-label>
 		</ion-item>
-		<div ><!-- *ngFor="let category of categories ; let i = index;trackBy:trackByIndex;" -->
-		<ion-item >
-      <ion-label><!-- {{category.name}} --></ion-label>
-      <ion-checkbox color="dark" checked="true" ></ion-checkbox> <!-- [(ngModel)]="{{category[i].state}}" (change)="getCategories()"-->
-		</ion-item>
+		<div >
+      <ion-scroll scrollY="true" class="scrollX">
+		<ion-item *ngFor="let c of categories  ; let i = index;trackBy:trackByIndex;" >
+      <ion-label>{{c.attributes.name}}</ion-label>
+      <ion-checkbox  color="dark" checked="true" (click)="getFilter(c.id)" ></ion-checkbox> <!-- -->
+    </ion-item>
+  </ion-scroll>
 		</div>
   </div>
 
