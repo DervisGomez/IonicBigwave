@@ -7,7 +7,7 @@ page-perfil {
 		text-align: center;
 		margin: 0 auto;
 		overflow: hidden;
-		border: 2px solid #888;
+		border: 2px solid #888; 
 		img{
 			height: auto;
 			width: auto;
@@ -24,7 +24,11 @@ page-perfil {
 		}
 	}
 	.centrar{
-		height: 100%;display: table;
+		height: 100%;
+		display: table;
+		margin: 0 auto;
+		width:100%;
+		max-width: 520px;
 		.fondo{
 			width:100%;
 			display: table-cell;

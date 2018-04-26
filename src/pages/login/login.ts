@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Angular2TokenService} from 'angular2-token';
 import { ROOT } from '../../config/routes';
 import { RegisterUserPage} from '../register-user/register-user';
+import { RecoverPasswordPage } from '../recover-password/recover-password'
 
 
 @IonicPage()
@@ -60,7 +61,7 @@ export class LoginPage {
   }
 
   goToRecoverPassword(){
-    this.navCtrl.push("RecoverPasswordPage");
+    this.navCtrl.push(RecoverPasswordPage);
   } 
 
   removeSpaces(email){

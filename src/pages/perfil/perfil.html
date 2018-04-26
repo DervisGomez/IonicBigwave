@@ -36,17 +36,18 @@
             </mat-form-field>            
           </div>                 
         </form>
+        <div style="padding: 16px 0">
+          <button class="example-full-width" mat-raised-button color="accent" (click)="editPerfil(user)">
+            <ion-icon name="ios-contact-outline" item-right color="theme-white"></ion-icon>&nbsp; Editar perfil
+          </button>
+          <br><br>
+          <button class="example-full-width" mat-raised-button color="primary" (click)="passwordPerfil(user)">
+            <ion-icon name="lock" item-right color="theme-white"></ion-icon>&nbsp; Cambiar Contraseña
+          </button>
+        </div>
       </div>
   </div>
-  <div *ngIf="user" style="padding: 8px 16px">
-    <button class="example-full-width" mat-raised-button color="accent" (click)="editPerfil(user)">
-      <ion-icon name="ios-contact-outline" item-left color="theme-white"></ion-icon>&nbsp; Editar perfil
-    </button>
-    <br><br>
-    <button class="example-full-width" mat-raised-button color="primary" (click)="passwordPerfil(user)">
-      <ion-icon name="ios-contact-outline" item-left color="theme-white"></ion-icon>&nbsp; Cambiar Contraseña
-    </button>
-  </div>
+  
   <!--
 	<ion-list *ngIf="user">
     <ion-item>

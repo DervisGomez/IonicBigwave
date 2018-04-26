@@ -4,14 +4,14 @@ export const routes = {
         return `/auth/sign_in?email=${email}&password=${pass}`
     },
     registerUser: () => {
-        return `/auth`
+        return `auth`
     },
     registerUser2: () => {
         return `${ROOT}/auth`
     },
     perfil: () =>{
     	//return `${ROOT}/users/current`;
-        return `/users/current`;
+        return `users/current`;
     },
     pymes: () => {
     	return `${ROOT}/pymes`;

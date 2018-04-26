@@ -15,6 +15,10 @@ import { NearbyPage } from '../pages/nearby/nearby';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { MessagesPage } from '../pages/messages/messages';
 import { RegisterUserPage } from '../pages/register-user/register-user';
+import { EditPerfilPage } from '../pages/edit-perfil/edit-perfil';
+import { RecoverPasswordPage } from '../pages/recover-password/recover-password';
+
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -48,7 +52,9 @@ import { MatInputModule } from '@angular/material/input';
     NearbyPage,
     PerfilPage,
     MessagesPage,
-    RegisterUserPage
+    RegisterUserPage,
+    EditPerfilPage,
+    RecoverPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -77,7 +83,9 @@ import { MatInputModule } from '@angular/material/input';
     NearbyPage,
     PerfilPage,
     MessagesPage,
-    RegisterUserPage
+    RegisterUserPage,
+    EditPerfilPage,
+    RecoverPasswordPage
   ],
   providers: [
     StatusBar,

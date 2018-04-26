@@ -7,6 +7,8 @@ import { Angular2TokenService} from 'angular2-token';
 import { routes } from '../../config/routes';
 import { ROOT } from '../../config/routes';
 import { Camera } from '@ionic-native/camera';
+import { PerfilPage } from '../perfil/perfil';
+
 
 @IonicPage()
 @Component({
@@ -23,7 +25,7 @@ export class EditPerfilPage {
   action: any;
   password_show=false;
   title="Editar Perfil";
-  lastImage: string = null;
+  lastImage="https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg";
 
   constructor(
   	public navCtrl: NavController, 
@@ -47,16 +49,13 @@ export class EditPerfilPage {
     if (this.action=="password") {
       this.password_show=true;      
       this.title="Cambiar Contraseña";
-    }
-
-    if (this.user.image==null) {
-      this.lastImage='https://bigwave.herokuapp.com/uploads/user/avatar/11/avatar.png'
-    }else{
-      this.lastImage=this.user.image;
-    }    
+    }       
 
     this.form = this.fb.group({
-	    email: [this.user.email, Validators.required],
+	    email: [this.user.email, Validators.compose([
+          Validators.required,
+          Validators.email,
+      ])],
 	    name: [this.user.name, Validators.required],
 	    nickname: [this.user.nickname, Validators.required],
       	password:  ['', Validators.compose([
@@ -75,7 +74,15 @@ export class EditPerfilPage {
           Validators.minLength(8),
       ])],
 	    // image: ['', Validators.required],
-    });    	
+    }); 
+
+    if (this.user.avatar.url==null) {
+      console.log("si")
+      this.lastImage='https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg';
+    }else{
+      console.log("no")
+      this.lastImage=this.user.avatar.url;
+    }    	
   }
 
   ionViewDidLoad() {
@@ -191,25 +198,34 @@ export class EditPerfilPage {
 
       if (!this.password_show) {
         this.title="Editar Perfil";
-        if (this.form.value.current_password==""&&this.form.value.current_password==undefined) {
-          this.messages("Contraseña invalida.");
-          return
-        }
-        if (this.form.value.email==""&&this.form.value.email==undefined) {
+        if (this.form.value.email==""||this.form.controls.email.errors) {
           this.messages("Email invalido");
           return
         }
-        if (this.form.value.name==""&&this.form.value.name==undefined) {
+        if (this.form.value.name==""||this.form.controls.name.errors) {
           this.messages("Nombre invalido.");
           return
         }
-        if (this.form.value.nickname==""&&this.form.value.nickname==undefined) {
+        if (this.form.value.nickname==""||this.form.controls.nickname.errors) {
           this.messages("Nickname invalido.");
+          return
+        }
+        if (this.form.value.current_password==""||this.form.controls.current_password.errors) {
+          this.messages("Contraseña invalida.");
           return
         }
         this.form.value.password=this.form.value.current_password;
         this.form.value.password_confirm=this.form.value.current_password;
-      } 
+      }else{
+        if (this.form.value.password==""||this.form.controls.password.errors) {
+          this.messages("Contraseña Nueva invalida.");
+          return
+        }
+        if (this.form.value.password_confirm==""||this.form.controls.password_confirm.errors) {
+          this.messages("Confirmacion de contraseña invalida.");
+          return
+        }
+      }
       
       if (this.form.value.password==this.form.value.password_confirm) {
         loading.present();
@@ -237,7 +253,7 @@ export class EditPerfilPage {
             }else{
               this.messages("Contraseña actualizada")
             } 
-            this.navCtrl.setRoot("PerfilPage") 
+            this.navCtrl.setRoot(PerfilPage) 
           },
           error => {
             console.log(error)
