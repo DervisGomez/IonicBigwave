@@ -8,4 +8,19 @@ page-nearby {
 	    height: 100vh;
 	    width: 100%;
 	  }
+	  .scrollX{
+		width:100%;
+		height:160px;
+		display: flex;
+		margin: 2px 0;
+		margin-bottom: 12px;
+	}
+	.item{
+		font-size: 1.2rem;
+	
+	}
+	.label{
+		text-align: center;
+		white-space:normal;
+	}
 }

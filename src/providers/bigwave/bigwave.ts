@@ -57,7 +57,7 @@ export class BigwaveProvider {
    
        
    console.log(currentHeaders)
-   return this.http.get(routes.allcategories(), { headers: headers, observe: 'response' }); 	
+   return this.http.get(routes.categories(), { headers: headers, observe: 'response' }); 	
  }
  categories(currentHeaders: {'access-token': string, 'uid': string, 'client': string}, categories:object): Observable<any>{
   let headers = new HttpHeaders({

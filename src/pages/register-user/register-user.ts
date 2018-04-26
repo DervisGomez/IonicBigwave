@@ -5,6 +5,7 @@ import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
 import { Angular2TokenService} from 'angular2-token';
 import { ROOT } from '../../config/routes';
+import { PerfilPage } from '../perfil/perfil'
 
 @IonicPage()
 @Component({
@@ -135,7 +136,7 @@ export class RegisterUserPage {
         loading.dismiss();
         this.events.publish("userLogin", this.user);
         this.menuCtrl.enable(true);
-        this.navCtrl.setRoot("PerfilPage")
+        this.navCtrl.setRoot(PerfilPage)
       },
       error =>    {
         console.log(error);

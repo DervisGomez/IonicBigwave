@@ -20,20 +20,20 @@
 		          </mat-error>
 		        </mat-form-field>
 		        <mat-form-field class="example-full-width">
-		          <input matInput placeholder="Email" type="email" formControlName="email" #email (ionBlur)="removeSpaces(email)">
+		          <input matInput placeholder="Email" type="email*" formControlName="email" #email (ionBlur)="removeSpaces(email)">
 		          <mat-error *ngIf="form.controls.email.errors">
 		            <strong *ngIf="form.controls.email.errors.email && !form.controls.email.errors.required"> Por favor escribir un email valido </strong>
 		            <strong *ngIf="form.controls.email.errors.required"> Email es requerido</strong>
 		          </mat-error>
 		        </mat-form-field>
 		        <mat-form-field class="example-full-width">
-		          <input matInput placeholder="Nickname" type="text" formControlName="nickname" #nickname>
+		          <input matInput placeholder="Nickname*" type="text" formControlName="nickname" #nickname>
 		          <mat-error *ngIf="form.controls.nickname.errors">
 		            <strong *ngIf="form.controls.nickname.errors.required"> Nickname es requerido</strong>
 		          </mat-error>
 		        </mat-form-field>
 		        <mat-form-field class="example-full-width">
-		          <input matInput placeholder="Password" type="password" name="password" formControlName="password" #password>
+		          <input matInput placeholder="Password*" type="password" name="password" formControlName="password" #password>
 		          <mat-error *ngIf="form.controls.password.errors">
 		            <strong *ngIf="form.controls.password.errors.required"> Password es requerido</strong>
 		            <strong *ngIf="form.controls.password.errors.minlength">Mínimo 8 caracteres</strong>
@@ -41,7 +41,7 @@
 		          </mat-error>
 		        </mat-form-field>
 		        <mat-form-field class="example-full-width">
-		          <input matInput placeholder="Confirmar" type="password" name="password_confirm" formControlName="password_confirm" #password_confirm>
+		          <input matInput placeholder="Confirmar*" type="password" name="password_confirm" formControlName="password_confirm" #password_confirm>
 		          <mat-error *ngIf="form.controls.password_confirm.errors">
 		            <strong *ngIf="form.controls.password_confirm.errors.required"> Password es requerido</strong>
 		            <strong *ngIf="form.controls.password_confirm.errors.minlength">Mínimo 8 caracteres</strong>
