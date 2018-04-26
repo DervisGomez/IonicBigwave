@@ -1,4 +1,4 @@
-export const ROOT = 'https://bigwave.herokuapp.com/v1';
+export const ROOT = 'https://bigwave.herokuapp.com/v1/';
 export const routes = {
     login: (email, pass) => {
         return `/auth/sign_in?email=${email}&password=${pass}`
@@ -23,9 +23,9 @@ export const routes = {
     	return `${ROOT}/independents`;
     },
     allcategories: () => {
-        return `profiles/categories`;
+        return `categories`;
     },
     categories: () =>{
-        return   `profiles/categories`;
+        return   `v1/categories`;
     }
  }

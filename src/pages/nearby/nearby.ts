@@ -23,11 +23,11 @@ import { Angular2TokenService } from 'angular2-token';
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
+  newcategories: any = [1];
+  categories: any;
   user: any;
   lat: any=0;
   lng: any=0;
-  checked: boolean = true;
-  categories : any[];
   filter={
     show:false,
     icon:"funnel"
@@ -68,15 +68,20 @@ export class NearbyPage {
           let url = routes.allcategories();
           this._tokenService.get(url, data).subscribe(
             response => {
-              console.log(response)
-              let id = response['data'].id;
-              this.user.id = id;
+               
+             /*  let id = response['data'].id; */
+             /*  this.user.id = id; */
               var token, uid, client;
               client = response['headers'].get('client');
               uid = response['headers'].get('uid');
               token = response['headers'].get('access-token');
               this.categories = JSON.parse(response['_body']);
-              console.log(this.user)
+              console.log(this.categories)
+       /*        this.categories = this.categories; */
+              for(var i in this.categories.data){
+                this.newcategories[i] = this.categories.data[i].id;
+              }
+              this.categories = this.categories.data;
               let header = {
                 token: token,
                 client: client,
@@ -92,31 +97,18 @@ export class NearbyPage {
       }
     })
   }
-getCategories(){
-  this.storage.get('headers').then((data) => {
-    let url = routes.categories();
-    this._tokenService.get(url, data).subscribe(
-      response => {
-        console.log(response)
-        let id = response['data'].id;
-        this.user.id = id;
-        var token, uid, client;
-        client = response['headers'].get('client');
-        uid = response['headers'].get('uid');
-        token = response['headers'].get('access-token');
-        this.categories = JSON.parse(response['_body']);
-        console.log(this.user)
-        let header = {
-          token: token,
-          client: client,
-          uid: uid
-        }
-        this.storage.set('headers', header);
-      },
-      error => {
-        console.log(error);
-      })
-  })
+getFilter(category){
+  var index = this.newcategories.indexOf(category);
+  if (index > -1) {
+    this.newcategories.splice(index, 1);
+      console.log("eliminado",category,this.newcategories)
+
+
+ }else{
+  this.newcategories.push(category);
+  console.log("agregado",category ,this.newcategories)
+ }
+
 }
 
   showFilter(){
@@ -161,7 +153,7 @@ initMap(ps) {
       console.log(+lat[1]);
       prueba.lat=+lat[0];
       prueba.lng=+lat[1];
-      this.createMarker();
+      this.initMap(18);
     });
   } 
 
