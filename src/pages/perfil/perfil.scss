@@ -2,7 +2,7 @@ page-perfil {
 	.foto-perfil{
 		width: 150px;
 		height: 150px;
-		border-radius: 6px;
+		border-radius: 50%;
 		position: relative;
 		text-align: center;
 		margin: 0 auto;
@@ -20,7 +20,22 @@ page-perfil {
 			left: 50%;
 			transform: translate(-50%,-50%);
 			background: white;
-			border-radius: 6px;
+			border-radius: 50%;
 		}
 	}
+	.centrar{
+		height: 100%;display: table;
+		.fondo{
+			width:100%;
+			display: table-cell;
+			vertical-align: middle;
+			form{
+				padding: 16px;
+				box-shadow: 0 0 8px rgba(0,0,0,0.25);
+			}
+		}		
+	}
+	.example-full-width{
+			width: 100%;
+		}
 }

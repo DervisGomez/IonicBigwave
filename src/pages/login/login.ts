@@ -71,19 +71,17 @@ export class LoginPage {
   }  
 
   login(){
-    let loading = this.loading.create({ content: 'Cargando...' });
-    loading.present();
-
-    if (this.form.value.email==undefined||this.form.value.email=="") {
-      loading.dismiss();
+    if (this.form.controls.email.errors||this.form.value.email=="") {
       this.messages("Correo invalido");
       return
     }
-    if (this.form.value.password=="") {
-      loading.dismiss();
+    if (this.form.controls.password.errors||this.form.value.password=="") {
       this.messages("Contraseña invalida");
       return
     }
+
+    let loading = this.loading.create({ content: 'Cargando...' });
+    loading.present();
     this._tokenService.signIn({
       email:    this.form.value.email,
       password: this.form.value.password

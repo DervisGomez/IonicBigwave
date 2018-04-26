@@ -33,7 +33,10 @@ export class RegisterUserPage {
     this.menuCtrl.enable(false); 
     
     this.form = this.fb.group({
-	    email: ['', Validators.required],
+	    email: ['', Validators.compose([
+          Validators.required,
+          Validators.email,
+      ])],
 	    name: ['', Validators.required],
 	    nickname: ['', Validators.required],
       	password:  ['', Validators.compose([
@@ -45,8 +48,7 @@ export class RegisterUserPage {
 	        Validators.required,
 	        Validators.maxLength(15),
 	        Validators.minLength(8),
-	    ])],
-	    // image: ['', Validators.required],
+	    ])]
     });  
 
   }
@@ -56,7 +58,31 @@ export class RegisterUserPage {
   }
 
   register(){
-    if (this.form.valid) {
+    if (this.form.controls.name.errors||this.form.value.name=="") {
+      this.messages("Nombre invalido");
+      return
+    }
+    if (this.form.controls.email.errors||this.form.value.email=="") {
+      this.messages("Correo invalido");
+      return
+    }
+    if (this.form.controls.nickname.errors||this.form.value.nickname=="") {
+      this.messages("Nickname invalido");
+      return
+    }
+    if (this.form.controls.password.errors||this.form.value.password=="") {
+      this.messages("Contraseña invalida");
+      return
+    }
+    if (this.form.controls.password_confirm.errors||this.form.value.password_confirm=="") {
+      this.messages("Contraseña invalida");
+      return
+    }
+    if (this.form.value.password!=this.form.value.password_confirm) {
+      this.messages("Contraseña no coinciden");
+      return
+    }
+    
      	 let loading = this.loading.create({ content: 'Cargando...' });
       	loading.present();    
 
@@ -74,15 +100,13 @@ export class RegisterUserPage {
         loading.dismiss();
         console.log(err)
         try{
-          this.message(err.error.errors.full_messages[0]);
+          //this.messages(err.error.errors.full_messages[0]);
+          this.messages("Ha ocurrido un error");
         }catch(err){
-          this.message("An error has occurred");
+          this.messages("Ha ocurrido un error");
         }
         
   		});
-    }else{
-      this.message("Invalid information. Please try again.");
-    }
   }
 
    login(email,password,loading){
@@ -119,13 +143,13 @@ export class RegisterUserPage {
         //this.loading=false;
         //this.errorHttp = true; this.loading=false; console.log(error._body);
         if (error && '_body' in error){          
-          this.message("an error has occurred, log in again");
+          this.messages("an error has occurred, log in again");
         }
       }
     );
   }
 
-  message(message){
+  messages(message){
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,
