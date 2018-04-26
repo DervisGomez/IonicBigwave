@@ -56,16 +56,16 @@ export class NearbyPage {
 
   ionViewDidLoad() {  	//this.loadMap();
     this.miPosition();
-    this.getAllcategories();
+    this.getCategories();
     console.log('ionViewDidLoad NearbyPage');
     
   }
-  getAllcategories() {
+  getCategories() {
     this.storage.get('user').then((user) => {
      this.user = user;
       if (this.user) {
         this.storage.get('headers').then((data) => {
-          let url = routes.allcategories();
+          let url = routes.categoriesFilter();
           this._tokenService.get(url, data).subscribe(
             response => {
                
@@ -98,15 +98,27 @@ export class NearbyPage {
     })
   }
 getFilter(category){
+  let url = routes.categories();
   var index = this.newcategories.indexOf(category);
   if (index > -1) {
     this.newcategories.splice(index, 1);
-      console.log("eliminado",category,this.newcategories)
-
-
+    
+    this._tokenService.get(url, this.newcategories).subscribe(
+      response => {
+        console.log(response )
+      },
+      error => {
+        console.log(error);
+      })
  }else{
   this.newcategories.push(category);
-  console.log("agregado",category ,this.newcategories)
+  this._tokenService.get(url, this.newcategories).subscribe(
+    response => {
+      console.log(response )
+    },
+    error => {
+      console.log(error);
+    })
  }
 
 }

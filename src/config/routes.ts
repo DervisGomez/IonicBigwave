@@ -11,21 +11,21 @@ export const routes = {
     },
     perfil: () =>{
     	//return `${ROOT}/users/current`;
-        return `/users/current`;
+        return `/users/current`
     },
     pymes: () => {
-    	return `${ROOT}/pymes`;
+    	return `${ROOT}/pymes`
     },
     sellers: () => {
-    	return `${ROOT}/sellers`;
+    	return `${ROOT}/sellers`
     },
     independents: () => {
-    	return `${ROOT}/independents`;
+    	return `${ROOT}/independents`
     },
-    allcategories: () => {
-        return `categories`;
+    categoriesFilter: () => {
+        return `categories`
     },
     categories: () =>{
-        return   `v1/categories`;
+        return   `categories`
     }
  }
