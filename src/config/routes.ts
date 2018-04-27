@@ -23,9 +23,9 @@ export const routes = {
     	return `${ROOT}/independents`
     },
     categoriesFilter: () => {
-        return `categories`
+        return `profiles/categories`
     },
     categories: () =>{
-        return   `categories`
+        return   `profiles/categories`
     }
  }
