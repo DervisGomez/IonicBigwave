@@ -38,6 +38,7 @@ import { Camera } from '@ionic-native/camera';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { MatInputModule } from '@angular/material/input';
     A2tUiModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

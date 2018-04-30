@@ -81,7 +81,7 @@ export class EditPerfilPage {
       this.lastImage='https://abrilvip.files.wordpress.com/2017/02/capaprofile.jpg';
     }else{
       console.log("no")
-      this.lastImage=this.user.avatar.url;
+      this.lastImage="https://bigwave.herokuapp.com"+this.user.avatar.url;
     }    	
   }
 
@@ -270,6 +270,14 @@ export class EditPerfilPage {
         this.messages("Las contraseñas no son iguales");
       }
   }
+
+  removeSpaces(email){
+    let strParse = new String(email.value);
+    let campo = strParse.trim();
+    email.value = campo;
+    console.log(campo)
+  } 
+
 
   messages(message){
     let toast = this.toastCtrl.create({

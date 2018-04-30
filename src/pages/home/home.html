@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="purple">
+  <ion-navbar color="primary">
     <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -17,31 +17,72 @@
 <ion-content >
   
   <div>
-    <h2 class="margin-home" >Descubre e-wave</h2>
       <ion-slides pager>
-
         <ion-slide class="card-background-page">
             <ion-card>
-              <img src="http://www.conectiva.com/wp-content/uploads/2016/06/los-profesionales-mas-inteligentes-660x330.jpg"/>
-              <div class="card-title">Pymes</div>
+              <img src="assets/imgs/slider2.jpg"/>
+              <button class="example-full-width" mat-raised-button color="accent" (click)="login()">Crear Tienda</button>
+              <h3>Descrube Bigwave</h3>
             </ion-card>
         </ion-slide>
-
         <ion-slide class="card-background-page">
-          <ion-card>
-              <img src="http://www.conectiva.com/wp-content/uploads/2016/06/los-profesionales-mas-inteligentes-660x330.jpg">
-              <div class="card-title">Profesionales</div>
+            <ion-card>
+              <img src="assets/imgs/slider3.jpg"/>
+              <button class="example-full-width" mat-raised-button color="accent" (click)="login()">Crear Profesional</button>
+              <h3>Descrube Bigwave</h3>
             </ion-card>
         </ion-slide>
-
         <ion-slide class="card-background-page">
-          <ion-card>
-              <img src="http://www.conectiva.com/wp-content/uploads/2016/06/los-profesionales-mas-inteligentes-660x330.jpg">
-              <div class="card-title">Vendedores</div>
+            <ion-card>
+              <img src="assets/imgs/slider1.jpg"/>
+              <button class="example-full-width" mat-raised-button color="accent" (click)="login()">Deseo Vender</button>
+              <h3>Descrube Bigwave</h3>
             </ion-card>
         </ion-slide>
+      </ion-slides> 
 
-      </ion-slides>  
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>  
+            <button class="boton-icon" mat-fab color="primary">
+              <ion-icon name="list-box" item-right color="theme-white"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-3>  
+            <button class="boton-icon" mat-fab color="warn">
+              <ion-icon name="pricetags" item-right color="theme-white"></ion-icon>
+            </button>
+          </ion-col> 
+          <ion-col col-3>  
+            <button class="boton-icon" mat-fab color="accent">
+              <ion-icon name="notifications" item-right color="theme-white"></ion-icon>
+            </button>
+          </ion-col>             
+          <ion-col col-3>  
+            <button class="boton-icon" mat-fab color="primary">
+              <ion-icon name="ribbon" item-right color="theme-white"></ion-icon>
+            </button>
+          </ion-col>  
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 class="card-item1">
+            <button  mat-raised-button color="accent">
+              <img src="assets/imgs/slider3.jpg">              
+            </button>
+            <div class="prueba"><div class="prueba2"><div>Visita nuestras tiendas</div></div></div>
+          </ion-col>
+          <ion-col col-6 class="card-item2">
+            <button  mat-raised-button color="warn">
+              <img src="assets/imgs/slider3.jpg">              
+            </button>
+            <div class="prueba"><div class="prueba2"><div>Zona de Profesionales</div></div></div>
+          </ion-col> 
+        </ion-row>
+      </ion-grid>
+
       <div class="margin-home">
       <ion-toolbar >
         <ion-segment color="purple">
