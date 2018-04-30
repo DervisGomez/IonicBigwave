@@ -1,0 +1,39 @@
+page-list-perfiles {
+	.item{
+		position: relative;
+		width: 45vw;
+		margin: 0 auto;
+		.button{
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			width: 40px;
+			height: 40px;
+		}
+	}
+	.list-perf{
+		width: 45vw;
+		height: 45vw;
+		box-shadow: 0 0 2px rgba(0,0,0,.5);
+		position: relative;
+		border-radius: 4px;	
+		margin: 0 auto;
+		img{
+			width: auto;
+			height: auto;
+			max-height: 95%;
+			max-width: 95%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}		
+	}
+	
+	.title{
+		margin-top: 8px;
+	}
+	.cart{
+		font-size: 32px;
+	}
+}

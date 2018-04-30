@@ -14,18 +14,18 @@ export const routes = {
         return `users/current`
     },
     pymes: () => {
-    	return `${ROOT}/pymes`
+    	return `pymes`
     },
     sellers: () => {
-    	return `${ROOT}/sellers`
+    	return `sellers`
     },
     independents: () => {
-    	return `${ROOT}/independents`
+    	return `independents`
     },
     categoriesFilter: () => {
-        return `categories`
+        return `profiles/categories`
     },
     categories: () =>{
-        return   `categories`
+        return   `profiles/categories`
     }
  }

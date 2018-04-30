@@ -17,8 +17,7 @@ import { MessagesPage } from '../pages/messages/messages';
 import { RegisterUserPage } from '../pages/register-user/register-user';
 import { EditPerfilPage } from '../pages/edit-perfil/edit-perfil';
 import { RecoverPasswordPage } from '../pages/recover-password/recover-password';
-
-
+import { ListPerfilesPage } from '../pages/list-perfiles/list-perfiles';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -38,6 +37,7 @@ import { Camera } from '@ionic-native/camera';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -54,7 +54,8 @@ import { MatInputModule } from '@angular/material/input';
     MessagesPage,
     RegisterUserPage,
     EditPerfilPage,
-    RecoverPasswordPage
+    RecoverPasswordPage,
+    ListPerfilesPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,8 @@ import { MatInputModule } from '@angular/material/input';
     A2tUiModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -85,7 +87,8 @@ import { MatInputModule } from '@angular/material/input';
     MessagesPage,
     RegisterUserPage,
     EditPerfilPage,
-    RecoverPasswordPage
+    RecoverPasswordPage,
+    ListPerfilesPage
   ],
   providers: [
     StatusBar,

@@ -150,6 +150,13 @@ export class RegisterUserPage {
     );
   }
 
+  removeSpaces(email){
+    let strParse = new String(email.value);
+    let campo = strParse.trim();
+    email.value = campo;
+    console.log(campo)
+  } 
+
   messages(message){
     let toast = this.toastCtrl.create({
       message: message,

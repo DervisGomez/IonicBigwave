@@ -1,0 +1,46 @@
+<!--
+  Generated template for the ListPerfilesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      {{title}}
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button >
+        <ion-icon class="cart" name="list-box"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background: #f8f8f8">
+	 <ion-grid>
+        <ion-row text-center>
+          <ion-col col-6 *ngFor="let pyme of pymes;let last = last;" > 
+          	         	
+             <span class="flag-icon flag-icon-ve"></span>
+             <!--<div class="list-perf">
+	          <img src="{{pyme.attributes.photo}}"/>
+	          <button mat-mini-fab class="toolbar-icon" >
+	              <ion-icon name="thumbs-up" item-right color="theme-white"></ion-icon>
+	          </button>	          
+	        </div>-->
+	        <div class="item">
+		        <button class="list-perf" mat-raised-button color="basic">
+	              <img src="{{pyme.attributes.photo}}">	                            
+	            </button>
+	            <button mat-mini-fab class="toolbar-icon button" >
+		              <ion-icon name="thumbs-up" item-right color="theme-white"></ion-icon>
+		         </button>
+		     </div>
+	        <h5 class="title">{{pyme.attributes.name}}</h5>
+          </ion-col> 
+        </ion-row>
+      </ion-grid>
+
+</ion-content>
