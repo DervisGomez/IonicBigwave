@@ -68,21 +68,33 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col col-6 class="card-item1">
+          <ion-col col-6 class="card-item1" (click)="goList(1)">
             <button  mat-raised-button color="accent">
-              <img src="assets/imgs/slider3.jpg">              
+              <img src="assets/imgs/slider2.jpg">              
             </button>
             <div class="prueba"><div class="prueba2"><div>Visita nuestras tiendas</div></div></div>
           </ion-col>
-          <ion-col col-6 class="card-item2">
-            <button  mat-raised-button color="warn">
+          <ion-col col-6 class="card-item2" (click)="goList(2)">
+            <button id="prue"  mat-raised-button color="warn">
               <img src="assets/imgs/slider3.jpg">              
             </button>
-            <div class="prueba"><div class="prueba2"><div>Zona de Profesionales</div></div></div>
+            <div class="prueba"><div class="prueba2"><div for="prue">Zona de Profesionales</div></div></div>
+          </ion-col>
+          <ion-col col-6 class="card-item1" (click)="goList(3)">
+            <button  mat-raised-button color="warn">
+              <img src="assets/imgs/slider1.jpg">              
+            </button>
+            <div class="prueba"><div class="prueba2"><div>Zona de Seller</div></div></div>
+          </ion-col>
+          <ion-col col-6 class="card-item2">
+            <button  mat-raised-button color="primary">
+              <img src="assets/imgs/slider3.jpg">              
+            </button>
+            <div class="prueba"><div class="prueba2"><div>Zona de Ofertas</div></div></div>
           </ion-col> 
         </ion-row>
       </ion-grid>
-
+<!--
       <div class="margin-home">
       <ion-toolbar >
         <ion-segment color="purple">
@@ -252,7 +264,7 @@
           </ion-card>
         </ion-slide>
 
-      </ion-slides>  
+      </ion-slides> -->
   </div>
 
 </ion-content>

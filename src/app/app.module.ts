@@ -17,8 +17,7 @@ import { MessagesPage } from '../pages/messages/messages';
 import { RegisterUserPage } from '../pages/register-user/register-user';
 import { EditPerfilPage } from '../pages/edit-perfil/edit-perfil';
 import { RecoverPasswordPage } from '../pages/recover-password/recover-password';
-
-
+import { ListPerfilesPage } from '../pages/list-perfiles/list-perfiles';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -55,7 +54,8 @@ import { MatIconModule } from '@angular/material/icon';
     MessagesPage,
     RegisterUserPage,
     EditPerfilPage,
-    RecoverPasswordPage
+    RecoverPasswordPage,
+    ListPerfilesPage
   ],
   imports: [
     BrowserModule,
@@ -87,7 +87,8 @@ import { MatIconModule } from '@angular/material/icon';
     MessagesPage,
     RegisterUserPage,
     EditPerfilPage,
-    RecoverPasswordPage
+    RecoverPasswordPage,
+    ListPerfilesPage
   ],
   providers: [
     StatusBar,
