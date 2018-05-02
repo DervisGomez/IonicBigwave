@@ -46,36 +46,46 @@ page-home {
 	}
 	.card-item1{
 		position: relative;
+		text-align: center;		
 		button{
 			width: 100%;
-			height: 80px;
+			height: 154px;
 			position: relative;
-			vertical-align: middle;
-			img{
-				width: 48px;
-				height: 48px;
+			text-align: center;
+			.imagenes{
 				position: absolute;
-				left: 8px;
-				top: 16px;
-				border-radius: 50%;
+				bottom: 16px;
+				height: 56px;
+				width: 146px;
+				left: 50%;
+				transform: translateX(-50%);
+				.principal{
+					width: 40px;
+					height: 40px;
+					margin: 8px;
+					border-radius: 50%;
+				}
+				.secundario{
+					width: 40px;
+					height: 40px;
+					margin: 8px 0;
+					border-radius: 50%;
+				}
 			}
 		}
-		.prueba{
+		.espacio{
 			position: absolute;
-			height: 100%;
-			left: 68px;
-			right: 24px;
-			top: 0;
-			padding-right: 80px;
-			display: table;
-			width: 100%;
-			.prueba2{
-				vertical-align:middle;
-				display: table-cell;
-				div{
-					font-size: 17px;
-					color: white;
-				}
+			top: 16px;
+			left: 16px;
+			right: 16px;
+			bottom: 80px;
+			div{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				color: white;
+				font-size: 20px;
 			}
 		}			
 	}
@@ -83,34 +93,70 @@ page-home {
 		position: relative;
 		button{
 			width: 100%;
-			height: 80px;
+			height: 72px;
 			position: relative;
 			vertical-align: middle;
 			img{
-				width: 48px;
-				height: 48px;
+				width: 40px;
+				height: 40px;
 				position: absolute;
 				right: 8px;
 				top: 16px;
 				border-radius: 50%;
 			}
 		}
+		div{
+			position: absolute;
+			top: 50%;
+			left: 8px;
+			right: 56px;
+			transform: translateY(-50%);
+			color: white;
+			font-size: 16px;
+		}
 		.prueba{
 			position: absolute;
 			height: 100%;
-			right: 64px;
+			right: 60px;
 			top: 0;
-			padding-left: 76px;
+			padding-left: 68px;
 			display: table;
 			width: 100%;
 			.prueba2{
 				vertical-align:middle;
 				display: table-cell;
 				div{
-					font-size: 17px;
+					font-size: 16px;
 					color: white;
 				}
 			}
+		}			
+	}
+	.card-item3{
+		position: relative;
+		text-align: center;
+		button{
+			width: 100%;
+			height: 72px;
+			position: relative;
+			vertical-align: middle;
+			img{
+				width: 40px;
+				height: 40px;
+				position: absolute;
+				left: 8px;
+				top: 16px;
+				border-radius: 50%;
+			}
+		}
+		div{
+			position: absolute;
+			top: 50%;
+			left: 56px;
+			transform: translateY(-50%);
+			right: 8px;
+			color: white;
+			font-size: 16px;
 		}			
 	}
 	ion-col{

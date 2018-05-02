@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { ROOT } from '../../config/routes';
 import { Angular2TokenService} from 'angular2-token'
 import { routes } from '../../config/routes';
+import { RecoverPasswordPage } from '../recover-password/recover-password';
+
 
 /**
  * Generated class for the ListPerfilesPage page.
@@ -26,6 +28,7 @@ export class ListPerfilesPage {
   	public navParams: NavParams,
     public loading: LoadingController,
     public toastCtrl: ToastController,
+    public modalCtrl: ModalController,
     private _tokenService: Angular2TokenService) {
 
   	this._tokenService.init({apiBase: ROOT});
@@ -37,6 +40,11 @@ export class ListPerfilesPage {
     console.log(this.action);
     this.getPymes();
   }
+
+  presentProfileModal() {
+   let profileModal = this.modalCtrl.create(RecoverPasswordPage, { userId: 8675309 });
+   profileModal.present();
+ }
 
   getPymes(){
     let loading = this.loading.create({ content: 'Cargando...' });

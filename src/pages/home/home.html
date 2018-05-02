@@ -68,29 +68,41 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col col-6 class="card-item1" (click)="goList(1)">
+          <ion-col col-6 class="card-item3" (click)="goList(1)">
             <button  mat-raised-button color="accent">
               <img src="assets/imgs/slider2.jpg">              
             </button>
-            <div class="prueba"><div class="prueba2"><div>Visita nuestras tiendas</div></div></div>
+            <div>Visita nuestras tiendas</div>
           </ion-col>
-          <ion-col col-6 class="card-item2" (click)="goList(2)">
+          <ion-col col-6 class="card-item2" >
             <button id="prue"  mat-raised-button color="warn">
               <img src="assets/imgs/slider3.jpg">              
             </button>
-            <div class="prueba"><div class="prueba2"><div for="prue">Zona de Profesionales</div></div></div>
+            <div for="prue">Zona de Ofertas</div>
           </ion-col>
-          <ion-col col-6 class="card-item1" (click)="goList(3)">
-            <button  mat-raised-button color="warn">
-              <img src="assets/imgs/slider1.jpg">              
-            </button>
-            <div class="prueba"><div class="prueba2"><div>Zona de Seller</div></div></div>
+          <ion-col col-6>
+            <div class="card-item3" (click)="goList(2)" style="margin-bottom: 10px">
+              <button  mat-raised-button color="warn">
+                <img src="assets/imgs/slider3.jpg">              
+              </button>
+              <div>Zona de Profesionales</div>
+            </div>
+            <div class="card-item3" (click)="goList(3)">
+              <button  mat-raised-button color="accent">
+                <img src="assets/imgs/slider1.jpg">              
+              </button>
+              <div>Zona de Seller</div>
+            </div>                     
           </ion-col>
-          <ion-col col-6 class="card-item2">
+          <ion-col col-6 class="card-item1" >
             <button  mat-raised-button color="primary">
-              <img src="assets/imgs/slider3.jpg">              
+              <div class="imagenes">
+                <img class="secundario" src="assets/imgs/slider1.jpg">  
+                <img class="principal" src="assets/imgs/slider3.jpg">  
+                <img class="secundario" src="assets/imgs/slider2.jpg">  
+              </div>             
             </button>
-            <div class="prueba"><div class="prueba2"><div>Zona de Ofertas</div></div></div>
+            <div class="espacio"><div>Zona de Productos</div></div>
           </ion-col> 
         </ion-row>
       </ion-grid>

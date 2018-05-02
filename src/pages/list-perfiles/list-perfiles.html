@@ -18,9 +18,9 @@
 </ion-header>
 
 
-<ion-content style="background: #f8f8f8">
+<ion-content style="background: #f3f3f3">
 	 <ion-grid>
-        <ion-row text-center>
+        <ion-row>
           <ion-col col-6 *ngFor="let pyme of pymes;let last = last;" > 
           	         	
              <span class="flag-icon flag-icon-ve"></span>
@@ -32,13 +32,17 @@
 	        </div>-->
 	        <div class="item">
 		        <button class="list-perf" mat-raised-button color="basic">
-	              <img src="{{pyme.attributes.photo}}">	                            
+                <div class="imagen">
+                  <img src="{{pyme.attributes.photo}}">
+                </div>	              
+                <h5 class="title">{{pyme.attributes.name}}</h5>                        
 	            </button>
 	            <button mat-mini-fab class="toolbar-icon button" >
 		              <ion-icon name="thumbs-up" item-right color="theme-white"></ion-icon>
 		         </button>
 		     </div>
-	        <h5 class="title">{{pyme.attributes.name}}</h5>
+	        
+
           </ion-col> 
         </ion-row>
       </ion-grid>
