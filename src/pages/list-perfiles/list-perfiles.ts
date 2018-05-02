@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { ROOT } from '../../config/routes';
 import { Angular2TokenService} from 'angular2-token'
 import { routes } from '../../config/routes';
-import { RecoverPasswordPage } from '../recover-password/recover-password';
-
 
 /**
  * Generated class for the ListPerfilesPage page.
@@ -20,6 +18,8 @@ import { RecoverPasswordPage } from '../recover-password/recover-password';
 })
 export class ListPerfilesPage {
 	pymes: any = [];
+  categories: any = [];
+  categoriesCheck: any =[];
 	action: any;
 	title;
 
@@ -28,7 +28,7 @@ export class ListPerfilesPage {
   	public navParams: NavParams,
     public loading: LoadingController,
     public toastCtrl: ToastController,
-    public modalCtrl: ModalController,
+    public alertCtrl: AlertController,
     private _tokenService: Angular2TokenService) {
 
   	this._tokenService.init({apiBase: ROOT});
@@ -41,10 +41,59 @@ export class ListPerfilesPage {
     this.getPymes();
   }
 
-  presentProfileModal() {
-   let profileModal = this.modalCtrl.create(RecoverPasswordPage, { userId: 8675309 });
+  showCheckbox() {
+    if(this.categories.length>0){
+      this.configCheckbox();
+    }else{
+      this.getCategories();
+    }    
+    
+  }
+
+  configCheckbox(){
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Categorias');
+    for (var i = 0; i<this.categories.length; i++) {
+      this.categories[i].checked=this.verificarCheckbox(this.categories[i].id);
+      alert.addInput({
+        type: 'checkbox',
+        label: this.categories[i].attributes.name,
+        value: this.categories[i].id,
+        checked: this.categories[i].checked
+      });
+      
+    }
+
+    alert.addButton('Cancelar');
+    alert.addButton({
+      text: 'Listo',
+      handler: data => {
+        this.categoriesCheck=data;
+        console.log('Checkbox data:', data);
+      }
+    });
+    alert.present();
+  }
+
+  verificarCheckbox(id){
+    if(this.categoriesCheck.length>0){
+      for (var i = 0;i<this.categoriesCheck.length; i++) {
+        if(this.categoriesCheck[i]==id){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /*presentModal() {
+   let profileModal = this.modalCtrl.create(ListCategoriesPage, { userId: 8675309 });
+   profileModal.onDidDismiss(data => {
+     console.log(data);
+   });
    profileModal.present();
- }
+ }*/
+
 
   getPymes(){
     let loading = this.loading.create({ content: 'Cargando...' });
@@ -85,18 +134,19 @@ export class ListPerfilesPage {
     );
   }
 
-   getIndependents(){
+  getCategories(){
     let loading = this.loading.create({ content: 'Cargando...' });
     loading.present();
-    let url = routes.independents();
+    let url = routes.categories();
     this._tokenService.get(url).subscribe(
       data =>      {
         loading.dismiss();
       	console.log(data)
       	data = JSON.parse(data['_body']);
         if (data['data'].length){
-          this.pymes = data['data'];
-          console.log(this.pymes);
+          this.categories = data['data'];
+          console.log(this.categories);
+          this.configCheckbox();
         }
       },
       error =>  {
