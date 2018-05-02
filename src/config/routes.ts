@@ -1,13 +1,13 @@
-export const ROOT = 'https://bigwave.herokuapp.com/v1/';
+export const ROOT = 'https://bigwave.herokuapp.com/v1';
 export const routes = {
     login: (email, pass) => {
-        return `/auth/sign_in?email=${email}&password=${pass}`
+        return `auth/sign_in?email=${email}&password=${pass}`
     },
     registerUser: () => {
         return `auth`
     },
     registerUser2: () => {
-        return `${ROOT}/auth`
+        return `${ROOT}auth`
     },
     perfil: () =>{
     	//return `${ROOT}/users/current`;
@@ -27,5 +27,8 @@ export const routes = {
     },
     categories: () =>{
         return   `profiles/categories`
+    },
+    geolocation:() =>{
+        return `geolocation/look_for`
     }
  }

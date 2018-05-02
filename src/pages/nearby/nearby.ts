@@ -6,14 +6,7 @@ import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/goo
 import { icons, sucursales } from '../../config/marks/icons'
 import { routes, ROOT } from '../../config/routes';
 import { Angular2TokenService } from 'angular2-token';
-
-/**
- * Generated class for the NearbyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { BigwaveProvider } from '../../providers/bigwave/bigwave';
  declare var google;
  let infowindow: any;
 
@@ -23,7 +16,7 @@ import { Angular2TokenService } from 'angular2-token';
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
-  newcategories: any = [1];
+  newcategories: any;
   categories: any;
   user: any;
   lat: any=0;
@@ -47,7 +40,9 @@ export class NearbyPage {
     public storage: Storage,
     public geo: Geolocation,
     private _tokenService: Angular2TokenService,
+    public bigwave: BigwaveProvider,
     ) {
+      this.newcategories = [];
       this._tokenService.init({apiBase: ROOT});
   	  platform.ready().then(() => {
     
@@ -61,12 +56,12 @@ export class NearbyPage {
     
   }
   getCategories() {
-    this.storage.get('user').then((user) => {
+/*     this.storage.get('user').then((user) => {
      this.user = user;
       if (this.user) {
-        this.storage.get('headers').then((data) => {
+        this.storage.get('headers').then((data) => { */
           let url = routes.categoriesFilter();
-          this._tokenService.get(url, data).subscribe(
+          this._tokenService.get(url).subscribe(
             response => {
                
              /*  let id = response['data'].id; */
@@ -81,6 +76,7 @@ export class NearbyPage {
               for(var i in this.categories.data){
                 this.newcategories[i] = this.categories.data[i].id;
               }
+              console.log(this.newcategories)
               this.categories = this.categories.data;
               let header = {
                 token: token,
@@ -93,32 +89,33 @@ export class NearbyPage {
               console.log(error);
             })
 
-        })
+    /*     })
       }
-    })
+    }) */
   }
 getFilter(category){
-  let url = routes.categories();
+
   var index = this.newcategories.indexOf(category);
   if (index > -1) {
     this.newcategories.splice(index, 1);
-    
-    this._tokenService.get(url, this.newcategories).subscribe(
-      response => {
-        console.log(response )
-      },
-      error => {
-        console.log(error);
-      })
+    var q;
+    this.bigwave.geololization(String(this.lat), String(this.lng), this.newcategories, q).subscribe(
+      res => {
+        console.log(res)
+      },err =>{
+        console.log(err)
+      }
+    )
  }else{
   this.newcategories.push(category);
-  this._tokenService.get(url, this.newcategories).subscribe(
-    response => {
-      console.log(response )
-    },
-    error => {
-      console.log(error);
-    })
+  var q;
+  this.bigwave.geololization(this.lat, this.lng, this.newcategories, q).subscribe(
+    res => {
+      console.log(res)
+    },err =>{
+      console.log(err)
+    }
+  )
  }
 
 }
@@ -145,6 +142,7 @@ getFilter(category){
   }
 
 initMap(ps) {
+  console.log(this.lat, this.lng)
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: ps,
       center: {lat: this.lat, lng: this.lng}
@@ -169,9 +167,6 @@ initMap(ps) {
     });
   } 
 
-  public newMap(){
-    console.log("hola")
-  } 
   createMarker() {
     if(this.lat==0&&this.lng==0){
       //this.message("No se pudo establecer la ubicacion");

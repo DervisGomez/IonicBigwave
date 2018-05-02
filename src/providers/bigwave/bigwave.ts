@@ -1,12 +1,17 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { routes } from '../../config/routes';
-
+import 'rxjs/add/operator/map';
+import { Angular2TokenService } from 'angular2-token'
 @Injectable()
 export class BigwaveProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(
+    public http: HttpClient,
+    private _tokenService: Angular2TokenService
+   ) {
+
     console.log('Hello BigwaveProvider Provider');
   }
 
@@ -59,16 +64,17 @@ export class BigwaveProvider {
    console.log(currentHeaders)
    return this.http.get(routes.categories(), { headers: headers, observe: 'response' }); 	
  }
- categories(currentHeaders: {'access-token': string, 'uid': string, 'client': string}, categories:object): Observable<any>{
-  let headers = new HttpHeaders({
-   'Content-Type': 'application/json;charset=utf-8',
-   'access-token': currentHeaders['access-token'],
-   'uid': currentHeaders.uid,
-   'client': currentHeaders.client
- });
- 
-     
- console.log(currentHeaders)
- return this.http.get(routes.categories(), { headers: headers, observe: 'response' }); 	
-}
+geololization(lat:string, lng:string, newCategories, q) : Observable<any>{
+  let params = {
+     "q":"q", 
+    "radio": 5,
+   " user": [
+      "11.7",
+      "70.0"
+    ],
+    "categories":newCategories
+  }
+console.log(params)
+  return this._tokenService.post(routes.geolocation(), params).map(res => res);
+  }
 }
