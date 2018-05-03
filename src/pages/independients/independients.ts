@@ -3,9 +3,11 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { ROOT } from '../../config/routes';
 import { Angular2TokenService} from 'angular2-token'
 import { routes } from '../../config/routes';
+import { imageconst } from '../../config/constant';
+
 
 /**
- * Generated class for the ListPerfilesPage page.
+ * Generated class for the IndependientsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,18 +15,19 @@ import { routes } from '../../config/routes';
 
 @IonicPage()
 @Component({
-  selector: 'page-list-perfiles',
-  templateUrl: 'list-perfiles.html',
+  selector: 'page-independients',
+  templateUrl: 'independients.html',
 })
-export class ListPerfilesPage {
-	pymes: any = [];
+export class IndependientsPage {
+  pymes: any = [];
   pymesAll: any =[];
   categories: any = [];
   categoriesCheck: any =[];
-	action: any;
-	title;
+  title;
   showSearch=false;
   titleFiltrar="Filtrar";
+  imagenBaner;
+  imagenLogo;
 
   constructor(
   	public navCtrl: NavController,
@@ -35,14 +38,22 @@ export class ListPerfilesPage {
     private _tokenService: Angular2TokenService) {
 
   	this._tokenService.init({apiBase: ROOT});
+  	this.imagenBaner=imageconst.banner;
+    this.imagenLogo=imageconst.logo;
+
   }
 
   ionViewDidLoad() {
+    console.log('ionViewDidLoad IndependientsPage');    
+    this.getPymes();
+  }
+
+  /*ionViewDidLoad() {
     console.log('ionViewDidLoad ListPerfilesPage');
     this.action=this.navParams.get("data");
     console.log(this.action);
-    this.getPymes();
-  }
+    
+  }*/
 
   goShowSearch(){
     this.showSearch=true;
@@ -133,36 +144,11 @@ export class ListPerfilesPage {
     return false;
   }
 
-  /*presentModal() {
-   let profileModal = this.modalCtrl.create(ListCategoriesPage, { userId: 8675309 });
-   profileModal.onDidDismiss(data => {
-     console.log(data);
-   });
-   profileModal.present();
- }*/
-
-
   getPymes(){
     let loading = this.loading.create({ content: 'Cargando...' });
     loading.present();
-    let url;
-    switch (this.action) {
-    	case 1:
-    		url = routes.pymes();
-    		this.title="Pymes"
-    		break;
-    	case 2:
-    		url = routes.independents();
-    		this.title="Independientes"
-    		break;
-    	case 3:
-    		url = routes.sellers();
-    		this.title="Sellers"
-    		break;  	
-    	default:
-    		this.messages("Ha ocurrido un error al cargar la inforamción.");
-    		break;
-    }
+    let url = routes.independents();
+    this.title="Independientes"
     this._tokenService.get(url).subscribe(
       data => {
       	loading.dismiss();
@@ -195,28 +181,6 @@ export class ListPerfilesPage {
           this.categories = data['data'];
           console.log(this.categories);
           this.configCheckbox();
-        }
-      },
-      error =>  {
-        console.log(error)
-        loading.dismiss();
-        this.messages("Ha ocurrido un error al cargar la inforamción.");
-      }
-    );
-  }
-
-  getSellers(){
-    let loading = this.loading.create({ content: 'Cargando...' });
-    loading.present();
-    let url = routes.sellers();
-    this._tokenService.get(url).subscribe(
-      data =>      {
-        loading.dismiss();
-      	console.log(data)
-      	data = JSON.parse(data['_body']);
-        if (data['data'].length){
-          this.pymes = data['data'];
-          console.log(this.pymes);
         }
       },
       error =>  {

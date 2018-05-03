@@ -19,6 +19,9 @@ import { EditPerfilPage } from '../pages/edit-perfil/edit-perfil';
 import { RecoverPasswordPage } from '../pages/recover-password/recover-password';
 import { ListPerfilesPage } from '../pages/list-perfiles/list-perfiles';
 import { ListCategoriesPage } from '../pages/list-categories/list-categories';
+import { PymesPage } from '../pages/pymes/pymes';
+import { IndependientsPage } from '../pages/independients/independients';
+import { SellersPage } from '../pages/sellers/sellers';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -57,7 +60,10 @@ import { MatIconModule } from '@angular/material/icon';
     EditPerfilPage,
     RecoverPasswordPage,
     ListPerfilesPage,
-    ListCategoriesPage
+    ListCategoriesPage,
+    PymesPage,
+    IndependientsPage,
+    SellersPage
   ],
   imports: [
     BrowserModule,
@@ -91,7 +97,10 @@ import { MatIconModule } from '@angular/material/icon';
     EditPerfilPage,
     RecoverPasswordPage,
     ListPerfilesPage,
-    ListCategoriesPage
+    ListCategoriesPage,
+    PymesPage,
+    IndependientsPage,
+    SellersPage
   ],
   providers: [
     StatusBar,

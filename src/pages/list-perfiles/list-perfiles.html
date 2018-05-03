@@ -6,12 +6,18 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>
+    <ion-title *ngIf="!showSearch">
       {{title}}
     </ion-title>
+    <ion-searchbar *ngIf="showSearch" placeholder="{{title}}"> </ion-searchbar>
+    <ion-buttons right *ngIf="!showSearch">
+      <button ion-button (click)="goShowSearch()">
+        <ion-icon class="cart" name="search" ></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons right>
       <button ion-button (click)="showCheckbox()">
-        <ion-icon class="cart" name="funnel"></ion-icon> Filtrar
+        <ion-icon class="cart" name="funnel"></ion-icon> {{titleFiltrar}}
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -21,7 +27,7 @@
 <ion-content style="background: #f3f3f3">
 	 <ion-grid>
         <ion-row>
-          <ion-col col-6 *ngFor="let pyme of pymes;let last = last;" > 
+          <ion-col col-6 *ngFor="let pyme of pymes;let last = last;" >
           	         	
              <span class="flag-icon flag-icon-ve"></span>
              <!--<div class="list-perf">
@@ -30,6 +36,9 @@
 	              <ion-icon name="thumbs-up" item-right color="theme-white"></ion-icon>
 	          </button>	          
 	        </div>-->
+          <div>
+            
+          </div>
 	        <div class="item">
 		        <button class="list-perf" mat-raised-button color="basic">
                 <div class="imagen">

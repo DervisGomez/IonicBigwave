@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ListPerfilesPage } from '../list-perfiles/list-perfiles';
-
+import { IndependientsPage } from '../independients/independients';
 
 @Component({
   selector: 'page-home',
@@ -19,6 +19,26 @@ export class HomePage {
 
   goList(perfil){
   	this.navCtrl.push(ListPerfilesPage,{data: perfil});
+  }
+
+  goListPymes(){
+    this.navCtrl.push(ListPerfilesPage,{data: 1});
+  }
+
+  goListIndependients(){
+    this.navCtrl.push(IndependientsPage);
+  }
+
+  goListSellers(){
+    this.navCtrl.push(ListPerfilesPage,{data: 3});
+  }
+
+  goListOfertas(){
+    //this.navCtrl.push(IndependientsPage);
+  }
+
+  goListProducts(){
+    //this.navCtrl.push(IndependientsPage);
   }
 
 }
