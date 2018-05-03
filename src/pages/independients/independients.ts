@@ -5,7 +5,6 @@ import { Angular2TokenService} from 'angular2-token'
 import { routes } from '../../config/routes';
 import { imageconst } from '../../config/constant';
 
-
 /**
  * Generated class for the IndependientsPage page.
  *
@@ -47,13 +46,6 @@ export class IndependientsPage {
     console.log('ionViewDidLoad IndependientsPage');    
     this.getPymes();
   }
-
-  /*ionViewDidLoad() {
-    console.log('ionViewDidLoad ListPerfilesPage');
-    this.action=this.navParams.get("data");
-    console.log(this.action);
-    
-  }*/
 
   goShowSearch(){
     this.showSearch=true;

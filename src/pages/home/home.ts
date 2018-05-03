@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ListPerfilesPage } from '../list-perfiles/list-perfiles';
 import { IndependientsPage } from '../independients/independients';
+import { SellersPage } from '../sellers/sellers';
+
 
 @Component({
   selector: 'page-home',
@@ -30,7 +32,7 @@ export class HomePage {
   }
 
   goListSellers(){
-    this.navCtrl.push(ListPerfilesPage,{data: 3});
+    this.navCtrl.push(SellersPage);
   }
 
   goListOfertas(){
