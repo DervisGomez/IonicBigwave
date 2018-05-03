@@ -1,3 +1,81 @@
 page-pymes {
+	.item-item{
+		width: 100%;
+		position: relative;
+		padding: 0;
+		min-height: 88px;
+		margin-bottom: 4px;
+		padding-bottom: 42px;
+
+		.banner{
+			width: 100%;
+		}
+
+		.imagenes{
+			width: 72px;
+			height: 72px;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: 10px;
+			border-radius: 4px;
+			background: #fff;
+			z-index: 100;
+
+			.imagen{
+				width: 100%;
+				height: 100%;
+				position: relative;
+				box-shadow: 0 0 8px rgba(0,0,0,.5);
+				border-radius: 4px;
+				overflow: hidden;
+
+				.logo{
+					width: auto;
+					height: auto;
+					max-height: 95%;
+					max-width: 95%;
+					position: absolute;
+					border-radius: 4px;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%);
+				}
+			}
+		}
+
+		.title{
+			position: absolute;
+			left: 50%;
+			width: 50%;
+			min-height: 36px;
+			padding-left: 42px;
+			bottom: 4px;
+			padding-right: 8px;
+
+			.fondo-title{
+				width: 100%;
+				height: 100%;
+				min-height: 42px;
+				position: relative;
+
+				.text-title{
+					top: 50%;
+					transform: translateY(-50%);
+					position: absolute;					
+					color: black;
+					text-shadow: 0 0 4px rgba(0,0,0,0);
+					font-size: 15px;
+				}
+			}
+		}
+	}
+	.funnel{
+		font-size: 20px;
+		margin-right: 8px;
+	}
+	.cart{
+		font-size: 20px;
+	}
 
 }

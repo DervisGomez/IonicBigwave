@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { ListPerfilesPage } from '../list-perfiles/list-perfiles';
 import { IndependientsPage } from '../independients/independients';
 import { SellersPage } from '../sellers/sellers';
+import { PymesPage } from '../pymes/pymes';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HomePage {
   }
 
   goListPymes(){
-    this.navCtrl.push(ListPerfilesPage,{data: 1});
+    this.navCtrl.push(PymesPage);
   }
 
   goListIndependients(){
