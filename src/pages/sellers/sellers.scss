@@ -1,0 +1,60 @@
+page-sellers {
+	.item-item{
+		width: 100%;
+		position: relative;
+		padding: 0;
+		min-height: 88px;
+		margin-bottom: -3px;
+
+		.banner{
+			width: 100%;
+		}
+
+		.imagenes{
+			width: 72px;
+			height: 72px;
+			position: absolute;
+			right: 6px;
+			bottom: 10px;
+			border-radius: 4px;
+			background: #fff;
+
+			.imagen{
+				width: 100%;
+				height: 100%;
+				position: relative;
+				box-shadow: 0 0 8px rgba(0,0,0,.5);
+				border-radius: 4px;
+				overflow: hidden;
+
+				.logo{
+					width: auto;
+					height: auto;
+					max-height: 95%;
+					max-width: 95%;
+					position: absolute;
+					border-radius: 4px;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%);
+				}
+			}
+		}
+
+		.title{
+			position: absolute;
+			right: 86px;
+			bottom: 12px;
+			color: white;
+			text-shadow: 0 0 4px rgba(0,0,0,1);
+			font-size: 16px;
+		}
+	}
+	.funnel{
+		font-size: 20px;
+		margin-right: 8px;
+	}
+	.cart{
+		font-size: 20px;
+	}
+}

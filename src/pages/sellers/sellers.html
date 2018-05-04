@@ -1,0 +1,39 @@
+<!--
+  Generated template for the SellersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="!showSearch">
+      {{title}}
+    </ion-title>
+    <ion-searchbar *ngIf="showSearch" placeholder="{{title}}"> </ion-searchbar>
+    <ion-buttons right *ngIf="!showSearch">
+      <button ion-button (click)="goShowSearch()">
+        <ion-icon class="cart" name="search" ></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button (click)="showCheckbox()">
+        <ion-icon class="funnel" name="funnel"></ion-icon> {{titleFiltrar}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="item-item" *ngFor="let pyme of pymes;let last = last;" >
+      	<img *ngIf="pyme.attributes.banner!=null&&pyme.attributes.banner!=''" class="banner" src="{{pyme.attributes.banner}}">
+       	<img *ngIf="pyme.attributes.banner==null||pyme.attributes.banner==''" class="banner" src="{{imagenBaner}}">
+       	<div class="imagenes">
+       		<div class="imagen">
+       			<img *ngIf="pyme.attributes.photo!=null" class="logo" src="{{pyme.attributes.photo}}">
+           		<img *ngIf="pyme.attributes.photo==null" class="logo" src="{{imagenLogo}}">
+       		</div>                  
+        </div>
+     	<div class="title">{{pyme.attributes.name}}</div>  
+	</div>
+
+</ion-content>
