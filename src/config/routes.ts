@@ -16,6 +16,9 @@ export const routes = {
     pymes: () => {
     	return `pymes`
     },
+    pymesCreate: () => {
+        return `pymes/create`
+    },
     sellers: () => {
     	return `sellers`
     },
