@@ -7,7 +7,7 @@ export const icons = {
   kenny:{
     icon: 'http://icons.iconarchive.com/icons/xtudiando/south-park/32/Kenny-icon.png'
   },
-  Pymes:{
+  Profile:{
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_p-32.png'
   },
   Seller:{
