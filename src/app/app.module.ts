@@ -22,6 +22,9 @@ import { ListCategoriesPage } from '../pages/list-categories/list-categories';
 import { PymesPage } from '../pages/pymes/pymes';
 import { IndependientsPage } from '../pages/independients/independients';
 import { SellersPage } from '../pages/sellers/sellers';
+import { SavePymesPage } from '../pages/save-pymes/save-pymes';
+import { SaveIndependientsPage } from '../pages/save-independients/save-independients';
+import { SaveSellersPage } from '../pages/save-sellers/save-sellers';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -63,7 +66,10 @@ import { MatIconModule } from '@angular/material/icon';
     ListCategoriesPage,
     PymesPage,
     IndependientsPage,
-    SellersPage
+    SellersPage,
+    SavePymesPage,
+    SaveIndependientsPage,
+    SaveSellersPage
   ],
   imports: [
     BrowserModule,
@@ -100,7 +106,10 @@ import { MatIconModule } from '@angular/material/icon';
     ListCategoriesPage,
     PymesPage,
     IndependientsPage,
-    SellersPage
+    SellersPage,
+    SavePymesPage,
+    SaveIndependientsPage,
+    SaveSellersPage
   ],
   providers: [
     StatusBar,

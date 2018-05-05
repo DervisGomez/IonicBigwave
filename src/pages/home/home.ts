@@ -5,6 +5,9 @@ import { IndependientsPage } from '../independients/independients';
 import { Storage } from '@ionic/storage';
 import { SellersPage } from '../sellers/sellers';
 import { PymesPage } from '../pymes/pymes';
+import { SavePymesPage } from '../save-pymes/save-pymes';
+import { SaveIndependientsPage } from '../save-independients/save-independients';
+import { SaveSellersPage } from '../save-sellers/save-sellers';
 
 
 
@@ -48,7 +51,7 @@ export class HomePage {
       });
       confirm.present();      
     }else{
-
+      this.navCtrl.push(SavePymesPage,{user_id: this.user.id});
     }
   }
 
@@ -69,7 +72,7 @@ export class HomePage {
       });
       confirm.present();      
     }else{
-      
+      this.navCtrl.push(SaveIndependientsPage,{user_id: this.user.id});
     }
   }
 
@@ -90,7 +93,7 @@ export class HomePage {
       });
       confirm.present();      
     }else{
-      
+      this.navCtrl.push(SaveSellersPage,{user_id: this.user.id});
     }
   }
 

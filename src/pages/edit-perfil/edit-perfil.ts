@@ -278,7 +278,6 @@ export class EditPerfilPage {
     console.log(campo)
   } 
 
-
   messages(message){
     let toast = this.toastCtrl.create({
       message: message,

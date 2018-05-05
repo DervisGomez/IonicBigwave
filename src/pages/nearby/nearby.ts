@@ -6,6 +6,7 @@ import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/goo
 import { icons, sucursales } from '../../config/marks/icons'
 import { routes, ROOT } from '../../config/routes';
 import { Angular2TokenService } from 'angular2-token';
+import { BigwaveProvider } from '../../providers/bigwave/bigwave';
 
 /**
  * Generated class for the NearbyPage page.
@@ -23,6 +24,7 @@ import { Angular2TokenService } from 'angular2-token';
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
+  profiles: any;
   newcategories: any = [1];
   categories: any;
   user: any;
@@ -47,6 +49,7 @@ export class NearbyPage {
     public storage: Storage,
     public geo: Geolocation,
     private _tokenService: Angular2TokenService,
+    public bigwaveProvider: BigwaveProvider
     ) {
       this._tokenService.init({apiBase: ROOT});
   	  platform.ready().then(() => {
@@ -63,7 +66,7 @@ export class NearbyPage {
   getCategories() {
     this.storage.get('user').then((user) => {
      this.user = user;
-      if (this.user) {
+  /*     if (this.user) { */
         this.storage.get('headers').then((data) => {
           let url = routes.categoriesFilter();
           this._tokenService.get(url, data).subscribe(
@@ -94,27 +97,34 @@ export class NearbyPage {
             })
 
         })
-      }
+    /*   } */
     })
   }
 getFilter(category){
-  let url = routes.categories();
   var index = this.newcategories.indexOf(category);
   if (index > -1) {
     this.newcategories.splice(index, 1);
-    
-    this._tokenService.get(url, this.newcategories).subscribe(
+    var q;
+    this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, q).subscribe(
       response => {
-        console.log(response )
+        console.log(response)
+        this.profiles = JSON.parse(response['_body']);
+        this.profiles = this.profiles.locations;
+        console.log( this.profiles )
+        this.createmarkers();
       },
       error => {
         console.log(error);
       })
  }else{
   this.newcategories.push(category);
-  this._tokenService.get(url, this.newcategories).subscribe(
+  this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, q).subscribe(
     response => {
-      console.log(response )
+      console.log(response)
+      this.profiles = JSON.parse(response['_body']);
+      this.profiles = this.profiles.locations;
+      console.log( this.profiles )
+      this.createmarkers();
     },
     error => {
       console.log(error);
@@ -230,10 +240,10 @@ initMap(ps) {
 
   createmarkers(){
     console.log("inicia marcas")
-    sucursales.forEach( (sucursal) => {
+    this.profiles.forEach( (sucursal) => {
       var marker = new google.maps.Marker({
-        position: sucursal.position,
-        icon: icons[sucursal.type].icon,
+        position: new google.maps.LatLng(sucursal.latitude, sucursal.longitude),
+        icon: icons[sucursal.locatable_type].icon,
         map: this.map
       });
       google.maps.event.addListener(marker, 'click', function() {
