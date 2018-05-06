@@ -66,13 +66,13 @@ export class BigwaveProvider {
  }
 geololization(lat:string, lng:string, newCategories, q) : Observable<any>{
   let params = {
-     "q":"q", 
-    "radio": 5,
-   " user": [
-      "11.7",
-      "70.0"
+     q: q, 
+    radio: 5,
+   user: [
+     lat,
+     lng
     ],
-    "categories":newCategories
+    categories: newCategories
   }
 console.log(params)
   return this._tokenService.post(routes.geolocation(), params).map(res => res);
