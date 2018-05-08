@@ -1,3 +1,21 @@
 page-save-sellers {
-
+	.centrar{
+		height: 100%;
+		display: table;
+		margin: 0 auto;
+		width:100%;
+		max-width: 520px;
+		.fondo{
+			width:100%;
+			display: table-cell;
+			vertical-align: middle;
+			form{
+				padding: 16px;
+				box-shadow: 0 0 8px rgba(0,0,0,0.25);
+			}
+		}
+		.example-full-width{
+			width: 100%;
+		}
+	}
 }

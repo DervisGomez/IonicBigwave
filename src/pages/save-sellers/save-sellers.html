@@ -6,13 +6,36 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>save-sellers</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Bigwave</ion-title>
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
-
+	<div padding class="centrar">
+	    <div class="fondo" >
+	      <form class="example-form" padding [formGroup]="form">
+	      	<div padding>
+	      		<h4>Crear Vendedor</h4>
+	      		<mat-form-field class="example-full-width">
+		          <input matInput placeholder="Nombre*" type="text" formControlName="name" #name>
+		          <mat-error *ngIf="form.controls.name.errors">
+		            <strong *ngIf="form.controls.name.errors.required"> Nombre es requerido</strong>
+		          </mat-error>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Descripción" type="text" formControlName="description" #description>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Email" type="email" formControlName="email" #email (ionBlur)="removeSpaces(email)">
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width" (click)="showCheckbox()">
+			      <textarea matInput placeholder="Categorias" type="text" formControlName="category_ids" #category_ids></textarea>
+			    </mat-form-field>
+		        <br><br>
+		        <button class="example-full-width" mat-raised-button color="primary" (click)="createPyme()">Crear</button>
+	      	</div>	               
+	      </form>
+	    </div>
+	</div>
 </ion-content>

@@ -118,7 +118,7 @@ export class IndependientsPage {
     let categories=this.pymesAll[i].attributes.categories;
     for (var j = 0;j<categories.length; j++) {
       for (var k = 0;k<this.categoriesCheck.length; k++) {
-        if(categories[j]==this.categoriesCheck[k]){
+        if(categories[j].id==this.categoriesCheck[k]){
           return true;
         }
       }

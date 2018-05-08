@@ -7,7 +7,7 @@ export const routes = {
         return `auth`
     },
     registerUser2: () => {
-        return `${ROOT}auth`
+        return `${ROOT}/auth`
     },
     perfil: () =>{
     	//return `${ROOT}/users/current`;
@@ -22,8 +22,14 @@ export const routes = {
     sellers: () => {
     	return `sellers`
     },
+    sellersCreate: () => {
+        return `sellers/create`
+    },
     independents: () => {
     	return `independents`
+    },
+    independentsCreate: () => {
+        return `independents/create`
     },
     categoriesFilter: () => {
         return `profiles/categories`

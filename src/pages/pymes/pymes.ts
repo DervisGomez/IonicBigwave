@@ -28,6 +28,7 @@ export class PymesPage {
   titleFiltrar="Filtrar";
   imagenBaner;
   imagenLogo;
+  searchText;
 
   constructor(
   	public navCtrl: NavController,
@@ -45,6 +46,32 @@ export class PymesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PymesPage');
     this.getPymes();
+  }
+
+  getItems(searchbar) {
+  // Reset items back to all of the items
+    this.pymes=this.pymesAll;
+
+    // set q to the value of the searchbar
+    var q = searchbar.srcElement.value;
+
+
+    // if the value is an empty string don't filter the items
+    if (!q) {
+      return;
+    }
+
+    this.pymes = this.pymesAll.filter((v) => {
+      if(v.name && q) {
+        if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+
+    console.log(q, this.pymes.length);
+
   }
 
   goShowSearch(){
@@ -118,7 +145,7 @@ export class PymesPage {
     let categories=this.pymesAll[i].attributes.categories;
     for (var j = 0;j<categories.length; j++) {
       for (var k = 0;k<this.categoriesCheck.length; k++) {
-        if(categories[j]==this.categoriesCheck[k]){
+        if(categories[j].id==this.categoriesCheck[k]){
           return true;
         }
       }

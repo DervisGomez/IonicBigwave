@@ -9,7 +9,7 @@
     <ion-title *ngIf="!showSearch">
       {{title}}
     </ion-title>
-    <ion-searchbar *ngIf="showSearch" placeholder="{{title}}"> </ion-searchbar>
+    <ion-searchbar *ngIf="showSearch" (ionInput)="getItems($event)" placeholder="{{title}}"> </ion-searchbar>
     <ion-buttons right *ngIf="!showSearch">
       <button ion-button (click)="goShowSearch()">
         <ion-icon class="cart" name="search" ></ion-icon>
@@ -24,7 +24,7 @@
 </ion-header>
 
 <ion-content>
-    <div class="item-item" *ngFor="let pyme of pymes;let last = last;" >
+    <div class="item-item" *ngFor="let pyme of pymes;" >
       	<img *ngIf="pyme.attributes.banner!=null&&pyme.attributes.banner!=''" class="banner" src="{{pyme.attributes.banner}}">
        	<img *ngIf="pyme.attributes.banner==null||pyme.attributes.banner==''" class="banner" src="{{imagenBaner}}">
        	<div class="imagenes">
