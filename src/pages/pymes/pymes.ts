@@ -49,29 +49,21 @@ export class PymesPage {
   }
 
   getItems(searchbar) {
-  // Reset items back to all of the items
     this.pymes=this.pymesAll;
-
-    // set q to the value of the searchbar
     var q = searchbar.srcElement.value;
 
-
-    // if the value is an empty string don't filter the items
     if (!q) {
       return;
     }
 
     this.pymes = this.pymesAll.filter((v) => {
-      if(v.name && q) {
-        if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+      if(v.attributes.name && q) {
+        if (v.attributes.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
         return false;
       }
     });
-
-    console.log(q, this.pymes.length);
-
   }
 
   goShowSearch(){

@@ -15,8 +15,15 @@
 </ion-header>
 
 <ion-content >
-  
-  <div>
+  <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button class="boton-float" ion-fab color="secondary"><ion-icon name="pricetags"></ion-icon></button>
+      <button class="boton-float" ion-fab color="secondary" [disabled]="true"><ion-icon name="ribbon"></ion-icon></button>
+      <button class="boton-float" ion-fab color="secondary" ><ion-icon name="bookmark"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+  <div >    
       <ion-slides pager>
         <ion-slide class="card-background-page">
             <ion-card>
@@ -40,31 +47,6 @@
             </ion-card>
         </ion-slide>
       </ion-slides> 
-
-      <ion-grid>
-        <ion-row>
-          <ion-col col-3>  
-            <button class="boton-icon" mat-fab color="primary">
-              <ion-icon name="list-box" item-right color="theme-white"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-3>  
-            <button class="boton-icon" mat-fab color="warn">
-              <ion-icon name="pricetags" item-right color="theme-white"></ion-icon>
-            </button>
-          </ion-col> 
-          <ion-col col-3>  
-            <button class="boton-icon" mat-fab color="accent">
-              <ion-icon name="notifications" item-right color="theme-white"></ion-icon>
-            </button>
-          </ion-col>             
-          <ion-col col-3>  
-            <button class="boton-icon" mat-fab color="primary">
-              <ion-icon name="ribbon" item-right color="theme-white"></ion-icon>
-            </button>
-          </ion-col>  
-        </ion-row>
-      </ion-grid>
 
       <ion-grid>
         <ion-row>

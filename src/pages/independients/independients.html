@@ -9,7 +9,7 @@
     <ion-title *ngIf="!showSearch">
       {{title}}
     </ion-title>
-    <ion-searchbar *ngIf="showSearch" placeholder="{{title}}"> </ion-searchbar>
+    <ion-searchbar *ngIf="showSearch" (ionInput)="getItems($event)" placeholder="{{title}}"> </ion-searchbar>
     <ion-buttons right *ngIf="!showSearch">
       <button ion-button (click)="goShowSearch()">
         <ion-icon class="cart" name="search" ></ion-icon>

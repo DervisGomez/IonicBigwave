@@ -47,6 +47,24 @@ export class SellersPage {
     this.getPymes();
   }
 
+  getItems(searchbar) {
+    this.pymes=this.pymesAll;
+    var q = searchbar.srcElement.value;
+
+    if (!q) {
+      return;
+    }
+
+    this.pymes = this.pymesAll.filter((v) => {
+      if(v.attributes.name && q) {
+        if (v.attributes.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+  }
+
   goShowSearch(){
     this.showSearch=true;
     this.titleFiltrar="";
