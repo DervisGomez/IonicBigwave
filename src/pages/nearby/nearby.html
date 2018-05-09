@@ -6,7 +6,7 @@
       </button>
     </ion-buttons>
 
-    <ion-searchbar [(ngModel)]="search"> </ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" (ionInput)="onInput(search)"> </ion-searchbar>
  
   </ion-navbar>
 </ion-header>

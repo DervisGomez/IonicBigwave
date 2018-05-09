@@ -7,19 +7,22 @@ export const icons = {
   kenny:{
     icon: 'http://icons.iconarchive.com/icons/xtudiando/south-park/32/Kenny-icon.png'
   },
-  Profile:{
+  pyme:{
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_p-32.png'
   },
-  Seller:{
+  seller:{
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_s_copy-32.png'
   },
-  Independientes:{
+  profile:{
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_linked_in-32.png'
   },
   Ofertas:{
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_f-32.png'
   },
   productos:{
+    icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_heart-32.png'
+  },
+  independent:{
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_heart-32.png'
   }
 }

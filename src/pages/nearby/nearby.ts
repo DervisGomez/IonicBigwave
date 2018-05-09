@@ -24,8 +24,9 @@ import { BigwaveProvider } from '../../providers/bigwave/bigwave';
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
+  sucursal: any;
   profiles: any;
-  newcategories: any = [1];
+  newcategories: any = [];
   categories: any;
   user: any;
   lat: any=0;
@@ -54,7 +55,9 @@ export class NearbyPage {
       this._tokenService.init({apiBase: ROOT});
   	  platform.ready().then(() => {
     
-	  });
+    });
+    this.newcategories = [];
+    this.sucursal = [];
   }
 
   ionViewDidLoad() {  	//this.loadMap();
@@ -109,9 +112,23 @@ getFilter(category){
       response => {
         console.log(response)
         this.profiles = JSON.parse(response['_body']);
-        this.profiles = this.profiles.locations;
-        console.log( this.profiles )
-        this.createmarkers();
+        this.profiles = this.profiles.data;
+        for(var i=0;i<this.profiles.length;i++){
+            this.profiles[i] = this.profiles[i].attributes 
+        }
+         for(var i=0;i<this.profiles.length;i++){
+          let sucursal = {
+            id: i,
+            locations : this.profiles[i].locations,
+            type:this.profiles[i]["type-profile"],
+            name: this.profiles[i].name,
+            phone: this.profiles[i].phone,
+            email: this.profiles[i].email,
+          }
+          this.sucursal[i] = sucursal
+      } 
+        console.log(this.sucursal)
+         this.createmarkers();  
       },
       error => {
         console.log(error);
@@ -122,9 +139,23 @@ getFilter(category){
     response => {
       console.log(response)
       this.profiles = JSON.parse(response['_body']);
-      this.profiles = this.profiles.locations;
-      console.log( this.profiles )
-      this.createmarkers();
+     this.profiles = this.profiles.data;
+        for(var i=0;i<this.profiles.length;i++){
+            this.profiles[i] = this.profiles[i].attributes 
+        }
+         for(var i=0;i<this.profiles.length;i++){
+          let sucursal = {
+            id: i,
+            locations : this.profiles[i].locations,
+            type:this.profiles[i]["type-profile"],
+            name: this.profiles[i].name,
+            phone: this.profiles[i].phone,
+            email: this.profiles[i].email,
+          }
+          this.sucursal[i] = sucursal
+      } 
+        console.log(this.sucursal)
+         this.createmarkers();  
     },
     error => {
       console.log(error);
@@ -132,7 +163,34 @@ getFilter(category){
  }
 
 }
-
+onInput(search){
+  this.initMap(18);
+  this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, search).subscribe(
+    response => {
+      console.log(response)
+      this.profiles = JSON.parse(response['_body']);
+     this.profiles = this.profiles.data;
+        for(var i=0;i<this.profiles.length;i++){
+            this.profiles[i] = this.profiles[i].attributes 
+        }
+         for(var i=0;i<this.profiles.length;i++){
+          let sucursal = {
+            id: i,
+            locations : this.profiles[i].locations,
+            type:this.profiles[i]["type-profile"],
+            name: this.profiles[i].name,
+            phone: this.profiles[i].phone,
+            email: this.profiles[i].email,
+          }
+          this.sucursal[i] = sucursal
+      } 
+        console.log(this.sucursal)
+         this.createmarkers();  
+    },
+    error => {
+      console.log(error);
+    })
+}
   showFilter(){
     this.filter.show=!this.filter.show;
     if (this.filter.show) {
@@ -144,8 +202,8 @@ getFilter(category){
 
   miPosition(){
     this.geo.getCurrentPosition().then( pos => {
-        this.lat = pos.coords.latitude;
-        this.lng = pos.coords.longitude;
+        this.lat = 11.68501858908447;
+        this.lng = -70.17362594604492;
         this.initMap(18);
         //this.initMap(pos);            
       }).catch( err => {
@@ -176,6 +234,29 @@ initMap(ps) {
       prueba.lat=+lat[0];
       prueba.lng=+lat[1];
       this.initMap(18);
+      var q;
+      this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, q).subscribe(
+        response => {
+          console.log(response)
+          this.profiles = JSON.parse(response['_body']);
+          this.profiles = this.profiles.data;
+          for(var i=0;i<this.profiles.length;i++){
+              this.profiles[i] = this.profiles[i].attributes 
+          }
+           for(var i=0;i<this.profiles.length;i++){
+            let sucursal = {
+              id: i,
+              locations : this.profiles[i].locations,
+              type:this.profiles[i]["type-profile"],
+              name: this.profiles[i].name,
+              phone: this.profiles[i].phone,
+              email: this.profiles[i].email,
+            }
+            this.sucursal[i] = sucursal
+        } 
+          console.log(this.sucursal)
+           this.createmarkers();  
+        })
     });
   } 
 
@@ -198,6 +279,7 @@ initMap(ps) {
       google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent("hola mundo");
         infowindow.open(this.map, this);
+
       });
     
     }
@@ -216,8 +298,9 @@ initMap(ps) {
       });
 
       google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent("hola mundo");
+        infowindow.setContent("Estas Aqui");
         infowindow.open(this.map, this);
+  
       });
     
     }
@@ -239,18 +322,23 @@ initMap(ps) {
   }
 
   createmarkers(){
-    console.log("inicia marcas")
-    this.profiles.forEach( (sucursal) => {
+    this.sucursal.forEach( (sucursal) => {
+     var localizacion = sucursal.locations
+     localizacion.forEach( (location) => {
+      console.log("marca",location.latitude, location.longitude )
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(sucursal.latitude, sucursal.longitude),
-        icon: icons[sucursal.locatable_type].icon,
+        position: new google.maps.LatLng(location.latitude, location.longitude),
+        icon: icons[sucursal.type].icon,
         map: this.map
       });
+     
       google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(sucursal.description);
+      
+        infowindow.setContent(sucursal.name+"<br>"+sucursal.email+"<br>"+sucursal.phone);
         infowindow.open(this.map, this);
-      });
+      }); 
     });
+  });
  
   }
 
