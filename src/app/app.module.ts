@@ -25,7 +25,7 @@ import { SellersPage } from '../pages/sellers/sellers';
 import { SavePymesPage } from '../pages/save-pymes/save-pymes';
 import { SaveIndependientsPage } from '../pages/save-independients/save-independients';
 import { SaveSellersPage } from '../pages/save-sellers/save-sellers';
-
+import { ListProductsPage } from '../pages/list-products/list-products';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -69,7 +69,8 @@ import { MatIconModule } from '@angular/material/icon';
     SellersPage,
     SavePymesPage,
     SaveIndependientsPage,
-    SaveSellersPage
+    SaveSellersPage,
+    ListProductsPage
   ],
   imports: [
     BrowserModule,
@@ -109,7 +110,8 @@ import { MatIconModule } from '@angular/material/icon';
     SellersPage,
     SavePymesPage,
     SaveIndependientsPage,
-    SaveSellersPage
+    SaveSellersPage,
+    ListProductsPage
   ],
   providers: [
     StatusBar,

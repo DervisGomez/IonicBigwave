@@ -25,6 +25,9 @@ export const routes = {
     sellersCreate: () => {
         return `sellers/create`
     },
+    sellersShow: () => {
+        return `sellers/own`
+    },
     independents: () => {
     	return `independents`
     },
@@ -36,6 +39,9 @@ export const routes = {
     },
     categories: () =>{
         return   `profiles/categories`
+    },
+    productsAll(){
+        return 'products/all';
     },
     geolocation:() =>{
         return `geolocation/look_for`

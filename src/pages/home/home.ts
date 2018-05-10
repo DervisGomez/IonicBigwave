@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, AlertController } from 'ionic-angular';
+import { NavController, Events, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { ListPerfilesPage } from '../list-perfiles/list-perfiles';
 import { IndependientsPage } from '../independients/independients';
 import { Storage } from '@ionic/storage';
@@ -8,6 +8,10 @@ import { PymesPage } from '../pymes/pymes';
 import { SavePymesPage } from '../save-pymes/save-pymes';
 import { SaveIndependientsPage } from '../save-independients/save-independients';
 import { SaveSellersPage } from '../save-sellers/save-sellers';
+import { ListProductsPage } from '../list-products/list-products';
+import { ROOT } from '../../config/routes';
+import { Angular2TokenService} from 'angular2-token'
+import { routes } from '../../config/routes';
 
 
 
@@ -21,8 +25,13 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public storage: Storage,
-    public events: Events,    
-    public alertCtrl: AlertController) {
+    public events: Events,
+    public loading: LoadingController,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    private _tokenService: Angular2TokenService) {
+
+    this._tokenService.init({apiBase: ROOT});
     this.checkLogin();
     this.events.subscribe("userLogin", (user) => {
       this.user = user;
@@ -44,7 +53,6 @@ export class HomePage {
             text: 'ok',
             handler: () => {
               this.navCtrl.parent.select(2); 
-              console.log('Disagree clicked');
             }
           }
         ]
@@ -65,7 +73,6 @@ export class HomePage {
             text: 'ok',
             handler: () => {
               this.navCtrl.parent.select(2); 
-              console.log('Disagree clicked');
             }
           }
         ]
@@ -86,15 +93,40 @@ export class HomePage {
             text: 'ok',
             handler: () => {
               this.navCtrl.parent.select(2); 
-              console.log('Disagree clicked');
             }
           }
         ]
       });
       confirm.present();      
     }else{
-      this.navCtrl.push(SaveSellersPage,{user_id: this.user.id});
+      //
+     this.checkVender()
     }
+  }
+
+  checkVender(){
+    let loading = this.loading.create({ content: 'Cargando...' });
+    loading.present();
+    let url = routes.sellersShow();
+    this._tokenService.get(url).subscribe(
+      data => {
+        loading.dismiss();
+        console.log(data)
+        data = JSON.parse(data['_body']);
+        if (data['data'].length){
+          let pymes = data['data'];
+          console.log(pymes);
+          this.messages("Ya ha creado un perfil para vender y solo puede tener uno");
+        }else{
+          this.navCtrl.push(SaveSellersPage,{user_id: this.user.id});
+        }
+      },
+      error =>  {
+        console.log(error)
+        loading.dismiss();
+        this.messages("en este momento no puede crear su perfil para vender por favor intentelos más tarde.");
+      }
+    );
   }
 
   checkLogin() {
@@ -105,6 +137,15 @@ export class HomePage {
         //this.navCtrl.setRoot(LoginPage,{data: PerfilPage});
       }
     });//storage user
+  }
+
+  messages(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present()
   }
 
   goList(perfil){
@@ -128,7 +169,7 @@ export class HomePage {
   }
 
   goListProducts(){
-    //this.navCtrl.push(IndependientsPage);
+    this.navCtrl.push(ListProductsPage);
   }
 
 }
