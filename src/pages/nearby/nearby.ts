@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ToastController, ActionSheet, ActionSheetController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/google-maps';
@@ -24,6 +24,7 @@ import { BigwaveProvider } from '../../providers/bigwave/bigwave';
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
+  profile:any;
   sucursal: any;
   profiles: any;
   newcategories: any = [];
@@ -31,6 +32,7 @@ export class NearbyPage {
   user: any;
   lat: any=0;
   lng: any=0;
+  window:any= false;
   filter={
     show:false,
     icon:"funnel"
@@ -50,7 +52,8 @@ export class NearbyPage {
     public storage: Storage,
     public geo: Geolocation,
     private _tokenService: Angular2TokenService,
-    public bigwaveProvider: BigwaveProvider
+    public bigwaveProvider: BigwaveProvider,
+    public actionSheetCtrl: ActionSheetController
     ) {
       this._tokenService.init({apiBase: ROOT});
   	  platform.ready().then(() => {
@@ -116,7 +119,7 @@ getFilter(category){
         for(var i=0;i<this.profiles.length;i++){
             this.profiles[i] = this.profiles[i].attributes 
         }
-         for(var i=0;i<this.profiles.length;i++){
+         for( i=0;i<this.profiles.length;i++){
           let sucursal = {
             id: i,
             locations : this.profiles[i].locations,
@@ -143,7 +146,7 @@ getFilter(category){
         for(var i=0;i<this.profiles.length;i++){
             this.profiles[i] = this.profiles[i].attributes 
         }
-         for(var i=0;i<this.profiles.length;i++){
+         for( i=0;i<this.profiles.length;i++){
           let sucursal = {
             id: i,
             locations : this.profiles[i].locations,
@@ -173,7 +176,7 @@ onInput(search){
         for(var i=0;i<this.profiles.length;i++){
             this.profiles[i] = this.profiles[i].attributes 
         }
-         for(var i=0;i<this.profiles.length;i++){
+         for( i=0;i<this.profiles.length;i++){
           let sucursal = {
             id: i,
             locations : this.profiles[i].locations,
@@ -243,7 +246,7 @@ initMap(ps) {
           for(var i=0;i<this.profiles.length;i++){
               this.profiles[i] = this.profiles[i].attributes 
           }
-           for(var i=0;i<this.profiles.length;i++){
+           for( i=0;i<this.profiles.length;i++){
             let sucursal = {
               id: i,
               locations : this.profiles[i].locations,
@@ -333,15 +336,24 @@ initMap(ps) {
       });
      
       google.maps.event.addListener(marker, 'click', function() {
-      
-        infowindow.setContent(sucursal.name+"<br>"+sucursal.email+"<br>"+sucursal.phone);
-        infowindow.open(this.map, this);
+      this.info(sucursal);
       }); 
     });
   });
  
   }
 
+info(sucursal){
+ this.window =true;
+  this.profile ={
+    name: sucursal.name,
+    email: sucursal.email,
+    phone: sucursal.phone
+  } 
+}
+closeinfo(){
+  this.window =false;
+}
   message(message){
     let toast = this.toastCtrl.create({
       message: message,
@@ -397,5 +409,8 @@ initMap(ps) {
       console.log(error);
     });
   }
+
+
+ 
 
 }
