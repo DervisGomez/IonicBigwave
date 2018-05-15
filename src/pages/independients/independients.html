@@ -24,16 +24,19 @@
 </ion-header>
 
 <ion-content>
-    <div class="item-item" *ngFor="let pyme of pymes;let last = last;" >
-      	<img *ngIf="pyme.attributes.banner!=null&&pyme.attributes.banner!=''" class="banner" src="{{pyme.attributes.banner}}">
-       	<img *ngIf="pyme.attributes.banner==null||pyme.attributes.banner==''" class="banner" src="{{imagenBaner}}">
-       	<div class="imagenes">
-       		<div class="imagen">
-       			<img *ngIf="pyme.attributes.photo!=null" class="logo" src="{{pyme.attributes.photo}}">
-           		<img *ngIf="pyme.attributes.photo==null" class="logo" src="{{imagenLogo}}">
-       		</div>                  
-        </div>
-     	<div class="title">{{pyme.attributes.name}}</div>  
+  <div class="item-item" *ngFor="let pyme of pymes;let last = last;let i = index" >
+   	<img *ngIf="pyme.attributes.banner!=null&&pyme.attributes.banner!=''" class="banner" src="{{pyme.attributes.banner}}">
+   	<img *ngIf="pyme.attributes.banner==null||pyme.attributes.banner==''" class="banner" src="{{imagenBaner}}">
+   	<div class="imagenes">
+   		<div class="imagen">
+   			<img *ngIf="pyme.attributes.photo!=null" class="logo" src="{{pyme.attributes.photo}}">
+     		<img *ngIf="pyme.attributes.photo==null" class="logo" src="{{imagenLogo}}">
+   		</div>                  
+    </div>
+   	<div class="title">{{pyme.attributes.name}}</div> 
+    <button mat-icon-button class="boton-seguir" (click)="seguir(pyme.id,i)">
+      <ion-icon [ngClass]="pyme.followColor" name="ios-thumbs-up"></ion-icon>
+    </button>
 	</div>
 
 </ion-content>

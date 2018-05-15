@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, Events, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { ROOT } from '../../config/routes';
 import { Angular2TokenService} from 'angular2-token'
 import { routes } from '../../config/routes';
 import { imageconst } from '../../config/constant';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the IndependientsPage page.
@@ -22,15 +23,19 @@ export class IndependientsPage {
   pymesAll: any =[];
   categories: any = [];
   categoriesCheck: any =[];
+  followAll;
   title;
   showSearch=false;
   titleFiltrar="Filtrar";
   imagenBaner;
   imagenLogo;
+  user: any;
 
   constructor(
   	public navCtrl: NavController,
-  	public navParams: NavParams,
+    public storage: Storage,
+  	public navParams: NavParams,    
+    public events: Events,
     public loading: LoadingController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
@@ -39,12 +44,176 @@ export class IndependientsPage {
   	this._tokenService.init({apiBase: ROOT});
   	this.imagenBaner=imageconst.banner;
     this.imagenLogo=imageconst.logo;
+    this.checkLogin();
+    this.events.subscribe("userLogin", (user) => {
+      this.user = user;
+      this.getPymes();
+      console.log("events in perfil", this.user);
+    });
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IndependientsPage');    
     this.getPymes();
+  }
+
+  checkLogin() {
+    this.storage.get('user').then((user) => {
+      if (user) {
+        this.user = JSON.parse(user);
+      }else{
+        this.user=null;
+      }
+    });//storage user
+  }
+
+  showFollowing(){
+    for (var i = 0; i < this.pymesAll.length; i++) {
+      if(this.follow(this.pymesAll[i])){
+        this.pymesAll[i].followColor="icon-seguir2"
+      }else{
+        this.pymesAll[i].followColor="icon-seguir"
+      }
+    }
+    this.pymes=this.pymesAll;
+  }
+
+  follow(item){
+    for (var j = 0; j < this.followAll.data.length; j++) {
+      if(item.id==this.followAll.data[j].id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  showFollowing2(){
+    for (var i = 0; i < this.pymesAll.length; i++) {
+      this.pymesAll[i].followColor="icon-seguir"      
+    }
+    this.pymes=this.pymesAll;
+  }
+
+  showFollow(){
+    let loading = this.loading.create({ content: 'Cargando...' });
+    loading.present();
+    let url = routes.following("pymes");
+    this._tokenService.get(url).subscribe(
+      data => {
+        loading.dismiss();
+        console.log(data)
+        this.followAll = JSON.parse(data['_body']);
+        console.log(this.followAll);
+        this.showFollowing();
+      },
+      error =>  {
+        console.log(error)
+        loading.dismiss();
+        this.messages("Ha ocurrido un error al cargar la inforamción.");
+      }
+    );
+  }
+
+  seguir(id,index){
+    if(this.user==null){
+      let confirm = this.alertCtrl.create({
+        title: 'Crear Tienda',
+        message: 'Para seguir un perfil debes registrarte',
+        buttons: [
+          {
+            text: 'ok',
+            handler: () => {
+              this.navCtrl.parent.select(2); 
+            }
+          }
+        ]
+      });
+      confirm.present(); 
+    }else{
+      let options;
+      if(this.pymes[index].followColor=="icon-seguir"){
+        options={
+          pregunta:'¿Quieres seguir este perfil?',
+          url: routes.follow("pymes",id),
+          icon:"icon-seguir2",
+          service:true
+        };
+      }else{
+        options={
+          pregunta:'¿Quieres dejar de seguir este perfil?',
+          url: routes.unfollow("pymes",id),
+          icon:"icon-seguir"
+        };
+      }
+      console.log(id,index);
+      let confirm = this.alertCtrl.create({
+        message: options.pregunta,
+        buttons: [
+          {
+            text: 'No',
+            handler: () => {
+              console.log('no');
+            }
+          },
+          {
+            text: 'Si',
+            handler: () => {
+              let loading = this.loading.create({ content: 'Cargando...' });
+              loading.present();
+              if(options.service){
+                this._tokenService.get(options.url).subscribe(
+                  data => {
+                    loading.dismiss();
+                    console.log(data)
+                    data = JSON.parse(data['_body']);
+                    console.log(data)
+                    this.pymes[index].followColor=options.icon;
+                    this.changeFoller(id,options.icon);
+                  },
+                  error =>  {
+                    console.log(error)
+                    loading.dismiss();
+                    this.messages("Ha ocurrido un error al cargar la inforamción.");
+                  }
+                );
+              }else{
+                let info={
+                  unfollow:{
+                    profile_id:id
+                  }
+                }
+                this._tokenService.post(options.url,info).subscribe(
+                  data => {
+                    loading.dismiss();
+                    console.log(data)
+                    data = JSON.parse(data['_body']);
+                    console.log(data)
+                    this.pymes[index].followColor=options.icon;
+                    this.changeFoller(id,options.icon);
+                  },
+                  error =>  {
+                    console.log(error)
+                    loading.dismiss();
+                    this.messages("Ha ocurrido un error al cargar la inforamción.");
+                  }
+                );
+              }            
+            }
+          }
+        ]
+      });
+      confirm.present();
+    }         
+  }
+
+  changeFoller(id,icon){
+    for (var i = 0; i <this.pymesAll.length; i++) {
+      if(this.pymesAll[i].id==id){
+        this.pymesAll[i].folloColor=icon;
+        return;
+      }
+    }
   }
 
   getItems(searchbar) {
@@ -166,8 +335,14 @@ export class IndependientsPage {
       	data = JSON.parse(data['_body']);
         if (data['data'].length){
           this.pymesAll = data['data'];
-          this.pymes=this.pymesAll;
+          //this.pymes=this.pymesAll;
           console.log(this.pymes);
+          if(this.user==null){
+            this.showFollowing2();
+          }else{
+            console.log(this.user);
+            this.showFollow();
+          }          
         }
       },
       error =>  {

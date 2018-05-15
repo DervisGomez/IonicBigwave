@@ -3,6 +3,9 @@ export const routes = {
     login: (email, pass) => {
         return `auth/sign_in?email=${email}&password=${pass}`
     },
+    sing_out: () => {
+        return `auth/sign_out`
+    },
     registerUser: () => {
         return `auth`
     },
@@ -45,5 +48,14 @@ export const routes = {
     },
     geolocation:() =>{
         return `geolocation/look_for`
+    },
+    follow:(type,profile) =>{
+        return `current_user/follow/${type}/${profile}`
+    },
+    unfollow:(type,profile) =>{
+        return `current_user/unfollow/${type}/${profile}`
+    },
+    following:(type,) =>{
+        return `current_user/following/${type}`
     }
  }
