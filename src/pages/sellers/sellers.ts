@@ -68,6 +68,14 @@ export class SellersPage {
     });//storage user
   }
 
+  showAll(){
+    this.pymes=this.pymesAll;
+  }
+
+  showFollowProfile(){
+    this.pymes=this.followAll.data;
+  }
+
   showFollowing(){
     for (var i = 0; i < this.pymesAll.length; i++) {
       if(this.follow(this.pymesAll[i])){
@@ -99,12 +107,16 @@ export class SellersPage {
     let loading = this.loading.create({ content: 'Cargando...' });
     loading.present();
     let url = routes.following("sellers");
+    
     this._tokenService.get(url).subscribe(
       data => {
         loading.dismiss();
         console.log(data)
         this.followAll = JSON.parse(data['_body']);
         console.log(this.followAll);
+        for (var i = 0; i < this.followAll.data.length; i++) {
+          this.followAll.data[i].followColor="icon-seguir2"      
+        }
         this.showFollowing();
       },
       error =>  {
@@ -123,6 +135,11 @@ export class SellersPage {
         buttons: [
           {
             text: 'ok',
+            handler: () => {
+            }
+          },
+          {
+            text: 'Registrarse',
             handler: () => {
               this.navCtrl.parent.select(2); 
             }

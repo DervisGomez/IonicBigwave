@@ -58,6 +58,14 @@ export class IndependientsPage {
     this.getPymes();
   }
 
+  showAll(){
+    this.pymes=this.pymesAll;
+  }
+
+  showFollowProfile(){
+    this.pymes=this.followAll.data;
+  }
+
   checkLogin() {
     this.storage.get('user').then((user) => {
       if (user) {
@@ -104,7 +112,10 @@ export class IndependientsPage {
         loading.dismiss();
         console.log(data)
         this.followAll = JSON.parse(data['_body']);
-        console.log(this.followAll);
+        console.log(this.followAll);        
+        for (var i = 0; i < this.followAll.data.length; i++) {
+          this.followAll.data[i].followColor="icon-seguir2"      
+        }
         this.showFollowing();
       },
       error =>  {
@@ -123,6 +134,11 @@ export class IndependientsPage {
         buttons: [
           {
             text: 'ok',
+            handler: () => { 
+            }
+          },
+          {
+            text: 'Registrarse',
             handler: () => {
               this.navCtrl.parent.select(2); 
             }
@@ -130,6 +146,7 @@ export class IndependientsPage {
         ]
       });
       confirm.present(); 
+
     }else{
       let options;
       if(this.pymes[index].followColor=="icon-seguir"){
