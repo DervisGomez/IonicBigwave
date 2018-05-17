@@ -12,19 +12,27 @@
     <ion-searchbar *ngIf="showSearch" (ionInput)="getItems($event)" placeholder="{{title}}"> </ion-searchbar>
     <ion-buttons right *ngIf="!showSearch">
       <button ion-button (click)="goShowSearch()">
-        <ion-icon class="cart" name="search" ></ion-icon>
+        <ion-icon class="funnel" name="search" ></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
       <button ion-button (click)="showCheckbox()">
-        <ion-icon class="funnel" name="funnel"></ion-icon> {{titleFiltrar}}
+        <ion-icon class="cart" name="cart"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <div class="item-item" *ngFor="let pyme of pymes;" >
+  <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="ios-build"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button *ngIf="user!=null" class="boton-float" ion-fab color="secondary" (click)="showFollowProfile()"><ion-icon name="ios-thumbs-up"></ion-icon></button>
+      <button class="boton-float" ion-fab color="secondary" (click)="showAll()"><ion-icon name="ios-eye"></ion-icon></button>
+      <button class="boton-float" ion-fab color="secondary" (click)="showCheckbox()"><ion-icon name="funnel"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+    <div class="item-item" *ngFor="let pyme of pymes;let last = last;let i = index" >
       	<img *ngIf="pyme.attributes.banner!=null&&pyme.attributes.banner!=''" class="banner" src="{{pyme.attributes.banner}}">
        	<img *ngIf="pyme.attributes.banner==null||pyme.attributes.banner==''" class="banner" src="{{imagenBaner}}">
        	<div class="imagenes">
@@ -37,7 +45,10 @@
      		<div class="fondo-title">
      			<div class="text-title">{{pyme.attributes.name}}</div>
      		</div>
-     	</div>  
+     	</div>
+      <button mat-icon-button class="boton-seguir" (click)="seguir(pyme.id,i)">
+        <ion-icon [ngClass]="pyme.followColor" name="ios-thumbs-up"></ion-icon>
+      </button>
 	</div>
 
 </ion-content>

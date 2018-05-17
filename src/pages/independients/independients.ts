@@ -106,7 +106,7 @@ export class IndependientsPage {
   showFollow(){
     let loading = this.loading.create({ content: 'Cargando...' });
     loading.present();
-    let url = routes.following("pymes");
+    let url = routes.following("independents");
     this._tokenService.get(url).subscribe(
       data => {
         loading.dismiss();
@@ -121,7 +121,7 @@ export class IndependientsPage {
       error =>  {
         console.log(error)
         loading.dismiss();
-        this.messages("Ha ocurrido un error al cargar la inforamción.");
+        this.messages("Ha ocurrido un error al cargar la información.");
       }
     );
   }
@@ -151,15 +151,15 @@ export class IndependientsPage {
       let options;
       if(this.pymes[index].followColor=="icon-seguir"){
         options={
-          pregunta:'¿Quieres seguir este perfil?',
-          url: routes.follow("pymes",id),
+          pregunta:'¿Quieres seguir a '+this.pymes[index].attributes.name+'?',
+          url: routes.follow("independents",id),
           icon:"icon-seguir2",
           service:true
         };
       }else{
         options={
-          pregunta:'¿Quieres dejar de seguir este perfil?',
-          url: routes.unfollow("pymes",id),
+          pregunta:'¿Quieres dejar de seguir a '+this.pymes[index].attributes.name+'?',
+          url: routes.unfollow("independents",id),
           icon:"icon-seguir"
         };
       }
@@ -186,6 +186,7 @@ export class IndependientsPage {
                     data = JSON.parse(data['_body']);
                     console.log(data)
                     this.pymes[index].followColor=options.icon;
+                    this.followAll.data.push(this.pymes[index]);
                     this.changeFoller(id,options.icon);
                   },
                   error =>  {
@@ -207,6 +208,7 @@ export class IndependientsPage {
                     data = JSON.parse(data['_body']);
                     console.log(data)
                     this.pymes[index].followColor=options.icon;
+                    this.deleteFollew(id);
                     this.changeFoller(id,options.icon);
                   },
                   error =>  {
@@ -222,6 +224,15 @@ export class IndependientsPage {
       });
       confirm.present();
     }         
+  }
+
+  deleteFollew(id){
+    for (var i = 0; i < this.followAll.data.length; i++) {
+      if (this.followAll.data[i].id==id) {
+        this.followAll.data.splice(i, 1);
+        return;
+      }
+    }
   }
 
   changeFoller(id,icon){

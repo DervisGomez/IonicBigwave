@@ -151,14 +151,14 @@ export class SellersPage {
       let options;
       if(this.pymes[index].followColor=="icon-seguir"){
         options={
-          pregunta:'¿Quieres seguir este perfil?',
+          pregunta:'¿Quieres seguir a '+this.pymes[index].attributes.name+'?',
           url: routes.follow("sellers",id),
           icon:"icon-seguir2",
           service:true
         };
       }else{
         options={
-          pregunta:'¿Quieres dejar de seguir este perfil?',
+          pregunta:'¿Quieres dejar de seguir a '+this.pymes[index].attributes.name+'?',
           url: routes.unfollow("sellers",id),
           icon:"icon-seguir"
         };
@@ -186,6 +186,7 @@ export class SellersPage {
                     data = JSON.parse(data['_body']);
                     console.log(data)
                     this.pymes[index].followColor=options.icon;
+                    this.followAll.data.push(this.pymes[index]);
                     this.changeFoller(id,options.icon);
                   },
                   error =>  {
@@ -207,6 +208,7 @@ export class SellersPage {
                     data = JSON.parse(data['_body']);
                     console.log(data)
                     this.pymes[index].followColor=options.icon;
+                    this.deleteFollew(id);
                     this.changeFoller(id,options.icon);
                   },
                   error =>  {
@@ -222,6 +224,15 @@ export class SellersPage {
       });
       confirm.present();
     }         
+  }
+
+  deleteFollew(id){
+    for (var i = 0; i < this.followAll.data.length; i++) {
+      if (this.followAll.data[i].id==id) {
+        this.followAll.data.splice(i, 1);
+        return;
+      }
+    }
   }
 
   changeFoller(id,icon){
