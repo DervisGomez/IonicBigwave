@@ -24,6 +24,7 @@ let infowindow: any;
   templateUrl: 'nearby.html',
 })
 export class NearbyPage {
+  detail: any;
   profile: any;
   sucursal: any;
   profiles: any;
@@ -123,7 +124,7 @@ export class NearbyPage {
             profiles[j] = profiles[j][0];
            }
             let sucursal = {
-              latitud: this.sucursal[i].latitude,
+              latitude: this.sucursal[i].latitude,
               longitude: this.sucursal[i].longitude,
              profiles : profiles
             }
@@ -140,21 +141,20 @@ export class NearbyPage {
       this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, this.q).subscribe(
         response => {
           console.log(response)
-          this.profiles = JSON.parse(response['_body']);
-          this.profiles = this.profiles.data;
-          for (var i = 0; i < this.profiles.length; i++) {
-            this.profiles[i] = this.profiles[i].attributes
-          }
-          for (i = 0; i < this.profiles.length; i++) {
+          this.sucursal = JSON.parse(response['_body']);
+          console.log(this.sucursal)
+          for (var i = 0; i < this.sucursal.length; i++) {
+           let profiles = this.sucursal[i].profiles;
+           for(var j = 0; j < profiles.length ; j++){
+            profiles[j] = profiles[j];
+            profiles[j] = profiles[j][0];
+           }
             let sucursal = {
-              id: i,
-              locations: this.profiles[i].locations,
-              type: this.profiles[i]["type-profile"],
-              name: this.profiles[i].name,
-              phone: this.profiles[i].phone,
-              email: this.profiles[i].email,
+              latitude: this.sucursal[i].latitude,
+              longitude: this.sucursal[i].longitude,
+             profiles : profiles
             }
-            this.sucursal[i] = sucursal
+          this.sucursal[i] = sucursal;
           }
           console.log(this.sucursal)
           this.createmarkers();
@@ -170,21 +170,20 @@ export class NearbyPage {
     this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, search).subscribe(
       response => {
         console.log(response)
-        this.profiles = JSON.parse(response['_body']);
-        this.profiles = this.profiles.data;
-        for (var i = 0; i < this.profiles.length; i++) {
-          this.profiles[i] = this.profiles[i].attributes
-        }
-        for (i = 0; i < this.profiles.length; i++) {
+        this.sucursal = JSON.parse(response['_body']);
+        console.log(this.sucursal)
+        for (var i = 0; i < this.sucursal.length; i++) {
+         let profiles = this.sucursal[i].profiles;
+         for(var j = 0; j < profiles.length ; j++){
+          profiles[j] = profiles[j];
+          profiles[j] = profiles[j][0];
+         }
           let sucursal = {
-            id: i,
-            locations: this.profiles[i].locations,
-            type: this.profiles[i]["type-profile"],
-            name: this.profiles[i].name,
-            phone: this.profiles[i].phone,
-            email: this.profiles[i].email,
+            latitude: this.sucursal[i].latitude,
+            longitude: this.sucursal[i].longitude,
+           profiles : profiles
           }
-          this.sucursal[i] = sucursal
+        this.sucursal[i] = sucursal;
         }
         console.log(this.sucursal)
         this.createmarkers();
@@ -219,7 +218,7 @@ export class NearbyPage {
       zoom: ps,
       center: { lat: this.lat, lng: this.lng }
     });
-
+    this.window = false;
     this.directionsDisplay.setMap(this.map);
     this.createMarkerUser();
     /*  this.createmarkers(); */
@@ -236,25 +235,23 @@ export class NearbyPage {
       prueba.lat = +lat[0];
       prueba.lng = +lat[1];
       this.initMap(18);
-      var q;
-      this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, q).subscribe(
+      this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, this.q).subscribe(
         response => {
           console.log(response)
-          this.profiles = JSON.parse(response['_body']);
-          this.profiles = this.profiles.data;
-          for (var i = 0; i < this.profiles.length; i++) {
-            this.profiles[i] = this.profiles[i].attributes
-          }
-          for (i = 0; i < this.profiles.length; i++) {
+          this.sucursal = JSON.parse(response['_body']);
+          console.log(this.sucursal)
+          for (var i = 0; i < this.sucursal.length; i++) {
+           let profiles = this.sucursal[i].profiles;
+           for(var j = 0; j < profiles.length ; j++){
+            profiles[j] = profiles[j];
+            profiles[j] = profiles[j][0];
+           }
             let sucursal = {
-              id: i,
-              locations: this.profiles[i].locations,
-              type: this.profiles[i]["type-profile"],
-              name: this.profiles[i].name,
-              phone: this.profiles[i].phone,
-              email: this.profiles[i].email,
+              latitude: this.sucursal[i].latitude,
+              longitude: this.sucursal[i].longitude,
+             profiles : profiles
             }
-            this.sucursal[i] = sucursal
+          this.sucursal[i] = sucursal;
           }
           console.log(this.sucursal)
           this.createmarkers();
@@ -325,17 +322,17 @@ export class NearbyPage {
 
   createmarkers() {
     this.sucursal.forEach((sucursal) => {
-      var location = sucursal.profiles;
-      location.forEach((location) => {
+      var profiles = sucursal.profiles;
+      profiles.forEach((profile) => {
         console.log("marca", sucursal.latitude, sucursal.longitude)
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(sucursal.latitude, sucursal.longitude),
-          icon: icons[sucursal.type].icon,
+          icon: icons[profile.type_profile].icon,
           map: this.map
         });
 
         google.maps.event.addListener(marker, 'click', () => {
-          this.info(sucursal);
+          this.info(sucursal.profiles);
         });
       });
       });
@@ -343,12 +340,10 @@ export class NearbyPage {
     }
 
 info(sucursal){
-        this.window = true;
-        this.profile = {
-          name: sucursal.name,
-          email: sucursal.email,
-          phone: sucursal.phone
-        }
+    this.window = true;
+    console.log(sucursal)
+    this.detail = sucursal;
+
       }
 closeinfo(){
         this.window = false;
