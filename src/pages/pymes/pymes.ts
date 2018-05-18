@@ -65,7 +65,32 @@ export class PymesPage {
   }
 
   showFollowProfile(){
-    this.pymes=this.followAll.data;
+    if(this.user==null){
+      let confirm = this.alertCtrl.create({
+        title: 'Crear Tienda',
+        message: 'Para seguir un perfil debes registrarte',
+        buttons: [
+          {
+            text: 'ok',
+            handler: () => { 
+            }
+          },
+          {
+            text: 'Registrarse',
+            handler: () => {
+              this.navCtrl.parent.select(2); 
+            }
+          }
+        ]
+      });
+      confirm.present(); 
+    }else{
+      if(this.followAll.data.length>0){
+        this.pymes=this.followAll.data;
+      }else{
+        this.messagesDuration("Para seguir un perfil haz click en el icono de la mano",5000)
+      }      
+    }
   }
 
   checkLogin() {
@@ -231,9 +256,16 @@ export class PymesPage {
     for (var i = 0; i < this.followAll.data.length; i++) {
       if (this.followAll.data[i].id==id) {
         this.followAll.data.splice(i, 1);
+        for (var i = 0; i < this.pymesAll.length; i++) {
+          if(this.follow(this.pymesAll[i])){
+            this.pymesAll[i].followColor="icon-seguir2"
+          }else{
+            this.pymesAll[i].followColor="icon-seguir"
+          }
+        }
         return;
       }
-    }
+    }    
   }
 
   changeFoller(id,icon){
@@ -409,6 +441,15 @@ export class PymesPage {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,
+      position: 'top'
+    });
+    toast.present()
+  }
+
+  messagesDuration(message,duration){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: duration,
       position: 'top'
     });
     toast.present()
