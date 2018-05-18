@@ -26,6 +26,17 @@ export const icons = {
     icon: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3-2/24/_heart-32.png'
   }
 }
+export const iconsMaps = {
+  pyme:{
+    icon: 'assets/icon/pyme-icon.png'
+  },
+  seller:{
+    icon: 'assets/icon/seller-icon.png'
+  },
+  independent:{
+    icon: 'assets/icon/independents-icon.png'
+  }
+}
 export const sucursales = [
     {
       position: new google.maps.LatLng(8.299231, -62.736985),

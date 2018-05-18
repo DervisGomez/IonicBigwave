@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Platform, ToastController, ActionS
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { GoogleMaps, GoogleMapsEvent, GoogleMapOptions } from '@ionic-native/google-maps';
-import { icons, sucursales } from '../../config/marks/icons'
+import { icons, iconsMaps, sucursales } from '../../config/marks/icons'
 import { routes, ROOT } from '../../config/routes';
 import { Angular2TokenService } from 'angular2-token';
 import { BigwaveProvider } from '../../providers/bigwave/bigwave';
@@ -205,10 +205,10 @@ export class NearbyPage {
     this.geo.getCurrentPosition().then(pos => {
       this.lat = 11.68501858908447;
       this.lng = -70.17362594604492;
-      this.initMap(18);
+      this.initMap(14);
       //this.initMap(pos);            
     }).catch(err => {
-      this.initMap(18);
+      this.initMap(14);
       this.message("GPS no activado")
     });
   }
@@ -234,7 +234,7 @@ export class NearbyPage {
       console.log(+lat[1]);
       prueba.lat = +lat[0];
       prueba.lng = +lat[1];
-      this.initMap(18);
+      this.initMap(14);
       this.bigwaveProvider.geololization(this.lat, this.lng, this.newcategories, this.q).subscribe(
         response => {
           console.log(response)
@@ -327,12 +327,16 @@ export class NearbyPage {
         console.log("marca", sucursal.latitude, sucursal.longitude)
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(sucursal.latitude, sucursal.longitude),
-          icon: icons[profile.type_profile].icon,
+          icon: iconsMaps[profile.type_profile].icon,
           map: this.map
         });
 
-        google.maps.event.addListener(marker, 'click', () => {
-          this.info(sucursal.profiles);
+        var thi=this;
+
+        google.maps.event.addListener(marker, 'click', function () {
+          infowindow.setContent(profile.title);
+          infowindow.open(this.map, this);
+          thi.info(sucursal.profiles);
         });
       });
       });
